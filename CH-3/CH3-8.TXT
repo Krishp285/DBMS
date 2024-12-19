@@ -1,0 +1,590 @@
+SQL> 
+SQL> REM DATE FUNCTIONS : SYSDATE  CURRENT_DATE    ADD_MONTHS  MONTHS_BETWEEN    LAST_DAY  NEXT_DAY    TRUNC  ROUND
+SQL> 
+SQL> REM 1 DAY = 24 HOURS = 1440 MINUTES = 86400 SECONDS
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> SELECT SYSDATE , SYSDATE + 4 , SYSDATE + 4/24 , SYSDATE + 4/1440 , SYSDATE + 4/86400 FROM DUAL;
+
+SYSDATE                       SYSDATE+4                     SYSDATE+4/24                  SYSDATE+4/1440                SYSDATE+4/86400                                                                 
+----------------------------- ----------------------------- ----------------------------- ----------------------------- -----------------------------                                                   
+21-FEBRUARY -2024 06:46.00 PM 25-FEBRUARY -2024 06:46.00 PM 21-FEBRUARY -2024 10:46.00 PM 21-FEBRUARY -2024 06:50.00 PM 21-FEBRUARY -2024 06:46.04 PM                                                   
+
+SQL> REM NLS : NATIONAL LANGUAGE SUPPORT
+SQL> 
+SQL> REM CENTURY YEAR MONTH DAY HOUR MINUTE SECOND
+SQL> 
+SQL> REM 1 MONTH = ?? (28/29/30/31)
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3*7 FROM DUAL;
+
+SYSDATE                       SYSDATE+3*7                                                                                                                                                               
+----------------------------- -----------------------------                                                                                                                                             
+21-FEBRUARY -2024 06:51.06 PM 13-MARCH    -2024 06:51.06 PM                                                                                                                                             
+
+SQL> REM ADD_MONTHS : TO ADD/SUBTRACT MONTHS/QUARTERS/YEARS/CENTURIES TO/FROM DATE VALUE
+SQL> 
+SQL> SELECT SYSDATE , ADD_MONTHS(SYSDATE,3) , ADD_MONTHS(SYSDATE,-2) FROM DUAL;
+
+SYSDATE                       ADD_MONTHS(SYSDATE,3)         ADD_MONTHS(SYSDATE,-2)                                                                                                                      
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+21-FEBRUARY -2024 06:52.04 PM 21-MAY      -2024 06:52.04 PM 21-DECEMBER -2023 06:52.04 PM                                                                                                               
+
+SQL> SELECT SYSDATE+8 , ADD_MONTHS(SYSDATE+8,3) , ADD_MONTHS(SYSDATE+8,-2) FROM DUAL;
+
+SYSDATE+8                     ADD_MONTHS(SYSDATE+8,3)       ADD_MONTHS(SYSDATE+8,-2)                                                                                                                    
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+29-FEBRUARY -2024 06:53.11 PM 31-MAY      -2024 06:53.11 PM 31-DECEMBER -2023 06:53.11 PM                                                                                                               
+
+SQL> SELECT SYSDATE+7 , ADD_MONTHS(SYSDATE+7,3) , ADD_MONTHS(SYSDATE+7,-2) FROM DUAL;
+
+SYSDATE+7                     ADD_MONTHS(SYSDATE+7,3)       ADD_MONTHS(SYSDATE+7,-2)                                                                                                                    
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+28-FEBRUARY -2024 06:53.44 PM 28-MAY      -2024 06:53.44 PM 28-DECEMBER -2023 06:53.44 PM                                                                                                               
+
+SQL> SELECT SYSDATE-21 , ADD_MONTHS(SYSDATE-21,1) , ADD_MONTHS(SYSDATE-21,-1) FROM DUAL;
+
+SYSDATE-21                    ADD_MONTHS(SYSDATE-21,1)      ADD_MONTHS(SYSDATE-21,-1)                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+31-JANUARY  -2024 06:54.20 PM 29-FEBRUARY -2024 06:54.20 PM 31-DECEMBER -2023 06:54.20 PM                                                                                                               
+
+SQL> SELECT SYSDATE-22 , ADD_MONTHS(SYSDATE-22,1) , ADD_MONTHS(SYSDATE-22,-1) FROM DUAL;
+
+SYSDATE-22                    ADD_MONTHS(SYSDATE-22,1)      ADD_MONTHS(SYSDATE-22,-1)                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+30-JANUARY  -2024 06:54.48 PM 29-FEBRUARY -2024 06:54.48 PM 30-DECEMBER -2023 06:54.48 PM                                                                                                               
+
+SQL> SELECT SYSDATE-23 , ADD_MONTHS(SYSDATE-23,1) , ADD_MONTHS(SYSDATE-23,-1) FROM DUAL;
+
+SYSDATE-23                    ADD_MONTHS(SYSDATE-23,1)      ADD_MONTHS(SYSDATE-23,-1)                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+29-JANUARY  -2024 06:55.12 PM 29-FEBRUARY -2024 06:55.12 PM 29-DECEMBER -2023 06:55.12 PM                                                                                                               
+
+SQL> REM COMPANY SENDS APPOINTMENT LETTER BEFORE 1 MONTH OF JOINING.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(HIRE_DATE, -1) APLD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                     APLD                                                                                                                                                      
+--------------- ----------------------------- -----------------------------                                                                                                                             
+Steven          17-JULY     -1987 12:00.00 AM 17-JUNE     -1987 12:00.00 AM                                                                                                                             
+Neena           21-SEPTEMBER-1989 12:00.00 AM 21-AUGUST   -1989 12:00.00 AM                                                                                                                             
+Lex             13-JANUARY  -1993 12:00.00 AM 13-DECEMBER -1992 12:00.00 AM                                                                                                                             
+Alexander       03-JANUARY  -1990 12:00.00 AM 03-DECEMBER -1989 12:00.00 AM                                                                                                                             
+Bruce           21-MAY      -1991 12:00.00 AM 21-APRIL    -1991 12:00.00 AM                                                                                                                             
+Diana           07-FEBRUARY -1999 12:00.00 AM 07-JANUARY  -1999 12:00.00 AM                                                                                                                             
+Kevin           16-NOVEMBER -1999 12:00.00 AM 16-OCTOBER  -1999 12:00.00 AM                                                                                                                             
+Trenna          17-OCTOBER  -1995 12:00.00 AM 17-SEPTEMBER-1995 12:00.00 AM                                                                                                                             
+Curtis          29-JANUARY  -1997 12:00.00 AM 29-DECEMBER -1996 12:00.00 AM                                                                                                                             
+Randall         15-MARCH    -1998 12:00.00 AM 15-FEBRUARY -1998 12:00.00 AM                                                                                                                             
+Peter           09-JULY     -1998 12:00.00 AM 09-JUNE     -1998 12:00.00 AM                                                                                                                             
+Eleni           29-JANUARY  -2000 12:00.00 AM 29-DECEMBER -1999 12:00.00 AM                                                                                                                             
+Ellen           11-MAY      -1996 12:00.00 AM 11-APRIL    -1996 12:00.00 AM                                                                                                                             
+Jonathon        24-MARCH    -1998 12:00.00 AM 24-FEBRUARY -1998 12:00.00 AM                                                                                                                             
+Kimerely        24-MAY      -1999 12:00.00 AM 24-APRIL    -1999 12:00.00 AM                                                                                                                             
+Jennifer        17-SEPTEMBER-1987 12:00.00 AM 17-AUGUST   -1987 12:00.00 AM                                                                                                                             
+Michael         17-FEBRUARY -1996 12:00.00 AM 17-JANUARY  -1996 12:00.00 AM                                                                                                                             
+Pat             17-AUGUST   -1997 12:00.00 AM 17-JULY     -1997 12:00.00 AM                                                                                                                             
+Shelley         07-JUNE     -1994 12:00.00 AM 07-MAY      -1994 12:00.00 AM                                                                                                                             
+William         07-JUNE     -1994 12:00.00 AM 07-MAY      -1994 12:00.00 AM                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 1 COMPANY MAKES EMPLOYEE PERMANENT AFTER COMPLETION OF 6 MONTHS.
+SQL> 
+SQL> REM 2 COMPANY STARTS PAYING PF AFTER COMPLETION OF 6 QUARTERS.
+SQL> 
+SQL> REM 3 COMPANY STARTS PAYING EXTRA BENEFITS AFTER COMPLETION OF 3 YEARS.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 COMPANY MAKES EMPLOYEE PERMANENT AFTER COMPLETION OF 6 MONTHS.
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(HIRE_DATE,6) PD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                     PD                                                                                                                                                        
+--------------- ----------------------------- -----------------------------                                                                                                                             
+Steven          17-JULY     -1987 12:00.00 AM 17-JANUARY  -1988 12:00.00 AM                                                                                                                             
+Neena           21-SEPTEMBER-1989 12:00.00 AM 21-MARCH    -1990 12:00.00 AM                                                                                                                             
+Lex             13-JANUARY  -1993 12:00.00 AM 13-JULY     -1993 12:00.00 AM                                                                                                                             
+Alexander       03-JANUARY  -1990 12:00.00 AM 03-JULY     -1990 12:00.00 AM                                                                                                                             
+Bruce           21-MAY      -1991 12:00.00 AM 21-NOVEMBER -1991 12:00.00 AM                                                                                                                             
+Diana           07-FEBRUARY -1999 12:00.00 AM 07-AUGUST   -1999 12:00.00 AM                                                                                                                             
+Kevin           16-NOVEMBER -1999 12:00.00 AM 16-MAY      -2000 12:00.00 AM                                                                                                                             
+Trenna          17-OCTOBER  -1995 12:00.00 AM 17-APRIL    -1996 12:00.00 AM                                                                                                                             
+Curtis          29-JANUARY  -1997 12:00.00 AM 29-JULY     -1997 12:00.00 AM                                                                                                                             
+Randall         15-MARCH    -1998 12:00.00 AM 15-SEPTEMBER-1998 12:00.00 AM                                                                                                                             
+Peter           09-JULY     -1998 12:00.00 AM 09-JANUARY  -1999 12:00.00 AM                                                                                                                             
+Eleni           29-JANUARY  -2000 12:00.00 AM 29-JULY     -2000 12:00.00 AM                                                                                                                             
+Ellen           11-MAY      -1996 12:00.00 AM 11-NOVEMBER -1996 12:00.00 AM                                                                                                                             
+Jonathon        24-MARCH    -1998 12:00.00 AM 24-SEPTEMBER-1998 12:00.00 AM                                                                                                                             
+Kimerely        24-MAY      -1999 12:00.00 AM 24-NOVEMBER -1999 12:00.00 AM                                                                                                                             
+Jennifer        17-SEPTEMBER-1987 12:00.00 AM 17-MARCH    -1988 12:00.00 AM                                                                                                                             
+Michael         17-FEBRUARY -1996 12:00.00 AM 17-AUGUST   -1996 12:00.00 AM                                                                                                                             
+Pat             17-AUGUST   -1997 12:00.00 AM 17-FEBRUARY -1998 12:00.00 AM                                                                                                                             
+Shelley         07-JUNE     -1994 12:00.00 AM 07-DECEMBER -1994 12:00.00 AM                                                                                                                             
+William         07-JUNE     -1994 12:00.00 AM 07-DECEMBER -1994 12:00.00 AM                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 2 COMPANY STARTS PAYING PF AFTER COMPLETION OF 6 QUARTERS.
+SQL> 
+SQL> SELECT FIRST_NAME ,HIRE_DATE , ADD_MONTHS(HIRE_DATE,3*6) PF FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                     PF                                                                                                                                                        
+--------------- ----------------------------- -----------------------------                                                                                                                             
+Steven          17-JULY     -1987 12:00.00 AM 17-JANUARY  -1989 12:00.00 AM                                                                                                                             
+Neena           21-SEPTEMBER-1989 12:00.00 AM 21-MARCH    -1991 12:00.00 AM                                                                                                                             
+Lex             13-JANUARY  -1993 12:00.00 AM 13-JULY     -1994 12:00.00 AM                                                                                                                             
+Alexander       03-JANUARY  -1990 12:00.00 AM 03-JULY     -1991 12:00.00 AM                                                                                                                             
+Bruce           21-MAY      -1991 12:00.00 AM 21-NOVEMBER -1992 12:00.00 AM                                                                                                                             
+Diana           07-FEBRUARY -1999 12:00.00 AM 07-AUGUST   -2000 12:00.00 AM                                                                                                                             
+Kevin           16-NOVEMBER -1999 12:00.00 AM 16-MAY      -2001 12:00.00 AM                                                                                                                             
+Trenna          17-OCTOBER  -1995 12:00.00 AM 17-APRIL    -1997 12:00.00 AM                                                                                                                             
+Curtis          29-JANUARY  -1997 12:00.00 AM 29-JULY     -1998 12:00.00 AM                                                                                                                             
+Randall         15-MARCH    -1998 12:00.00 AM 15-SEPTEMBER-1999 12:00.00 AM                                                                                                                             
+Peter           09-JULY     -1998 12:00.00 AM 09-JANUARY  -2000 12:00.00 AM                                                                                                                             
+Eleni           29-JANUARY  -2000 12:00.00 AM 29-JULY     -2001 12:00.00 AM                                                                                                                             
+Ellen           11-MAY      -1996 12:00.00 AM 11-NOVEMBER -1997 12:00.00 AM                                                                                                                             
+Jonathon        24-MARCH    -1998 12:00.00 AM 24-SEPTEMBER-1999 12:00.00 AM                                                                                                                             
+Kimerely        24-MAY      -1999 12:00.00 AM 24-NOVEMBER -2000 12:00.00 AM                                                                                                                             
+Jennifer        17-SEPTEMBER-1987 12:00.00 AM 17-MARCH    -1989 12:00.00 AM                                                                                                                             
+Michael         17-FEBRUARY -1996 12:00.00 AM 17-AUGUST   -1997 12:00.00 AM                                                                                                                             
+Pat             17-AUGUST   -1997 12:00.00 AM 17-FEBRUARY -1999 12:00.00 AM                                                                                                                             
+Shelley         07-JUNE     -1994 12:00.00 AM 07-DECEMBER -1995 12:00.00 AM                                                                                                                             
+William         07-JUNE     -1994 12:00.00 AM 07-DECEMBER -1995 12:00.00 AM                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 3 COMPANY STARTS PAYING EXTRA BENEFITS AFTER COMPLETION OF 3 YEARS.
+SQL> 
+SQL> REM 1 YEAR = 12 MONTHS
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , ADD_MONTHS(HIRE_DATE,3*12) EBSD FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE                     EBSD                                                                                                                                                      
+--------------- ----------------------------- -----------------------------                                                                                                                             
+Steven          17-JULY     -1987 12:00.00 AM 17-JULY     -1990 12:00.00 AM                                                                                                                             
+Neena           21-SEPTEMBER-1989 12:00.00 AM 21-SEPTEMBER-1992 12:00.00 AM                                                                                                                             
+Lex             13-JANUARY  -1993 12:00.00 AM 13-JANUARY  -1996 12:00.00 AM                                                                                                                             
+Alexander       03-JANUARY  -1990 12:00.00 AM 03-JANUARY  -1993 12:00.00 AM                                                                                                                             
+Bruce           21-MAY      -1991 12:00.00 AM 21-MAY      -1994 12:00.00 AM                                                                                                                             
+Diana           07-FEBRUARY -1999 12:00.00 AM 07-FEBRUARY -2002 12:00.00 AM                                                                                                                             
+Kevin           16-NOVEMBER -1999 12:00.00 AM 16-NOVEMBER -2002 12:00.00 AM                                                                                                                             
+Trenna          17-OCTOBER  -1995 12:00.00 AM 17-OCTOBER  -1998 12:00.00 AM                                                                                                                             
+Curtis          29-JANUARY  -1997 12:00.00 AM 29-JANUARY  -2000 12:00.00 AM                                                                                                                             
+Randall         15-MARCH    -1998 12:00.00 AM 15-MARCH    -2001 12:00.00 AM                                                                                                                             
+Peter           09-JULY     -1998 12:00.00 AM 09-JULY     -2001 12:00.00 AM                                                                                                                             
+Eleni           29-JANUARY  -2000 12:00.00 AM 29-JANUARY  -2003 12:00.00 AM                                                                                                                             
+Ellen           11-MAY      -1996 12:00.00 AM 11-MAY      -1999 12:00.00 AM                                                                                                                             
+Jonathon        24-MARCH    -1998 12:00.00 AM 24-MARCH    -2001 12:00.00 AM                                                                                                                             
+Kimerely        24-MAY      -1999 12:00.00 AM 24-MAY      -2002 12:00.00 AM                                                                                                                             
+Jennifer        17-SEPTEMBER-1987 12:00.00 AM 17-SEPTEMBER-1990 12:00.00 AM                                                                                                                             
+Michael         17-FEBRUARY -1996 12:00.00 AM 17-FEBRUARY -1999 12:00.00 AM                                                                                                                             
+Pat             17-AUGUST   -1997 12:00.00 AM 17-AUGUST   -2000 12:00.00 AM                                                                                                                             
+Shelley         07-JUNE     -1994 12:00.00 AM 07-JUNE     -1997 12:00.00 AM                                                                                                                             
+William         07-JUNE     -1994 12:00.00 AM 07-JUNE     -1997 12:00.00 AM                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 1 CENTURY = 100 YEARS
+SQL> 
+SQL> REM 1 YEAR = 12 MONTHS
+SQL> 
+SQL> REM 1 CENTUTRY = 12*100 MONTHS = 1200  MONTHS
+SQL> 
+SQL> REM CENTURY YEAR QUARTER MONTH WEEK DAY HOUR MINUTE SECOND
+SQL> 
+SQL> REM DATE - DATE = DAYS
+SQL> 
+SQL> SELECT SYSDATE , HIRE_DATE , SYSDATE - HIRE_DATE DAYS FROM EMPLOYEES;
+
+SYSDATE                       HIRE_DATE                           DAYS                                                                                                                                  
+----------------------------- ----------------------------- ----------                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 17-JULY     -1987 12:00.00 AM 13368.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 21-SEPTEMBER-1989 12:00.00 AM 12571.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 13-JANUARY  -1993 12:00.00 AM 11361.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 03-JANUARY  -1990 12:00.00 AM 12467.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 21-MAY      -1991 12:00.00 AM 11964.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 07-FEBRUARY -1999 12:00.00 AM 9145.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 16-NOVEMBER -1999 12:00.00 AM 8863.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 17-OCTOBER  -1995 12:00.00 AM 10354.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 29-JANUARY  -1997 12:00.00 AM 9884.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 15-MARCH    -1998 12:00.00 AM 9474.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 09-JULY     -1998 12:00.00 AM 9358.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 29-JANUARY  -2000 12:00.00 AM 8789.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 11-MAY      -1996 12:00.00 AM 10147.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 24-MARCH    -1998 12:00.00 AM 9465.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 24-MAY      -1999 12:00.00 AM 9039.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 17-SEPTEMBER-1987 12:00.00 AM 13306.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 17-FEBRUARY -1996 12:00.00 AM 10231.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 17-AUGUST   -1997 12:00.00 AM 9684.79984                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 07-JUNE     -1994 12:00.00 AM 10851.7998                                                                                                                                  
+21-FEBRUARY -2024 07:11.46 PM 07-JUNE     -1994 12:00.00 AM 10851.7998                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) DAYS FROM EMPLOYEES;
+
+SYSDATE                       HIRE_DATE                           DAYS                                                                                                                                  
+----------------------------- ----------------------------- ----------                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 17-JULY     -1987 12:00.00 AM      13368                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 21-SEPTEMBER-1989 12:00.00 AM      12571                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 13-JANUARY  -1993 12:00.00 AM      11361                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 03-JANUARY  -1990 12:00.00 AM      12467                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 21-MAY      -1991 12:00.00 AM      11964                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 07-FEBRUARY -1999 12:00.00 AM       9145                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 16-NOVEMBER -1999 12:00.00 AM       8863                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 17-OCTOBER  -1995 12:00.00 AM      10354                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 29-JANUARY  -1997 12:00.00 AM       9884                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 15-MARCH    -1998 12:00.00 AM       9474                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 09-JULY     -1998 12:00.00 AM       9358                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 29-JANUARY  -2000 12:00.00 AM       8789                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 11-MAY      -1996 12:00.00 AM      10147                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 24-MARCH    -1998 12:00.00 AM       9465                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 24-MAY      -1999 12:00.00 AM       9039                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 17-SEPTEMBER-1987 12:00.00 AM      13306                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 17-FEBRUARY -1996 12:00.00 AM      10231                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 17-AUGUST   -1997 12:00.00 AM       9684                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 07-JUNE     -1994 12:00.00 AM      10851                                                                                                                                  
+21-FEBRUARY -2024 07:13.06 PM 07-JUNE     -1994 12:00.00 AM      10851                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT SYSDATE , HIRE_DATE , TRUNC(SYSDATE - HIRE_DATE) COMPLETED_DAYS_WORKED FROM EMPLOYEES;
+
+SYSDATE                       HIRE_DATE                     COMPLETED_DAYS_WORKED                                                                                                                       
+----------------------------- ----------------------------- ---------------------                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 17-JULY     -1987 12:00.00 AM                 13368                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 21-SEPTEMBER-1989 12:00.00 AM                 12571                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 13-JANUARY  -1993 12:00.00 AM                 11361                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 03-JANUARY  -1990 12:00.00 AM                 12467                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 21-MAY      -1991 12:00.00 AM                 11964                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 07-FEBRUARY -1999 12:00.00 AM                  9145                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 16-NOVEMBER -1999 12:00.00 AM                  8863                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 17-OCTOBER  -1995 12:00.00 AM                 10354                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 29-JANUARY  -1997 12:00.00 AM                  9884                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 15-MARCH    -1998 12:00.00 AM                  9474                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 09-JULY     -1998 12:00.00 AM                  9358                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 29-JANUARY  -2000 12:00.00 AM                  8789                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 11-MAY      -1996 12:00.00 AM                 10147                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 24-MARCH    -1998 12:00.00 AM                  9465                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 24-MAY      -1999 12:00.00 AM                  9039                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 17-SEPTEMBER-1987 12:00.00 AM                 13306                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 17-FEBRUARY -1996 12:00.00 AM                 10231                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 17-AUGUST   -1997 12:00.00 AM                  9684                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 07-JUNE     -1994 12:00.00 AM                 10851                                                                                                                       
+21-FEBRUARY -2024 07:13.16 PM 07-JUNE     -1994 12:00.00 AM                 10851                                                                                                                       
+
+20 rows selected.
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT '15-AUG-47' - '31-MAY-44' FROM DUAL;
+SELECT '15-AUG-47' - '31-MAY-44' FROM DUAL
+       *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 15-AUG-47 - 31-MAY-44 FROM DUAL;
+SELECT 15-AUG-47 - 31-MAY-44 FROM DUAL
+                      *
+ERROR at line 1:
+ORA-00904: "MAY": invalid identifier 
+
+
+SQL> SELECT TO_DATE('15-AUG-47') - TO_DATE('31-MAY-44') FROM DUAL;
+
+TO_DATE('15-AUG-47')-TO_DATE('31-MAY-44')                                                                                                                                                               
+-----------------------------------------                                                                                                                                                               
+                                     1171                                                                                                                                                               
+
+SQL> SELECT TO_DATE('15-AUG-47') - TO_DATE('31-MAY-44') DAYS_DIFFERENCE FROM DUAL;
+
+DAYS_DIFFERENCE                                                                                                                                                                                         
+---------------                                                                                                                                                                                         
+           1171                                                                                                                                                                                         
+
+SQL> REM WEEK_COMPLETED :
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC((SYSDATE-HIRE_DATE)/7) WEEKS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE WEEKS_COMPLETED                                                                                                                                                     
+--------------- --------- --------- ---------------                                                                                                                                                     
+Steven          21-FEB-24 17-JUL-87            1909                                                                                                                                                     
+Neena           21-FEB-24 21-SEP-89            1795                                                                                                                                                     
+Lex             21-FEB-24 13-JAN-93            1623                                                                                                                                                     
+Alexander       21-FEB-24 03-JAN-90            1781                                                                                                                                                     
+Bruce           21-FEB-24 21-MAY-91            1709                                                                                                                                                     
+Diana           21-FEB-24 07-FEB-99            1306                                                                                                                                                     
+Kevin           21-FEB-24 16-NOV-99            1266                                                                                                                                                     
+Trenna          21-FEB-24 17-OCT-95            1479                                                                                                                                                     
+Curtis          21-FEB-24 29-JAN-97            1412                                                                                                                                                     
+Randall         21-FEB-24 15-MAR-98            1353                                                                                                                                                     
+Peter           21-FEB-24 09-JUL-98            1336                                                                                                                                                     
+Eleni           21-FEB-24 29-JAN-00            1255                                                                                                                                                     
+Ellen           21-FEB-24 11-MAY-96            1449                                                                                                                                                     
+Jonathon        21-FEB-24 24-MAR-98            1352                                                                                                                                                     
+Kimerely        21-FEB-24 24-MAY-99            1291                                                                                                                                                     
+Jennifer        21-FEB-24 17-SEP-87            1900                                                                                                                                                     
+Michael         21-FEB-24 17-FEB-96            1461                                                                                                                                                     
+Pat             21-FEB-24 17-AUG-97            1383                                                                                                                                                     
+Shelley         21-FEB-24 07-JUN-94            1550                                                                                                                                                     
+William         21-FEB-24 07-JUN-94            1550                                                                                                                                                     
+
+20 rows selected.
+
+SQL> REM MONTHS_COMPLETED
+SQL> 
+SQL> REM QTRS_COMPLETED
+SQL> 
+SQL> REM YRS_COMPLETED
+SQL> 
+SQL> 
+SQL> 
+SQL> REM MONTHS_BETWEEN : IT RETURNS NUMBER OF MONTHS BETWEEN TWO DATES.
+SQL> 
+SQL> REM MONTHS_COMPLETED
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , MONTHS_BETWEEN(SYSDATE,HIRE_DATE) MONTHS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE MONTHS_WORKED                                                                                                                                                       
+--------------- --------- --------- -------------                                                                                                                                                       
+Steven          21-FEB-24 17-JUL-87    439.155172                                                                                                                                                       
+Neena           21-FEB-24 21-SEP-89           413                                                                                                                                                       
+Lex             21-FEB-24 13-JAN-93    373.284204                                                                                                                                                       
+Alexander       21-FEB-24 03-JAN-90    409.606785                                                                                                                                                       
+Bruce           21-FEB-24 21-MAY-91           393                                                                                                                                                       
+Diana           21-FEB-24 07-FEB-99    300.477752                                                                                                                                                       
+Kevin           21-FEB-24 16-NOV-99     291.18743                                                                                                                                                       
+Trenna          21-FEB-24 17-OCT-95    340.155172                                                                                                                                                       
+Curtis          21-FEB-24 29-JAN-97    324.768075                                                                                                                                                       
+Randall         21-FEB-24 15-MAR-98    311.219688                                                                                                                                                       
+Peter           21-FEB-24 09-JUL-98    307.413236                                                                                                                                                       
+Eleni           21-FEB-24 29-JAN-00    288.768075                                                                                                                                                       
+Ellen           21-FEB-24 11-MAY-96     333.34872                                                                                                                                                       
+Jonathon        21-FEB-24 24-MAR-98    310.929365                                                                                                                                                       
+Kimerely        21-FEB-24 24-MAY-99    296.929365                                                                                                                                                       
+Jennifer        21-FEB-24 17-SEP-87    437.155172                                                                                                                                                       
+Michael         21-FEB-24 17-FEB-96    336.155172                                                                                                                                                       
+Pat             21-FEB-24 17-AUG-97    318.155172                                                                                                                                                       
+Shelley         21-FEB-24 07-JUN-94    356.477752                                                                                                                                                       
+William         21-FEB-24 07-JUN-94    356.477752                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)) COMPLETED_MONTHS_WORKED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE COMPLETED_MONTHS_WORKED                                                                                                                                             
+--------------- --------- --------- -----------------------                                                                                                                                             
+Steven          21-FEB-24 17-JUL-87                     439                                                                                                                                             
+Neena           21-FEB-24 21-SEP-89                     413                                                                                                                                             
+Lex             21-FEB-24 13-JAN-93                     373                                                                                                                                             
+Alexander       21-FEB-24 03-JAN-90                     409                                                                                                                                             
+Bruce           21-FEB-24 21-MAY-91                     393                                                                                                                                             
+Diana           21-FEB-24 07-FEB-99                     300                                                                                                                                             
+Kevin           21-FEB-24 16-NOV-99                     291                                                                                                                                             
+Trenna          21-FEB-24 17-OCT-95                     340                                                                                                                                             
+Curtis          21-FEB-24 29-JAN-97                     324                                                                                                                                             
+Randall         21-FEB-24 15-MAR-98                     311                                                                                                                                             
+Peter           21-FEB-24 09-JUL-98                     307                                                                                                                                             
+Eleni           21-FEB-24 29-JAN-00                     288                                                                                                                                             
+Ellen           21-FEB-24 11-MAY-96                     333                                                                                                                                             
+Jonathon        21-FEB-24 24-MAR-98                     310                                                                                                                                             
+Kimerely        21-FEB-24 24-MAY-99                     296                                                                                                                                             
+Jennifer        21-FEB-24 17-SEP-87                     437                                                                                                                                             
+Michael         21-FEB-24 17-FEB-96                     336                                                                                                                                             
+Pat             21-FEB-24 17-AUG-97                     318                                                                                                                                             
+Shelley         21-FEB-24 07-JUN-94                     356                                                                                                                                             
+William         21-FEB-24 07-JUN-94                     356                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM QTRS_COMPLETED
+SQL> 
+SQL> REM YRS_COMPLETED
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)/3) QTRS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE QTRS_COMPLETED                                                                                                                                                      
+--------------- --------- --------- --------------                                                                                                                                                      
+Steven          21-FEB-24 17-JUL-87            146                                                                                                                                                      
+Neena           21-FEB-24 21-SEP-89            137                                                                                                                                                      
+Lex             21-FEB-24 13-JAN-93            124                                                                                                                                                      
+Alexander       21-FEB-24 03-JAN-90            136                                                                                                                                                      
+Bruce           21-FEB-24 21-MAY-91            131                                                                                                                                                      
+Diana           21-FEB-24 07-FEB-99            100                                                                                                                                                      
+Kevin           21-FEB-24 16-NOV-99             97                                                                                                                                                      
+Trenna          21-FEB-24 17-OCT-95            113                                                                                                                                                      
+Curtis          21-FEB-24 29-JAN-97            108                                                                                                                                                      
+Randall         21-FEB-24 15-MAR-98            103                                                                                                                                                      
+Peter           21-FEB-24 09-JUL-98            102                                                                                                                                                      
+Eleni           21-FEB-24 29-JAN-00             96                                                                                                                                                      
+Ellen           21-FEB-24 11-MAY-96            111                                                                                                                                                      
+Jonathon        21-FEB-24 24-MAR-98            103                                                                                                                                                      
+Kimerely        21-FEB-24 24-MAY-99             98                                                                                                                                                      
+Jennifer        21-FEB-24 17-SEP-87            145                                                                                                                                                      
+Michael         21-FEB-24 17-FEB-96            112                                                                                                                                                      
+Pat             21-FEB-24 17-AUG-97            106                                                                                                                                                      
+Shelley         21-FEB-24 07-JUN-94            118                                                                                                                                                      
+William         21-FEB-24 07-JUN-94            118                                                                                                                                                      
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)/12) YRS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE YRS_COMPLETED                                                                                                                                                       
+--------------- --------- --------- -------------                                                                                                                                                       
+Steven          21-FEB-24 17-JUL-87            36                                                                                                                                                       
+Neena           21-FEB-24 21-SEP-89            34                                                                                                                                                       
+Lex             21-FEB-24 13-JAN-93            31                                                                                                                                                       
+Alexander       21-FEB-24 03-JAN-90            34                                                                                                                                                       
+Bruce           21-FEB-24 21-MAY-91            32                                                                                                                                                       
+Diana           21-FEB-24 07-FEB-99            25                                                                                                                                                       
+Kevin           21-FEB-24 16-NOV-99            24                                                                                                                                                       
+Trenna          21-FEB-24 17-OCT-95            28                                                                                                                                                       
+Curtis          21-FEB-24 29-JAN-97            27                                                                                                                                                       
+Randall         21-FEB-24 15-MAR-98            25                                                                                                                                                       
+Peter           21-FEB-24 09-JUL-98            25                                                                                                                                                       
+Eleni           21-FEB-24 29-JAN-00            24                                                                                                                                                       
+Ellen           21-FEB-24 11-MAY-96            27                                                                                                                                                       
+Jonathon        21-FEB-24 24-MAR-98            25                                                                                                                                                       
+Kimerely        21-FEB-24 24-MAY-99            24                                                                                                                                                       
+Jennifer        21-FEB-24 17-SEP-87            36                                                                                                                                                       
+Michael         21-FEB-24 17-FEB-96            28                                                                                                                                                       
+Pat             21-FEB-24 17-AUG-97            26                                                                                                                                                       
+Shelley         21-FEB-24 07-JUN-94            29                                                                                                                                                       
+William         21-FEB-24 07-JUN-94            29                                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM 6/3 = 2
+SQL> 
+SQL> REM 28 MONTHS : 2 YEARS : 4 MONTHS
+SQL> 
+SQL> REM TOTAL_MONTHS_COMPLETED , TOTAL_YEARS_COMPLETED , EXTRA_MONTHS_COMPLETED
+SQL> 
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)) TOTAL_MONTHS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE TOTAL_MONTHS_COMPLETED                                                                                                                                              
+--------------- --------- --------- ----------------------                                                                                                                                              
+Steven          21-FEB-24 17-JUL-87                    439                                                                                                                                              
+Neena           21-FEB-24 21-SEP-89                    413                                                                                                                                              
+Lex             21-FEB-24 13-JAN-93                    373                                                                                                                                              
+Alexander       21-FEB-24 03-JAN-90                    409                                                                                                                                              
+Bruce           21-FEB-24 21-MAY-91                    393                                                                                                                                              
+Diana           21-FEB-24 07-FEB-99                    300                                                                                                                                              
+Kevin           21-FEB-24 16-NOV-99                    291                                                                                                                                              
+Trenna          21-FEB-24 17-OCT-95                    340                                                                                                                                              
+Curtis          21-FEB-24 29-JAN-97                    324                                                                                                                                              
+Randall         21-FEB-24 15-MAR-98                    311                                                                                                                                              
+Peter           21-FEB-24 09-JUL-98                    307                                                                                                                                              
+Eleni           21-FEB-24 29-JAN-00                    288                                                                                                                                              
+Ellen           21-FEB-24 11-MAY-96                    333                                                                                                                                              
+Jonathon        21-FEB-24 24-MAR-98                    310                                                                                                                                              
+Kimerely        21-FEB-24 24-MAY-99                    296                                                                                                                                              
+Jennifer        21-FEB-24 17-SEP-87                    437                                                                                                                                              
+Michael         21-FEB-24 17-FEB-96                    336                                                                                                                                              
+Pat             21-FEB-24 17-AUG-97                    318                                                                                                                                              
+Shelley         21-FEB-24 07-JUN-94                    356                                                                                                                                              
+William         21-FEB-24 07-JUN-94                    356                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(HIRE_DATE,SYSDATE)) TOTAL_MONTHS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE TOTAL_MONTHS_COMPLETED                                                                                                                                              
+--------------- --------- --------- ----------------------                                                                                                                                              
+Steven          21-FEB-24 17-JUL-87                   -439                                                                                                                                              
+Neena           21-FEB-24 21-SEP-89                   -413                                                                                                                                              
+Lex             21-FEB-24 13-JAN-93                   -373                                                                                                                                              
+Alexander       21-FEB-24 03-JAN-90                   -409                                                                                                                                              
+Bruce           21-FEB-24 21-MAY-91                   -393                                                                                                                                              
+Diana           21-FEB-24 07-FEB-99                   -300                                                                                                                                              
+Kevin           21-FEB-24 16-NOV-99                   -291                                                                                                                                              
+Trenna          21-FEB-24 17-OCT-95                   -340                                                                                                                                              
+Curtis          21-FEB-24 29-JAN-97                   -324                                                                                                                                              
+Randall         21-FEB-24 15-MAR-98                   -311                                                                                                                                              
+Peter           21-FEB-24 09-JUL-98                   -307                                                                                                                                              
+Eleni           21-FEB-24 29-JAN-00                   -288                                                                                                                                              
+Ellen           21-FEB-24 11-MAY-96                   -333                                                                                                                                              
+Jonathon        21-FEB-24 24-MAR-98                   -310                                                                                                                                              
+Kimerely        21-FEB-24 24-MAY-99                   -296                                                                                                                                              
+Jennifer        21-FEB-24 17-SEP-87                   -437                                                                                                                                              
+Michael         21-FEB-24 17-FEB-96                   -336                                                                                                                                              
+Pat             21-FEB-24 17-AUG-97                   -318                                                                                                                                              
+Shelley         21-FEB-24 07-JUN-94                   -356                                                                                                                                              
+William         21-FEB-24 07-JUN-94                   -356                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)) TOTAL_MONTHS_COMPLETED,
+  2  TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)/12) TOTAL_YEARS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE TOTAL_MONTHS_COMPLETED TOTAL_YEARS_COMPLETED                                                                                                                        
+--------------- --------- --------- ---------------------- ---------------------                                                                                                                        
+Steven          21-FEB-24 17-JUL-87                    439                    36                                                                                                                        
+Neena           21-FEB-24 21-SEP-89                    413                    34                                                                                                                        
+Lex             21-FEB-24 13-JAN-93                    373                    31                                                                                                                        
+Alexander       21-FEB-24 03-JAN-90                    409                    34                                                                                                                        
+Bruce           21-FEB-24 21-MAY-91                    393                    32                                                                                                                        
+Diana           21-FEB-24 07-FEB-99                    300                    25                                                                                                                        
+Kevin           21-FEB-24 16-NOV-99                    291                    24                                                                                                                        
+Trenna          21-FEB-24 17-OCT-95                    340                    28                                                                                                                        
+Curtis          21-FEB-24 29-JAN-97                    324                    27                                                                                                                        
+Randall         21-FEB-24 15-MAR-98                    311                    25                                                                                                                        
+Peter           21-FEB-24 09-JUL-98                    307                    25                                                                                                                        
+Eleni           21-FEB-24 29-JAN-00                    288                    24                                                                                                                        
+Ellen           21-FEB-24 11-MAY-96                    333                    27                                                                                                                        
+Jonathon        21-FEB-24 24-MAR-98                    310                    25                                                                                                                        
+Kimerely        21-FEB-24 24-MAY-99                    296                    24                                                                                                                        
+Jennifer        21-FEB-24 17-SEP-87                    437                    36                                                                                                                        
+Michael         21-FEB-24 17-FEB-96                    336                    28                                                                                                                        
+Pat             21-FEB-24 17-AUG-97                    318                    26                                                                                                                        
+Shelley         21-FEB-24 07-JUN-94                    356                    29                                                                                                                        
+William         21-FEB-24 07-JUN-94                    356                    29                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SYSDATE , HIRE_DATE , TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)) TOTAL_MONTHS_COMPLETED,
+  2  TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)/12) TOTAL_YEARS_COMPLETED ,
+  3  TRUNC(MOD(TRUNC(MONTHS_BETWEEN(SYSDATE,HIRE_DATE)),12)) EXTRA_MONTHS_COMPLETED FROM EMPLOYEES;
+
+FIRST_NAME      SYSDATE   HIRE_DATE TOTAL_MONTHS_COMPLETED TOTAL_YEARS_COMPLETED EXTRA_MONTHS_COMPLETED                                                                                                 
+--------------- --------- --------- ---------------------- --------------------- ----------------------                                                                                                 
+Steven          21-FEB-24 17-JUL-87                    439                    36                      7                                                                                                 
+Neena           21-FEB-24 21-SEP-89                    413                    34                      5                                                                                                 
+Lex             21-FEB-24 13-JAN-93                    373                    31                      1                                                                                                 
+Alexander       21-FEB-24 03-JAN-90                    409                    34                      1                                                                                                 
+Bruce           21-FEB-24 21-MAY-91                    393                    32                      9                                                                                                 
+Diana           21-FEB-24 07-FEB-99                    300                    25                      0                                                                                                 
+Kevin           21-FEB-24 16-NOV-99                    291                    24                      3                                                                                                 
+Trenna          21-FEB-24 17-OCT-95                    340                    28                      4                                                                                                 
+Curtis          21-FEB-24 29-JAN-97                    324                    27                      0                                                                                                 
+Randall         21-FEB-24 15-MAR-98                    311                    25                     11                                                                                                 
+Peter           21-FEB-24 09-JUL-98                    307                    25                      7                                                                                                 
+Eleni           21-FEB-24 29-JAN-00                    288                    24                      0                                                                                                 
+Ellen           21-FEB-24 11-MAY-96                    333                    27                      9                                                                                                 
+Jonathon        21-FEB-24 24-MAR-98                    310                    25                     10                                                                                                 
+Kimerely        21-FEB-24 24-MAY-99                    296                    24                      8                                                                                                 
+Jennifer        21-FEB-24 17-SEP-87                    437                    36                      5                                                                                                 
+Michael         21-FEB-24 17-FEB-96                    336                    28                      0                                                                                                 
+Pat             21-FEB-24 17-AUG-97                    318                    26                      6                                                                                                 
+Shelley         21-FEB-24 07-JUN-94                    356                    29                      8                                                                                                 
+William         21-FEB-24 07-JUN-94                    356                    29                      8                                                                                                 
+
+20 rows selected.
+
+SQL> REM 28 MONTHS TOTAL
+SQL> 
+SQL> SELECT MOD(28,12) FROM DUAL;
+
+MOD(28,12)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> SPOOL OFF

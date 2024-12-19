@@ -1,0 +1,476 @@
+SQL> 
+SQL> REM DATE FUNCTIONS + DATE ARITHMETICS
+SQL> 
+SQL> REM LIST OF DATE FUNCTIONS : SYSDATE CURRENT_DATE   ADD_MONTHS MONTHS_BETWEEN    LAST_DAY NEXT_DAY     TRUNC ROUND
+SQL> 
+SQL> REM SYSDATE : IT RETURNS SERVER MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> REM CURRENT_DATE : IT RETURNS CURRENT/CLIENT/LOCAL MACHINE'S DATE AND TIME INFO.
+SQL> 
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE   CURRENT_D                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+14-FEB-24 14-FEB-24                                                                                                                                                                                     
+
+SQL> REM DATE DEFAULT FORMAT : DD-MON-RR
+SQL> 
+SQL> REM TO FIND CURRENT DATE FORMAT : NLS_SESSION_PARAMETERS
+SQL> 
+SQL> REM NLS : NATIONAL LANGUAGE SUPPORT
+SQL> 
+SQL> REM NATION : COUNTRY
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NLS_LANGUAGE                                                                                                                                                                                            
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TERRITORY                                                                                                                                                                                           
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_CURRENCY                                                                                                                                                                                            
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_ISO_CURRENCY                                                                                                                                                                                        
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_NUMERIC_CHARACTERS                                                                                                                                                                                  
+.,                                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_CALENDAR                                                                                                                                                                                            
+GREGORIAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_FORMAT                                                                                                                                                                                         
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DD-MON-RR                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_LANGUAGE                                                                                                                                                                                       
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_SORT                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_TIME_FORMAT                                                                                                                                                                                         
+HH.MI.SSXFF AM                                                                                                                                                                                          
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_FORMAT                                                                                                                                                                                    
+DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TIME_TZ_FORMAT                                                                                                                                                                                      
+HH.MI.SSXFF AM TZR                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_TZ_FORMAT                                                                                                                                                                                 
+DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                                                            
+
+PARAMETER                                                                                                                                                                                               
+------------------------------------------------------------------------------------------------------------------------                                                                                
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+NLS_DUAL_CURRENCY                                                                                                                                                                                       
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_COMP                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_LENGTH_SEMANTICS                                                                                                                                                                                    
+BYTE                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+NLS_NCHAR_CONV_EXCP                                                                                                                                                                                     
+FALSE                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+
+17 rows selected.
+
+SQL> COL PARAMETER FORMAT A30
+SQL> 
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                                                                                                                                                                                               
+------------------------------                                                                                                                                                                          
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+NLS_LANGUAGE                                                                                                                                                                                            
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TERRITORY                                                                                                                                                                                           
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_CURRENCY                                                                                                                                                                                            
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_ISO_CURRENCY                                                                                                                                                                                        
+AMERICA                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+NLS_NUMERIC_CHARACTERS                                                                                                                                                                                  
+.,                                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_CALENDAR                                                                                                                                                                                            
+GREGORIAN                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_FORMAT                                                                                                                                                                                         
+
+PARAMETER                                                                                                                                                                                               
+------------------------------                                                                                                                                                                          
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+DD-MON-RR                                                                                                                                                                                               
+                                                                                                                                                                                                        
+NLS_DATE_LANGUAGE                                                                                                                                                                                       
+AMERICAN                                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_SORT                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_TIME_FORMAT                                                                                                                                                                                         
+HH.MI.SSXFF AM                                                                                                                                                                                          
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_FORMAT                                                                                                                                                                                    
+DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                                                
+                                                                                                                                                                                                        
+NLS_TIME_TZ_FORMAT                                                                                                                                                                                      
+HH.MI.SSXFF AM TZR                                                                                                                                                                                      
+                                                                                                                                                                                                        
+NLS_TIMESTAMP_TZ_FORMAT                                                                                                                                                                                 
+DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                                                            
+
+PARAMETER                                                                                                                                                                                               
+------------------------------                                                                                                                                                                          
+VALUE                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+                                                                                                                                                                                                        
+NLS_DUAL_CURRENCY                                                                                                                                                                                       
+$                                                                                                                                                                                                       
+                                                                                                                                                                                                        
+NLS_COMP                                                                                                                                                                                                
+BINARY                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+NLS_LENGTH_SEMANTICS                                                                                                                                                                                    
+BYTE                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+NLS_NCHAR_CONV_EXCP                                                                                                                                                                                     
+FALSE                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+
+17 rows selected.
+
+SQL> COL VALUE FORMAT A30
+SQL> 
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MON-RR                                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> REM HOW TO CHANGE DATE FORMAT :
+SQL> 
+SQL> REM HOW TO CHANGE DATE FORMAT : ALTER SESSION SET parameter_name = 'value';
+SQL> 
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM';
+
+Session altered.
+
+SQL> SELECT * FROM NLS_SESSION_PARAMETERS;
+
+PARAMETER                      VALUE                                                                                                                                                                    
+------------------------------ ------------------------------                                                                                                                                           
+NLS_LANGUAGE                   AMERICAN                                                                                                                                                                 
+NLS_TERRITORY                  AMERICA                                                                                                                                                                  
+NLS_CURRENCY                   $                                                                                                                                                                        
+NLS_ISO_CURRENCY               AMERICA                                                                                                                                                                  
+NLS_NUMERIC_CHARACTERS         .,                                                                                                                                                                       
+NLS_CALENDAR                   GREGORIAN                                                                                                                                                                
+NLS_DATE_FORMAT                DD-MONTH-RRRR HH:MI.SS AM                                                                                                                                                
+NLS_DATE_LANGUAGE              AMERICAN                                                                                                                                                                 
+NLS_SORT                       BINARY                                                                                                                                                                   
+NLS_TIME_FORMAT                HH.MI.SSXFF AM                                                                                                                                                           
+NLS_TIMESTAMP_FORMAT           DD-MON-RR HH.MI.SSXFF AM                                                                                                                                                 
+NLS_TIME_TZ_FORMAT             HH.MI.SSXFF AM TZR                                                                                                                                                       
+NLS_TIMESTAMP_TZ_FORMAT        DD-MON-RR HH.MI.SSXFF AM TZR                                                                                                                                             
+NLS_DUAL_CURRENCY              $                                                                                                                                                                        
+NLS_COMP                       BINARY                                                                                                                                                                   
+NLS_LENGTH_SEMANTICS           BYTE                                                                                                                                                                     
+NLS_NCHAR_CONV_EXCP            FALSE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> SELECT SYSDATE , CURRENT_DATE FROM DUAL;
+
+SYSDATE                       CURRENT_DATE                                                                                                                                                              
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:04.16 PM 14-FEBRUARY -2024 07:04.16 PM                                                                                                                                             
+
+SQL> REM DATE HAS 7 PARTS/COMPONENTS/INTERVALS : CENTURY  YEAR   MONTH   DATE/DAY   HOUR    MINUTE    SECOND
+SQL> 
+SQL> REM DATE HAS 7 PARTS/COMPONENTS/INTERVALS : 20       24     02      14         19      04        16
+SQL> 
+SQL> 
+SQL> REM DATE ARITHMETICS : 1 DATE +/- INTERVALS  = DATE    2 DATE - DATE =  DAYS
+SQL> 
+SQL> 
+SQL> REM DATE ARITHMETICS : 1 DATE +/- INTERVALS  = DATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3 , SYSDATE - 5 FROM DUAL;
+
+SYSDATE                       SYSDATE+3                     SYSDATE-5                                                                                                                                   
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+14-FEBRUARY -2024 07:11.17 PM 17-FEBRUARY -2024 07:11.17 PM 09-FEBRUARY -2024 07:11.17 PM                                                                                                               
+
+SQL> 
+SQL> REM 1 DAY = 24 HOURS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/24 , SYSDATE - 2 / 24 FROM DUAL;
+
+SYSDATE                       SYSDATE+3/24                  SYSDATE-2/24                                                                                                                                
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+14-FEBRUARY -2024 07:12.33 PM 14-FEBRUARY -2024 10:12.33 PM 14-FEBRUARY -2024 05:12.33 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 * 60 = 1440 MINUTES
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60) , SYSDATE - 2 / 1440 FROM DUAL;
+
+SYSDATE                       SYSDATE+3/(24*60)             SYSDATE-2/1440                                                                                                                              
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+14-FEBRUARY -2024 07:13.12 PM 14-FEBRUARY -2024 07:16.12 PM 14-FEBRUARY -2024 07:11.12 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 * 60 * 60 = 1440 * 60 = 24 * 3600 = 86400 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/(24*60*60) , SYSDATE - 2 / 86400 FROM DUAL;
+
+SYSDATE                       SYSDATE+3/(24*60*60)          SYSDATE-2/86400                                                                                                                             
+----------------------------- ----------------------------- -----------------------------                                                                                                               
+14-FEBRUARY -2024 07:14.20 PM 14-FEBRUARY -2024 07:14.23 PM 14-FEBRUARY -2024 07:14.18 PM                                                                                                               
+
+SQL> REM 1 DAY = 24 HOURS = 1440 MINUTES = 86400 SECONDS
+SQL> 
+SQL> REM 1 DISPLAY SYSDATE AND ADD 4 DAYS
+SQL> 
+SQL> REM 2 DISPLAY CURRENT_DATE AND SUBTRACT 3 HOURS
+SQL> 
+SQL> REM 3 DISPLAY CURRENT_DATE AND ADD 10 MINUTES
+SQL> 
+SQL> REM 4 DISPLAY SYSDATE AND SUBTRACT 15 SECONDS
+SQL> 
+SQL> REM 5 DISPLAY CURRENT_DATE ADD 20 MINUTES AND SUBTRACT 2 HOURS
+SQL> 
+SQL> 
+SQL> 
+SQL> REM ALTER SESSION SET NLS_DATE_FORMAT = 'DD-MONTH-RRRR HH:MI.SS AM';
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY SYSDATE AND ADD 4 DAYS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 4 FROM DUAL;
+
+SYSDATE                       SYSDATE+4                                                                                                                                                                 
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:30.25 PM 18-FEBRUARY -2024 07:30.25 PM                                                                                                                                             
+
+SQL> REM 2 DISPLAY CURRENT_DATE AND SUBTRACT 3 HOURS
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE - 3/24 FROM DUAL;
+
+CURRENT_DATE                  CURRENT_DATE-3/24                                                                                                                                                         
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:30.36 PM 14-FEBRUARY -2024 04:30.36 PM                                                                                                                                             
+
+SQL> 
+SQL> REM 3 DISPLAY CURRENT_DATE AND ADD 10 MINUTES
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE + 10/1440 FROM DUAL;
+
+CURRENT_DATE                  CURRENT_DATE+10/1440                                                                                                                                                      
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:30.51 PM 14-FEBRUARY -2024 07:40.51 PM                                                                                                                                             
+
+SQL> 
+SQL> REM 4 DISPLAY SYSDATE AND SUBTRACT 15 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE, - 15 / 86400 FROM DUAL;
+
+SYSDATE                       SYSDATE                        -15/86400                                                                                                                                  
+----------------------------- ----------------------------- ----------                                                                                                                                  
+14-FEBRUARY -2024 07:31.06 PM 14-FEBRUARY -2024 07:31.06 PM -.00017361                                                                                                                                  
+
+SQL> REM 5 DISPLAY CURRENT_DATE ADD 20 MINUTES AND SUBTRACT 2 HOURS
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE + 20/1440 - 2/24 FROM DUAL;
+
+CURRENT_DATE                  CURRENT_DATE+20/1440-2/24                                                                                                                                                 
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:31.24 PM 14-FEBRUARY -2024 05:51.24 PM                                                                                                                                             
+
+SQL> REM 4 DISPLAY SYSDATE AND SUBTRACT 15 SECONDS
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE - 15 / 86400 FROM DUAL;
+
+SYSDATE                       SYSDATE-15/86400                                                                                                                                                          
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:31.46 PM 14-FEBRUARY -2024 07:31.31 PM                                                                                                                                             
+
+SQL> REM 1 SYSDATE , ADD 3 HOURS AND SUBTRACT 15 MINUTES
+SQL> 
+SQL> REM 2 CURRENT_DATE , SUBTRACT 40 SECONDS AND ADD 4 DAYS
+SQL> 
+SQL> REM 3 SYSDATE , ADD 4 DAYS , SUBTRACT 8 HOURS , ADD 16 MINUTES
+SQL> 
+SQL> REM 4 CURRENT_DATE , SUBTRACT 40 SECONDS , ADD 30 MINUTES , SUBTRACT 20 HOURS , ADD 10 DAYS
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 SYSDATE , ADD 3 HOURS AND SUBTRACT 15 MINUTES
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3/24 - 15/1440 FROM DUAL;
+
+SYSDATE                       SYSDATE+3/24-15/1440                                                                                                                                                      
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:45.14 PM 14-FEBRUARY -2024 10:30.14 PM                                                                                                                                             
+
+SQL> REM 2 CURRENT_DATE , SUBTRACT 40 SECONDS AND ADD 4 DAYS
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE - 40/86400 + 4 FROM DUAL;
+
+CURRENT_DATE                  CURRENT_DATE-40/86400+4                                                                                                                                                   
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:45.30 PM 18-FEBRUARY -2024 07:44.50 PM                                                                                                                                             
+
+SQL> REM 3 SYSDATE , ADD 4 DAYS , SUBTRACT 8 HOURS , ADD 16 MINUTES
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 4 - 8/24 + 16/1440 FROM DUAL;
+
+SYSDATE                       SYSDATE+4-8/24+16/1440                                                                                                                                                    
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:45.49 PM 18-FEBRUARY -2024 12:01.49 PM                                                                                                                                             
+
+SQL> REM 4 CURRENT_DATE , SUBTRACT 40 SECONDS , ADD 30 MINUTES , SUBTRACT 20 HOURS , ADD 10 DAYS
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE - 40/86400 + 30/1440 - 20/24 + 10 FROM DUAL;
+
+CURRENT_DATE                  CURRENT_DATE-40/86400+30/1440                                                                                                                                             
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:46.16 PM 24-FEBRUARY -2024 12:15.36 AM                                                                                                                                             
+
+SQL> REM 1 ADD 3 WEEKS TO SYSDATE
+SQL> 
+SQL> REM 2 SUBTRACT 29 WEEKS FROM CURRENT_DATE
+SQL> 
+SQL> REM 1 WEEK = 7 DAYS
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 ADD 3 WEEKS TO SYSDATE
+SQL> 
+SQL> SELECT SYSDATE , SYSDATE + 3*7 FROM DUAL;
+
+SYSDATE                       SYSDATE+3*7                                                                                                                                                               
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:51.03 PM 06-MARCH    -2024 07:51.03 PM                                                                                                                                             
+
+SQL> REM 2 SUBTRACT 29 WEEKS FROM CURRENT_DATE
+SQL> 
+SQL> SELECT CURRENT_DATE , CURRENT_DATE - 29*7 FROM DUAL;
+
+CURRENT_DATE                  CURRENT_DATE-29*7                                                                                                                                                         
+----------------------------- -----------------------------                                                                                                                                             
+14-FEBRUARY -2024 07:51.19 PM 26-JULY     -2023 07:51.19 PM                                                                                                                                             
+
+SQL> REM SEPTEMBER : 9 CHARACTERS
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+-----------------------------                                                                                                                                                                           
+17-JULY     -1987 12:00.00 AM                                                                                                                                                                           
+21-SEPTEMBER-1989 12:00.00 AM                                                                                                                                                                           
+13-JANUARY  -1993 12:00.00 AM                                                                                                                                                                           
+03-JANUARY  -1990 12:00.00 AM                                                                                                                                                                           
+21-MAY      -1991 12:00.00 AM                                                                                                                                                                           
+07-FEBRUARY -1999 12:00.00 AM                                                                                                                                                                           
+16-NOVEMBER -1999 12:00.00 AM                                                                                                                                                                           
+17-OCTOBER  -1995 12:00.00 AM                                                                                                                                                                           
+29-JANUARY  -1997 12:00.00 AM                                                                                                                                                                           
+15-MARCH    -1998 12:00.00 AM                                                                                                                                                                           
+09-JULY     -1998 12:00.00 AM                                                                                                                                                                           
+29-JANUARY  -2000 12:00.00 AM                                                                                                                                                                           
+11-MAY      -1996 12:00.00 AM                                                                                                                                                                           
+24-MARCH    -1998 12:00.00 AM                                                                                                                                                                           
+24-MAY      -1999 12:00.00 AM                                                                                                                                                                           
+17-SEPTEMBER-1987 12:00.00 AM                                                                                                                                                                           
+17-FEBRUARY -1996 12:00.00 AM                                                                                                                                                                           
+17-AUGUST   -1997 12:00.00 AM                                                                                                                                                                           
+07-JUNE     -1994 12:00.00 AM                                                                                                                                                                           
+07-JUNE     -1994 12:00.00 AM                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> ATLER SESSION SET NLS_DATE_FORMAT = 'DD-FMMONTH-RRRR DAY';
+SP2-0734: unknown command beginning "ATLER SESS..." - rest of line ignored.
+SQL> 
+SQL> 
+SQL> ALTER SESSION SET NLS_DATE_FORMAT = 'DD-FMMONTH-RRRR DAY';
+
+Session altered.
+
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------------------------                                                                                                                                                                             
+17-JULY-1987 FRIDAY                                                                                                                                                                                     
+21-SEPTEMBER-1989 THURSDAY                                                                                                                                                                              
+13-JANUARY-1993 WEDNESDAY                                                                                                                                                                               
+03-JANUARY-1990 WEDNESDAY                                                                                                                                                                               
+21-MAY-1991 TUESDAY                                                                                                                                                                                     
+07-FEBRUARY-1999 SUNDAY                                                                                                                                                                                 
+16-NOVEMBER-1999 TUESDAY                                                                                                                                                                                
+17-OCTOBER-1995 TUESDAY                                                                                                                                                                                 
+29-JANUARY-1997 WEDNESDAY                                                                                                                                                                               
+15-MARCH-1998 SUNDAY                                                                                                                                                                                    
+09-JULY-1998 THURSDAY                                                                                                                                                                                   
+29-JANUARY-2000 SATURDAY                                                                                                                                                                                
+11-MAY-1996 SATURDAY                                                                                                                                                                                    
+24-MARCH-1998 TUESDAY                                                                                                                                                                                   
+24-MAY-1999 MONDAY                                                                                                                                                                                      
+17-SEPTEMBER-1987 THURSDAY                                                                                                                                                                              
+17-FEBRUARY-1996 SATURDAY                                                                                                                                                                               
+17-AUGUST-1997 SUNDAY                                                                                                                                                                                   
+07-JUNE-1994 TUESDAY                                                                                                                                                                                    
+07-JUNE-1994 TUESDAY                                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SPOOL OFF
