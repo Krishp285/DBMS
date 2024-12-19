@@ -1,0 +1,1130 @@
+SQL> 
+SQL> REM * META CHARACTER
+SQL> 
+SQL> REM || CONCATENATION OPERATOR
+SQL> 
+SQL> REM / * + -
+> 
+SQL> REM DISTINCT/UNIQUE
+SQL> 
+SQL> REM NVL
+SQL> 
+SQL> REM POWER
+SQL> 
+SQL> REM PRECEDENCE
+SQL> 
+SQL> REM DUAL
+SQL> 
+SQL> REM COLUMN ALIAS
+SQL> 
+SQL> REM TABLE ALIAS
+SQL> 
+SQL> REM ROWNUM
+SQL> 
+SQL> REM ROWID
+SQL> 
+SQL> REM Q OPERATOR
+SQL> 
+SQL> 
+SQL> SELECT 4 * 5 FROM REGIONS;
+
+       4*5                                                                                                                                                                          
+----------                                                                                                                                                                          
+        20                                                                                                                                                                          
+        20                                                                                                                                                                          
+        20                                                                                                                                                                          
+        20                                                                                                                                                                          
+
+SQL> SELECT 4 * 5 FROM DUAL;
+
+       4*5                                                                                                                                                                          
+----------                                                                                                                                                                          
+        20                                                                                                                                                                          
+
+SQL> SELECT DISTINCT 4 * 5 FROM REGIONS;
+
+       4*5                                                                                                                                                                          
+----------                                                                                                                                                                          
+        20                                                                                                                                                                          
+
+SQL> SELECT UNIQUE 4 * 5 FROM REGIONS;
+
+       4*5                                                                                                                                                                          
+----------                                                                                                                                                                          
+        20                                                                                                                                                                          
+
+SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES;
+
+DEPARTMENT_ID                                                                                                                                                                       
+-------------                                                                                                                                                                       
+           90                                                                                                                                                                       
+           90                                                                                                                                                                       
+           90                                                                                                                                                                       
+           60                                                                                                                                                                       
+           60                                                                                                                                                                       
+           60                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           80                                                                                                                                                                       
+           80                                                                                                                                                                       
+           80                                                                                                                                                                       
+                                                                                                                                                                                    
+           10                                                                                                                                                                       
+           20                                                                                                                                                                       
+           20                                                                                                                                                                       
+          110                                                                                                                                                                       
+          110                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT ALL DEPARTMENT_ID FROM EMPLOYEES;
+
+DEPARTMENT_ID                                                                                                                                                                       
+-------------                                                                                                                                                                       
+           90                                                                                                                                                                       
+           90                                                                                                                                                                       
+           90                                                                                                                                                                       
+           60                                                                                                                                                                       
+           60                                                                                                                                                                       
+           60                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           80                                                                                                                                                                       
+           80                                                                                                                                                                       
+           80                                                                                                                                                                       
+                                                                                                                                                                                    
+           10                                                                                                                                                                       
+           20                                                                                                                                                                       
+           20                                                                                                                                                                       
+          110                                                                                                                                                                       
+          110                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES;
+
+DEPARTMENT_ID                                                                                                                                                                       
+-------------                                                                                                                                                                       
+                                                                                                                                                                                    
+           90                                                                                                                                                                       
+           20                                                                                                                                                                       
+          110                                                                                                                                                                       
+           50                                                                                                                                                                       
+           80                                                                                                                                                                       
+           60                                                                                                                                                                       
+           10                                                                                                                                                                       
+
+8 rows selected.
+
+SQL> SELECT UNIQUE DEPARTMENT_ID FROM EMPLOYEES;
+
+DEPARTMENT_ID                                                                                                                                                                       
+-------------                                                                                                                                                                       
+                                                                                                                                                                                    
+           90                                                                                                                                                                       
+           20                                                                                                                                                                       
+          110                                                                                                                                                                       
+           50                                                                                                                                                                       
+           80                                                                                                                                                                       
+           60                                                                                                                                                                       
+           10                                                                                                                                                                       
+
+8 rows selected.
+
+SQL> REM ALL IS DEFAULT, MEANS INCLUDING DUPLICATES.
+SQL> 
+SQL> REM DISTINCT/UNIQUE : EXCLUDING DUPLICATES
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT MANAGER_ID FROM EMPLOYEES;
+
+MANAGER_ID                                                                                                                                                                          
+----------                                                                                                                                                                          
+                                                                                                                                                                                    
+       100                                                                                                                                                                          
+       100                                                                                                                                                                          
+       102                                                                                                                                                                          
+       103                                                                                                                                                                          
+       103                                                                                                                                                                          
+       100                                                                                                                                                                          
+       124                                                                                                                                                                          
+       124                                                                                                                                                                          
+       124                                                                                                                                                                          
+       124                                                                                                                                                                          
+       100                                                                                                                                                                          
+       149                                                                                                                                                                          
+       149                                                                                                                                                                          
+       149                                                                                                                                                                          
+       101                                                                                                                                                                          
+       100                                                                                                                                                                          
+       201                                                                                                                                                                          
+       101                                                                                                                                                                          
+       205                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT DISTINCT MANAGER_ID FROM EMPLOYEES;
+
+MANAGER_ID                                                                                                                                                                          
+----------                                                                                                                                                                          
+                                                                                                                                                                                    
+       100                                                                                                                                                                          
+       149                                                                                                                                                                          
+       205                                                                                                                                                                          
+       102                                                                                                                                                                          
+       201                                                                                                                                                                          
+       101                                                                                                                                                                          
+       124                                                                                                                                                                          
+       103                                                                                                                                                                          
+
+9 rows selected.
+
+SQL> SELECT JOB_ID FROM EMPLOYEES;
+
+JOB_ID                                                                                                                                                                              
+----------                                                                                                                                                                          
+AD_PRES                                                                                                                                                                             
+AD_VP                                                                                                                                                                               
+AD_VP                                                                                                                                                                               
+IT_PROG                                                                                                                                                                             
+IT_PROG                                                                                                                                                                             
+IT_PROG                                                                                                                                                                             
+ST_MAN                                                                                                                                                                              
+ST_CLERK                                                                                                                                                                            
+ST_CLERK                                                                                                                                                                            
+ST_CLERK                                                                                                                                                                            
+ST_CLERK                                                                                                                                                                            
+SA_MAN                                                                                                                                                                              
+SA_REP                                                                                                                                                                              
+SA_REP                                                                                                                                                                              
+SA_REP                                                                                                                                                                              
+AD_ASST                                                                                                                                                                             
+MK_MAN                                                                                                                                                                              
+MK_REP                                                                                                                                                                              
+AC_MGR                                                                                                                                                                              
+AC_ACCOUNT                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT JOB_ID UNIQUE FROM EMPLOYEES;
+SELECT JOB_ID UNIQUE FROM EMPLOYEES
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT UNIQUE JOB_ID FROM EMPLOYEES;
+
+JOB_ID                                                                                                                                                                              
+----------                                                                                                                                                                          
+IT_PROG                                                                                                                                                                             
+AC_MGR                                                                                                                                                                              
+AC_ACCOUNT                                                                                                                                                                          
+ST_MAN                                                                                                                                                                              
+AD_ASST                                                                                                                                                                             
+AD_VP                                                                                                                                                                               
+SA_MAN                                                                                                                                                                              
+MK_MAN                                                                                                                                                                              
+AD_PRES                                                                                                                                                                             
+SA_REP                                                                                                                                                                              
+MK_REP                                                                                                                                                                              
+ST_CLERK                                                                                                                                                                            
+
+12 rows selected.
+
+SQL> REM DISTINCT AND UNIQUE ALSO INCLUDES NULL AS ONE OF THE VALUE.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID                                                                                                                                                            
+------------- ----------                                                                                                                                                            
+           10        101                                                                                                                                                            
+           20        100                                                                                                                                                            
+           20        201                                                                                                                                                            
+           50        100                                                                                                                                                            
+           50        124                                                                                                                                                            
+           50        124                                                                                                                                                            
+           50        124                                                                                                                                                            
+           50        124                                                                                                                                                            
+           60        102                                                                                                                                                            
+           60        103                                                                                                                                                            
+           60        103                                                                                                                                                            
+           80        100                                                                                                                                                            
+           80        149                                                                                                                                                            
+           80        149                                                                                                                                                            
+           90        100                                                                                                                                                            
+           90        100                                                                                                                                                            
+           90                                                                                                                                                                       
+          110        101                                                                                                                                                            
+          110        205                                                                                                                                                            
+                     149                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT DISTINCT DEPARTMENT_ID , MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID                                                                                                                                                            
+------------- ----------                                                                                                                                                            
+           10        101                                                                                                                                                            
+           20        100                                                                                                                                                            
+           20        201                                                                                                                                                            
+           50        100                                                                                                                                                            
+           50        124                                                                                                                                                            
+           60        102                                                                                                                                                            
+           60        103                                                                                                                                                            
+           80        100                                                                                                                                                            
+           80        149                                                                                                                                                            
+           90        100                                                                                                                                                            
+           90                                                                                                                                                                       
+          110        101                                                                                                                                                            
+          110        205                                                                                                                                                            
+                     149                                                                                                                                                            
+
+14 rows selected.
+
+SQL> SELECT JOB_ID , MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+
+JOB_ID     MANAGER_ID                                                                                                                                                               
+---------- ----------                                                                                                                                                               
+AC_ACCOUNT        205                                                                                                                                                               
+AC_MGR            101                                                                                                                                                               
+AD_ASST           101                                                                                                                                                               
+AD_PRES                                                                                                                                                                             
+AD_VP             100                                                                                                                                                               
+AD_VP             100                                                                                                                                                               
+IT_PROG           102                                                                                                                                                               
+IT_PROG           103                                                                                                                                                               
+IT_PROG           103                                                                                                                                                               
+MK_MAN            100                                                                                                                                                               
+MK_REP            201                                                                                                                                                               
+SA_MAN            100                                                                                                                                                               
+SA_REP            149                                                                                                                                                               
+SA_REP            149                                                                                                                                                               
+SA_REP            149                                                                                                                                                               
+ST_CLERK          124                                                                                                                                                               
+ST_CLERK          124                                                                                                                                                               
+ST_CLERK          124                                                                                                                                                               
+ST_CLERK          124                                                                                                                                                               
+ST_MAN            100                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , UNIQUE MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+SELECT JOB_ID , UNIQUE MANAGER_ID FROM EMPLOYEES ORDER BY 1,2
+                *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT UNIQUE JOB_ID , MANAGER_ID FROM EMPLOYEES ORDER BY 1,2;
+
+JOB_ID     MANAGER_ID                                                                                                                                                               
+---------- ----------                                                                                                                                                               
+AC_ACCOUNT        205                                                                                                                                                               
+AC_MGR            101                                                                                                                                                               
+AD_ASST           101                                                                                                                                                               
+AD_PRES                                                                                                                                                                             
+AD_VP             100                                                                                                                                                               
+IT_PROG           102                                                                                                                                                               
+IT_PROG           103                                                                                                                                                               
+MK_MAN            100                                                                                                                                                               
+MK_REP            201                                                                                                                                                               
+SA_MAN            100                                                                                                                                                               
+SA_REP            149                                                                                                                                                               
+ST_CLERK          124                                                                                                                                                               
+ST_MAN            100                                                                                                                                                               
+
+13 rows selected.
+
+SQL> REM RULES TO BE FOLLOWED WHEN WE USE UNIQUE/DISTINCT :
+SQL> 
+SQL> REM 1 UNIQUE OR DISTINCT MUST BE FOLLOWED BY 'SELECT'
+SQL> 
+SQL> REM 2 EITHER WE CAN USE DISTINCT OR UNIQUE.
+SQL> 
+SQL> REM 3 ANY ONE CAN BE USED ONCE PER SELECT.
+SQL> 
+SQL> 
+SQL> SELECT MANAGER_ID , JOB_ID , DEPARTMENT_ID FROM EMPLOYEES ORDER BY 1,2,3;
+
+MANAGER_ID JOB_ID     DEPARTMENT_ID                                                                                                                                                 
+---------- ---------- -------------                                                                                                                                                 
+       100 AD_VP                 90                                                                                                                                                 
+       100 AD_VP                 90                                                                                                                                                 
+       100 MK_MAN                20                                                                                                                                                 
+       100 SA_MAN                80                                                                                                                                                 
+       100 ST_MAN                50                                                                                                                                                 
+       101 AC_MGR               110                                                                                                                                                 
+       101 AD_ASST               10                                                                                                                                                 
+       102 IT_PROG               60                                                                                                                                                 
+       103 IT_PROG               60                                                                                                                                                 
+       103 IT_PROG               60                                                                                                                                                 
+       124 ST_CLERK              50                                                                                                                                                 
+       124 ST_CLERK              50                                                                                                                                                 
+       124 ST_CLERK              50                                                                                                                                                 
+       124 ST_CLERK              50                                                                                                                                                 
+       149 SA_REP                80                                                                                                                                                 
+       149 SA_REP                80                                                                                                                                                 
+       149 SA_REP                                                                                                                                                                   
+       201 MK_REP                20                                                                                                                                                 
+       205 AC_ACCOUNT           110                                                                                                                                                 
+           AD_PRES               90                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT DISTINCT MANAGER_ID , JOB_ID , DEPARTMENT_ID FROM EMPLOYEES ORDER BY 1,2,3;
+
+MANAGER_ID JOB_ID     DEPARTMENT_ID                                                                                                                                                 
+---------- ---------- -------------                                                                                                                                                 
+       100 AD_VP                 90                                                                                                                                                 
+       100 MK_MAN                20                                                                                                                                                 
+       100 SA_MAN                80                                                                                                                                                 
+       100 ST_MAN                50                                                                                                                                                 
+       101 AC_MGR               110                                                                                                                                                 
+       101 AD_ASST               10                                                                                                                                                 
+       102 IT_PROG               60                                                                                                                                                 
+       103 IT_PROG               60                                                                                                                                                 
+       124 ST_CLERK              50                                                                                                                                                 
+       149 SA_REP                80                                                                                                                                                 
+       149 SA_REP                                                                                                                                                                   
+       201 MK_REP                20                                                                                                                                                 
+       205 AC_ACCOUNT           110                                                                                                                                                 
+           AD_PRES               90                                                                                                                                                 
+
+14 rows selected.
+
+SQL> 
+SQL> SELECT DEPARTMENT_ID , COMMISSION_PCT FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID COMMISSION_PCT                                                                                                                                                        
+------------- --------------                                                                                                                                                        
+           10                                                                                                                                                                       
+           20                                                                                                                                                                       
+           20                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           50                                                                                                                                                                       
+           60                                                                                                                                                                       
+           60                                                                                                                                                                       
+           60                                                                                                                                                                       
+           80             .2                                                                                                                                                        
+           80             .3                                                                                                                                                        
+           80             .3                                                                                                                                                        
+           90                                                                                                                                                                       
+           90                                                                                                                                                                       
+           90                                                                                                                                                                       
+          110                                                                                                                                                                       
+          110                                                                                                                                                                       
+                         .15                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT DISTINCT DEPARTMENT_ID + COMMISSION_PCT FROM EMPLOYEES ORDER BY 1;
+
+DEPARTMENT_ID+COMMISSION_PCT                                                                                                                                                        
+----------------------------                                                                                                                                                        
+                        80.2                                                                                                                                                        
+                        80.3                                                                                                                                                        
+                                                                                                                                                                                    
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID FROM EMPLOYEES;
+
+COMMISSION_PCT MANAGER_ID                                                                                                                                                           
+-------------- ----------                                                                                                                                                           
+                                                                                                                                                                                    
+                      100                                                                                                                                                           
+                      100                                                                                                                                                           
+                      102                                                                                                                                                           
+                      103                                                                                                                                                           
+                      103                                                                                                                                                           
+                      100                                                                                                                                                           
+                      124                                                                                                                                                           
+                      124                                                                                                                                                           
+                      124                                                                                                                                                           
+                      124                                                                                                                                                           
+            .2        100                                                                                                                                                           
+            .3        149                                                                                                                                                           
+            .3        149                                                                                                                                                           
+           .15        149                                                                                                                                                           
+                      101                                                                                                                                                           
+                      100                                                                                                                                                           
+                      201                                                                                                                                                           
+                      101                                                                                                                                                           
+                      205                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID FROM EMPLOYEES ORDER BY 2;
+
+COMMISSION_PCT MANAGER_ID                                                                                                                                                           
+-------------- ----------                                                                                                                                                           
+                      100                                                                                                                                                           
+                      100                                                                                                                                                           
+                      100                                                                                                                                                           
+            .2        100                                                                                                                                                           
+                      100                                                                                                                                                           
+                      101                                                                                                                                                           
+                      101                                                                                                                                                           
+                      102                                                                                                                                                           
+                      103                                                                                                                                                           
+                      103                                                                                                                                                           
+                      124                                                                                                                                                           
+                      124                                                                                                                                                           
+                      124                                                                                                                                                           
+                      124                                                                                                                                                           
+           .15        149                                                                                                                                                           
+            .3        149                                                                                                                                                           
+            .3        149                                                                                                                                                           
+                      201                                                                                                                                                           
+                      205                                                                                                                                                           
+                                                                                                                                                                                    
+
+20 rows selected.
+
+SQL> SELECT UNIQUE COMMISSION_PCT || MANAGER_ID FROM EMPLOYEES;
+
+COMMISSION_PCT||MANAGER_ID                                                                                                                                                          
+--------------------------------------------------------------------------------                                                                                                    
+                                                                                                                                                                                    
+.2100                                                                                                                                                                               
+101                                                                                                                                                                                 
+100                                                                                                                                                                                 
+102                                                                                                                                                                                 
+201                                                                                                                                                                                 
+205                                                                                                                                                                                 
+103                                                                                                                                                                                 
+124                                                                                                                                                                                 
+.15149                                                                                                                                                                              
+.3149                                                                                                                                                                               
+
+11 rows selected.
+
+SQL> SELECT SALARY , COMMISSION_PCT , SALARY * COMMISSION_PCT COMM_AMOUNT FROM EMPLOYEES;
+
+    SALARY COMMISSION_PCT COMM_AMOUNT                                                                                                                                               
+---------- -------------- -----------                                                                                                                                               
+     24000                                                                                                                                                                          
+     17000                                                                                                                                                                          
+     17000                                                                                                                                                                          
+      9000                                                                                                                                                                          
+      6000                                                                                                                                                                          
+      4200                                                                                                                                                                          
+      5800                                                                                                                                                                          
+      3500                                                                                                                                                                          
+      3100                                                                                                                                                                          
+      2600                                                                                                                                                                          
+      2500                                                                                                                                                                          
+     10500             .2        2100                                                                                                                                               
+     11000             .3        3300                                                                                                                                               
+      8600             .3        2580                                                                                                                                               
+      7000            .15        1050                                                                                                                                               
+      4400                                                                                                                                                                          
+     13000                                                                                                                                                                          
+      6000                                                                                                                                                                          
+     12000                                                                                                                                                                          
+      8300                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM TOTAL_PAYMENT = SALARY + COMM_AMOUNT
+SQL> 
+SQL> SELECT SALARY , COMMISSION_PCT , SALARY * COMMISSION_PCT COMM_AMOUNT , SALARY + SALARY * COMMISSION_PCT TOTAL_PAYMENT FROM EMPLOYEES;
+
+    SALARY COMMISSION_PCT COMM_AMOUNT TOTAL_PAYMENT                                                                                                                                 
+---------- -------------- ----------- -------------                                                                                                                                 
+     24000                                                                                                                                                                          
+     17000                                                                                                                                                                          
+     17000                                                                                                                                                                          
+      9000                                                                                                                                                                          
+      6000                                                                                                                                                                          
+      4200                                                                                                                                                                          
+      5800                                                                                                                                                                          
+      3500                                                                                                                                                                          
+      3100                                                                                                                                                                          
+      2600                                                                                                                                                                          
+      2500                                                                                                                                                                          
+     10500             .2        2100         12600                                                                                                                                 
+     11000             .3        3300         14300                                                                                                                                 
+      8600             .3        2580         11180                                                                                                                                 
+      7000            .15        1050          8050                                                                                                                                 
+      4400                                                                                                                                                                          
+     13000                                                                                                                                                                          
+      6000                                                                                                                                                                          
+     12000                                                                                                                                                                          
+      8300                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM ANY ARITHMETIC CALCULCATION WITH NULL, ALWAYS RESULT NULL.
+SQL> 
+SQL> SELECT 5 + NULL FROM DUAL;
+
+    5+NULL                                                                                                                                                                          
+----------                                                                                                                                                                          
+                                                                                                                                                                                    
+
+SQL> REM NVL : IS USED TO REPLACE NULL VALUE WITH OTHER VALUE.
+SQL> 
+SQL> SELECT SALARY , COMMISSION_PCT , SALARY * COMMISSION_PCT COMM_AMOUNT , SALARY + SALARY * NVL(COMMISSION_PCT,0) TOTAL_PAYMENT FROM EMPLOYEES;
+
+    SALARY COMMISSION_PCT COMM_AMOUNT TOTAL_PAYMENT                                                                                                                                 
+---------- -------------- ----------- -------------                                                                                                                                 
+     24000                                    24000                                                                                                                                 
+     17000                                    17000                                                                                                                                 
+     17000                                    17000                                                                                                                                 
+      9000                                     9000                                                                                                                                 
+      6000                                     6000                                                                                                                                 
+      4200                                     4200                                                                                                                                 
+      5800                                     5800                                                                                                                                 
+      3500                                     3500                                                                                                                                 
+      3100                                     3100                                                                                                                                 
+      2600                                     2600                                                                                                                                 
+      2500                                     2500                                                                                                                                 
+     10500             .2        2100         12600                                                                                                                                 
+     11000             .3        3300         14300                                                                                                                                 
+      8600             .3        2580         11180                                                                                                                                 
+      7000            .15        1050          8050                                                                                                                                 
+      4400                                     4400                                                                                                                                 
+     13000                                    13000                                                                                                                                 
+      6000                                     6000                                                                                                                                 
+     12000                                    12000                                                                                                                                 
+      8300                                     8300                                                                                                                                 
+
+20 rows selected.
+
+SQL> REM COMMISSION_PCT , COMM_AMOUNT , TOTAL_PAYMENT
+SQL> 
+SQL> REM FIRST_NAME , SALARY , COMMISSION_PCT , COMM_AMOUNT , TOTAL_PAYMENT
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , NVL(COMMISSION_PCT,0) , SALARY * NVL(COMMISSION_PCT,0) , COMM_AMOUNT ,
+  2  SALARY + SALARY * NVL(COMMISSION_PCT , 0) TOTAL_PAYMENT
+  3  FROM EMPLOYEES
+  4  
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , NVL(COMMISSION_PCT,0) , SALARY * NVL(COMMISSION_PCT,0)  COMM_AMOUNT ,
+  2  
+SQL> SELECT FIRST_NAME , SALARY , NVL(COMMISSION_PCT,0) , SALARY * NVL(COMMISSION_PCT,0)  COMM_AMOUNT ,
+  2  SALARY + SALARY * NVL(COMMISSION_PCT , 0) TOTAL_PAYMENT
+  3  FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NVL(COMMISSION_PCT,0) COMM_AMOUNT TOTAL_PAYMENT                                                                                                          
+--------------- ---------- --------------------- ----------- -------------                                                                                                          
+Steven               24000                     0           0         24000                                                                                                          
+Neena                17000                     0           0         17000                                                                                                          
+Lex                  17000                     0           0         17000                                                                                                          
+Alexander             9000                     0           0          9000                                                                                                          
+Bruce                 6000                     0           0          6000                                                                                                          
+Diana                 4200                     0           0          4200                                                                                                          
+Kevin                 5800                     0           0          5800                                                                                                          
+Trenna                3500                     0           0          3500                                                                                                          
+Curtis                3100                     0           0          3100                                                                                                          
+Randall               2600                     0           0          2600                                                                                                          
+Peter                 2500                     0           0          2500                                                                                                          
+Eleni                10500                    .2        2100         12600                                                                                                          
+Ellen                11000                    .3        3300         14300                                                                                                          
+Jonathon              8600                    .3        2580         11180                                                                                                          
+Kimerely              7000                   .15        1050          8050                                                                                                          
+Jennifer              4400                     0           0          4400                                                                                                          
+Michael              13000                     0           0         13000                                                                                                          
+Pat                   6000                     0           0          6000                                                                                                          
+Shelley              12000                     0           0         12000                                                                                                          
+William               8300                     0           0          8300                                                                                                          
+
+20 rows selected.
+
+SQL> REM DISPLAY 999 IF DEPARTMENT_ID IS NOT FIXED
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                 
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                 
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                 
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                 
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                 
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                 
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                 
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                 
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                 
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                 
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                 
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                 
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                 
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                 
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                 
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                 
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                               
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                 
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                 
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                 
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                 
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                 
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , NVL(DEPARTMENT_ID , 999) FROM EMPLOYEES;
+
+DEPARTMENT_ID NVL(DEPARTMENT_ID,999)                                                                                                                                                
+------------- ----------------------                                                                                                                                                
+           90                     90                                                                                                                                                
+           90                     90                                                                                                                                                
+           90                     90                                                                                                                                                
+           60                     60                                                                                                                                                
+           60                     60                                                                                                                                                
+           60                     60                                                                                                                                                
+           50                     50                                                                                                                                                
+           50                     50                                                                                                                                                
+           50                     50                                                                                                                                                
+           50                     50                                                                                                                                                
+           50                     50                                                                                                                                                
+           80                     80                                                                                                                                                
+           80                     80                                                                                                                                                
+           80                     80                                                                                                                                                
+                                 999                                                                                                                                                
+           10                     10                                                                                                                                                
+           20                     20                                                                                                                                                
+           20                     20                                                                                                                                                
+          110                    110                                                                                                                                                
+          110                    110                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                 
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                 
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                 
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                 
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                 
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                 
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                 
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                 
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                 
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                 
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                 
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                 
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                 
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                 
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                 
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                 
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                               
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                 
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                 
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                 
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                 
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                 
+
+20 rows selected.
+
+SQL> REM DISPLAY MANAGER_ID , IF MISSING DISPLAY EMPLOYEE_ID
+SQL> 
+SQL> SELECT MANAGER_ID , NVL(MANAGER_ID , EMPLOYEE_ID) MGR FROM EMPLOYEES;
+
+MANAGER_ID        MGR                                                                                                                                                               
+---------- ----------                                                                                                                                                               
+                  100                                                                                                                                                               
+       100        100                                                                                                                                                               
+       100        100                                                                                                                                                               
+       102        102                                                                                                                                                               
+       103        103                                                                                                                                                               
+       103        103                                                                                                                                                               
+       100        100                                                                                                                                                               
+       124        124                                                                                                                                                               
+       124        124                                                                                                                                                               
+       124        124                                                                                                                                                               
+       124        124                                                                                                                                                               
+       100        100                                                                                                                                                               
+       149        149                                                                                                                                                               
+       149        149                                                                                                                                                               
+       149        149                                                                                                                                                               
+       101        101                                                                                                                                                               
+       100        100                                                                                                                                                               
+       201        201                                                                                                                                                               
+       101        101                                                                                                                                                               
+       205        205                                                                                                                                                               
+
+20 rows selected.
+
+SQL> REM * HAS TWO MEANINGS : 1 META CHARACTER 2 ARITHMETIC OPERATOR FOR MULTIPLICATION
+SQL> 
+SQL> REM WHEN WE USE ONLY * IN SELECT, IT IS USED AS META CHARACTER
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                 
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                 
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                 
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                 
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                 
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                 
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                 
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                 
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                 
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                 
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                 
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                 
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                 
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                 
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                 
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                 
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                               
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                 
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                 
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                 
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                 
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                 
+
+20 rows selected.
+
+SQL> REM WHEN WE USE ANYTHING ELSE WITH *, IT IS USED AS ARITHMETIC OPERATOR.
+SQL> 
+SQL> SELECT 4 *  5 FROM DUAL;
+
+       4*5                                                                                                                                                                          
+----------                                                                                                                                                                          
+        20                                                                                                                                                                          
+
+SQL> SELECT * , ROWID FROM EMPLOYEES;
+SELECT * , ROWID FROM EMPLOYEES
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> REM WE CAN GUIDE ORACLE TO USE * AS META CHARACTER
+SQL> 
+SQL> REM TO GUIDE WE MUST HAVE TO QUALIFY *
+SQL> 
+SQL> REM WE CAN QUALIFY * IN TWO STYLES : 1 TABLENAME.* 2 TABLEALIAS.*
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT EMPLOYEES.* , ROWID FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID ROWID                           
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- ------------------              
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90 AAAcDnAAHAAAAVdAAA              
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90 AAAcDnAAHAAAAVdAAB              
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90 AAAcDnAAHAAAAVdAAC              
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60 AAAcDnAAHAAAAVdAAD              
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60 AAAcDnAAHAAAAVdAAE              
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60 AAAcDnAAHAAAAVdAAF              
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50 AAAcDnAAHAAAAVdAAG              
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50 AAAcDnAAHAAAAVdAAH              
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50 AAAcDnAAHAAAAVdAAI              
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50 AAAcDnAAHAAAAVdAAJ              
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50 AAAcDnAAHAAAAVdAAK              
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80 AAAcDnAAHAAAAVdAAL              
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80 AAAcDnAAHAAAAVdAAM              
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80 AAAcDnAAHAAAAVdAAN              
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149               AAAcDnAAHAAAAVdAAO              
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10 AAAcDnAAHAAAAVdAAP              
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20 AAAcDnAAHAAAAVdAAQ              
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20 AAAcDnAAHAAAAVdAAR              
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110 AAAcDnAAHAAAAVdAAS              
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110 AAAcDnAAHAAAAVdAAT              
+
+20 rows selected.
+
+SQL> SELECT ROWID , EMPLOYEES.* FROM EMPLOYEES;
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID              
+------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------              
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90              
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90              
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90              
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60              
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60              
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60              
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50              
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50              
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50              
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50              
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50              
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80              
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80              
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80              
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                            
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10              
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20              
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20              
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110              
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110              
+
+20 rows selected.
+
+SQL> SELECT SALARY PAYMENT FROM EMPLOYEES;
+
+   PAYMENT                                                                                                                                                                          
+----------                                                                                                                                                                          
+     24000                                                                                                                                                                          
+     17000                                                                                                                                                                          
+     17000                                                                                                                                                                          
+      9000                                                                                                                                                                          
+      6000                                                                                                                                                                          
+      4200                                                                                                                                                                          
+      5800                                                                                                                                                                          
+      3500                                                                                                                                                                          
+      3100                                                                                                                                                                          
+      2600                                                                                                                                                                          
+      2500                                                                                                                                                                          
+     10500                                                                                                                                                                          
+     11000                                                                                                                                                                          
+      8600                                                                                                                                                                          
+      7000                                                                                                                                                                          
+      4400                                                                                                                                                                          
+     13000                                                                                                                                                                          
+      6000                                                                                                                                                                          
+     12000                                                                                                                                                                          
+      8300                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT ROWID , E.* FROM EMPLOYEES E;
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID              
+------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------              
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90              
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90              
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90              
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60              
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60              
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60              
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50              
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50              
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50              
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50              
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50              
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80              
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80              
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80              
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                            
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10              
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20              
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20              
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110              
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110              
+
+20 rows selected.
+
+SQL> SELECT ROWID , EMPLOYEES.* FROM EMPLOYEES E;
+SELECT ROWID , EMPLOYEES.* FROM EMPLOYEES E
+                         *
+ERROR at line 1:
+ORA-00904: "EMPLOYEES": invalid identifier 
+
+
+SQL> REM DISPLAY ALL COLUMNS OF EMLOYEES TABLE WITH YEARLY_SALARY
+SQL> 
+SQL> SELECT * , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES;
+SELECT * , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT EMPLOYEES.* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID YEARLY_SALARY                   
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- -------------                   
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90        288000                   
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90        204000                   
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90        204000                   
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60        108000                   
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60         72000                   
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60         50400                   
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50         69600                   
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50         42000                   
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50         37200                   
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50         31200                   
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50         30000                   
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80        126000                   
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80        132000                   
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80        103200                   
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                       84000                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10         52800                   
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20        156000                   
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20         72000                   
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110        144000                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110         99600                   
+
+20 rows selected.
+
+SQL> SELECT EMP.* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES EMP;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID YEARLY_SALARY                   
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- -------------                   
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90        288000                   
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90        204000                   
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90        204000                   
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60        108000                   
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60         72000                   
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60         50400                   
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50         69600                   
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50         42000                   
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50         37200                   
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50         31200                   
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50         30000                   
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80        126000                   
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80        132000                   
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80        103200                   
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                       84000                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10         52800                   
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20        156000                   
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20         72000                   
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110        144000                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110         99600                   
+
+20 rows selected.
+
+SQL> SELECT "Emp".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp";
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID YEARLY_SALARY                   
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- -------------                   
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90        288000                   
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90        204000                   
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90        204000                   
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60        108000                   
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60         72000                   
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60         50400                   
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50         69600                   
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50         42000                   
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50         37200                   
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50         31200                   
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50         30000                   
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80        126000                   
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80        132000                   
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80        103200                   
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                       84000                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10         52800                   
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20        156000                   
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20         72000                   
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110        144000                   
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110         99600                   
+
+20 rows selected.
+
+SQL> SELECT Emp.* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp";
+SELECT Emp.* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp"
+           *
+ERROR at line 1:
+ORA-00904: "EMP": invalid identifier 
+
+
+SQL> SELECT "Em".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp";
+SELECT "Em".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp"
+            *
+ERROR at line 1:
+ORA-00904: "Em": invalid identifier 
+
+
+SQL> SELECT "EmP".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp";
+SELECT "EmP".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp"
+             *
+ERROR at line 1:
+ORA-00904: "EmP": invalid identifier 
+
+
+SQL> SELECT "EmPInfo".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp Info";
+SELECT "EmPInfo".* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES "Emp Info"
+                 *
+ERROR at line 1:
+ORA-00904: "EmPInfo": invalid identifier 
+
+
+SQL> REM DISPLAY ALL COLUMNS AND QUARTERLY_SALARY
+SQL> 
+SQL> REM 1 QUALIFY IT WITH TABLENAME 2 QUALIFY IT WITH TABLEALIAS (CASE INSENSITIVE) 3 QUALIFY IT WITH TABLEALIAS (CASE SENSITIVE)
+SQL> 
+SQL> SELECT EMPLOYEES.* , SALARY * 3 QUARTERLY_SALARY FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID QUARTERLY_SALARY                
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- ----------------                
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90            72000                
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90            51000                
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90            51000                
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60            27000                
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60            18000                
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60            12600                
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50            17400                
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50            10500                
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50             9300                
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50             7800                
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50             7500                
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80            31500                
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80            33000                
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80            25800                
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                          21000                
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10            13200                
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20            39000                
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20            18000                
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110            36000                
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110            24900                
+
+20 rows selected.
+
+SQL> SELECT E.* , SALARY * 3 QUARTERLY_SALARY FROM EMPLOYEES E;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID QUARTERLY_SALARY                
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- ----------------                
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90            72000                
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90            51000                
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90            51000                
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60            27000                
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60            18000                
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60            12600                
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50            17400                
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50            10500                
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50             9300                
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50             7800                
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50             7500                
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80            31500                
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80            33000                
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80            25800                
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                          21000                
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10            13200                
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20            39000                
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20            18000                
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110            36000                
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110            24900                
+
+20 rows selected.
+
+SQL> SELECT "Emp".* , SALARY * 3 QUARTERLY_SALARY FROM EMPLOYEES "Emp";
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID QUARTERLY_SALARY                
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- ----------------                
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90            72000                
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90            51000                
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90            51000                
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60            27000                
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60            18000                
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60            12600                
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50            17400                
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50            10500                
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50             9300                
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50             7800                
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50             7500                
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80            31500                
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80            33000                
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80            25800                
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                          21000                
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10            13200                
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20            39000                
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20            18000                
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110            36000                
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110            24900                
+
+20 rows selected.
+
+SQL> SPOOL OFF

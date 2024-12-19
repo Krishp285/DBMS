@@ -1,0 +1,1105 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM Q/QUOTE OPERATOR :
+SQL> 
+SQL> REM ROWNUM , ROWID
+SQL> 
+SQL> REM TABLENAME/TABLEALIAS AS QUALIFIER
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE             JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                         
+----------- --------------- --------------- ---------- -------------------- --------------------- ---------- ---------- -------------- ---------- -------------                                         
+        100 Steven          King            SKING      515.123.4567         17-JUL-1987 FRIDAY    AD_PRES         24000                                      90                                         
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-1989 THURSDAY  AD_VP           17000                       100            90                                         
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-1993 WEDNESDAY AD_VP           17000                       100            90                                         
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-1990 WEDNESDAY IT_PROG          9000                       102            60                                         
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-1991 TUESDAY   IT_PROG          6000                       103            60                                         
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-1999 SUNDAY    IT_PROG          4200                       103            60                                         
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-1999 TUESDAY   ST_MAN           5800                       100            50                                         
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-1995 TUESDAY   ST_CLERK         3500                       124            50                                         
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-1997 WEDNESDAY ST_CLERK         3100                       124            50                                         
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-1998 SUNDAY    ST_CLERK         2600                       124            50                                         
+        144 Peter           Vargas                     650.121.2004         09-JUL-1998 THURSDAY  ST_CLERK         2500                       124            50                                         
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-2000 SATURDAY  SA_MAN          10500             .2        100            80                                         
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-1996 SATURDAY  SA_REP          11000             .3        149            80                                         
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-1998 TUESDAY   SA_REP           8600             .3        149            80                                         
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-1999 MONDAY    SA_REP           7000            .15        149                                                       
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-1987 THURSDAY  AD_ASST          4400                       101            10                                         
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-1996 SATURDAY  MK_MAN          13000                       100            20                                         
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-1997 SUNDAY    MK_REP           6000                       201            20                                         
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-1994 TUESDAY   AC_MGR          12000                       101           110                                         
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-1994 TUESDAY   AC_ACCOUNT       8300                       205           110                                         
+
+20 rows selected.
+
+SQL> REM Steven has joined the company on 17-JUL-87.
+SQL> 
+SQL> SELECT FIRST_NAME || ' has joined the company on ' || HIRE_DATE || '.' FROM EMPLOYEES;
+
+FIRST_NAME||'HASJOINEDTHECOMPANYON'||HIRE_DATE||'.'                                                                                                                                                     
+----------------------------------------------------------------------------------------------------                                                                                                    
+Steven has joined the company on 17-JUL-1987 FRIDAY   .                                                                                                                                                 
+Neena has joined the company on 21-SEP-1989 THURSDAY .                                                                                                                                                  
+Lex has joined the company on 13-JAN-1993 WEDNESDAY.                                                                                                                                                    
+Alexander has joined the company on 03-JAN-1990 WEDNESDAY.                                                                                                                                              
+Bruce has joined the company on 21-MAY-1991 TUESDAY  .                                                                                                                                                  
+Diana has joined the company on 07-FEB-1999 SUNDAY   .                                                                                                                                                  
+Kevin has joined the company on 16-NOV-1999 TUESDAY  .                                                                                                                                                  
+Trenna has joined the company on 17-OCT-1995 TUESDAY  .                                                                                                                                                 
+Curtis has joined the company on 29-JAN-1997 WEDNESDAY.                                                                                                                                                 
+Randall has joined the company on 15-MAR-1998 SUNDAY   .                                                                                                                                                
+Peter has joined the company on 09-JUL-1998 THURSDAY .                                                                                                                                                  
+Eleni has joined the company on 29-JAN-2000 SATURDAY .                                                                                                                                                  
+Ellen has joined the company on 11-MAY-1996 SATURDAY .                                                                                                                                                  
+Jonathon has joined the company on 24-MAR-1998 TUESDAY  .                                                                                                                                               
+Kimerely has joined the company on 24-MAY-1999 MONDAY   .                                                                                                                                               
+Jennifer has joined the company on 17-SEP-1987 THURSDAY .                                                                                                                                               
+Michael has joined the company on 17-FEB-1996 SATURDAY .                                                                                                                                                
+Pat has joined the company on 17-AUG-1997 SUNDAY   .                                                                                                                                                    
+Shelley has joined the company on 07-JUN-1994 TUESDAY  .                                                                                                                                                
+William has joined the company on 07-JUN-1994 TUESDAY  .                                                                                                                                                
+
+20 rows selected.
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> /
+
+FIRST_NAME||'HASJOINEDTHECOMPANYON'||HIRE_DATE||'.'                                                                                                                                                     
+-------------------------------------------------------------                                                                                                                                           
+Steven has joined the company on 17-JUL-87.                                                                                                                                                             
+Neena has joined the company on 21-SEP-89.                                                                                                                                                              
+Lex has joined the company on 13-JAN-93.                                                                                                                                                                
+Alexander has joined the company on 03-JAN-90.                                                                                                                                                          
+Bruce has joined the company on 21-MAY-91.                                                                                                                                                              
+Diana has joined the company on 07-FEB-99.                                                                                                                                                              
+Kevin has joined the company on 16-NOV-99.                                                                                                                                                              
+Trenna has joined the company on 17-OCT-95.                                                                                                                                                             
+Curtis has joined the company on 29-JAN-97.                                                                                                                                                             
+Randall has joined the company on 15-MAR-98.                                                                                                                                                            
+Peter has joined the company on 09-JUL-98.                                                                                                                                                              
+Eleni has joined the company on 29-JAN-00.                                                                                                                                                              
+Ellen has joined the company on 11-MAY-96.                                                                                                                                                              
+Jonathon has joined the company on 24-MAR-98.                                                                                                                                                           
+Kimerely has joined the company on 24-MAY-99.                                                                                                                                                           
+Jennifer has joined the company on 17-SEP-87.                                                                                                                                                           
+Michael has joined the company on 17-FEB-96.                                                                                                                                                            
+Pat has joined the company on 17-AUG-97.                                                                                                                                                                
+Shelley has joined the company on 07-JUN-94.                                                                                                                                                            
+William has joined the company on 07-JUN-94.                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM Steven's monthly salary is Rs.24000/-.
+SQL> 
+SQL> SELECT FIRST_NAME || ' has joined the company on ' || HIRE_DATE || '.' FROM EMPLOYEES
+  2  
+SQL> 
+SQL> SELECT FIRST_NAME || 's monthly salary is Rs.' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||'SMONTHLYSALARYISRS.'||SALARY||'/-.'                                                                                                                                                        
+---------------------------------------------------------------------------------                                                                                                                       
+Stevens monthly salary is Rs.24000/-.                                                                                                                                                                   
+Neenas monthly salary is Rs.17000/-.                                                                                                                                                                    
+Lexs monthly salary is Rs.17000/-.                                                                                                                                                                      
+Alexanders monthly salary is Rs.9000/-.                                                                                                                                                                 
+Bruces monthly salary is Rs.6000/-.                                                                                                                                                                     
+Dianas monthly salary is Rs.4200/-.                                                                                                                                                                     
+Kevins monthly salary is Rs.5800/-.                                                                                                                                                                     
+Trennas monthly salary is Rs.3500/-.                                                                                                                                                                    
+Curtiss monthly salary is Rs.3100/-.                                                                                                                                                                    
+Randalls monthly salary is Rs.2600/-.                                                                                                                                                                   
+Peters monthly salary is Rs.2500/-.                                                                                                                                                                     
+Elenis monthly salary is Rs.10500/-.                                                                                                                                                                    
+Ellens monthly salary is Rs.11000/-.                                                                                                                                                                    
+Jonathons monthly salary is Rs.8600/-.                                                                                                                                                                  
+Kimerelys monthly salary is Rs.7000/-.                                                                                                                                                                  
+Jennifers monthly salary is Rs.4400/-.                                                                                                                                                                  
+Michaels monthly salary is Rs.13000/-.                                                                                                                                                                  
+Pats monthly salary is Rs.6000/-.                                                                                                                                                                       
+Shelleys monthly salary is Rs.12000/-.                                                                                                                                                                  
+Williams monthly salary is Rs.8300/-.                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || ''s monthly salary is Rs.' || SALARY || '/-.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT FIRST_NAME || '''s monthly salary is Rs.' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||'''SMONTHLYSALARYISRS.'||SALARY||'/-.'                                                                                                                                                      
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM #
+SQL> 
+SQL> SELECT FIRST_NAME || Q'#'s monthly salary is Rs.#' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'#'SMONTHLYSALARYISRS.#'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'4's monthly salary is Rs.4' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'4'SMONTHLYSALARYISRS.4'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'A's monthly salary is Rs.A' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'A'SMONTHLYSALARYISRS.A'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'A's monthly salary is Rs.B' || SALARY || '/-.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT FIRST_NAME || Q'A's monthly salary is Rs.a' || SALARY || '/-.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT FIRST_NAME || Q'Q's monthly salary is Rs.Q' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'Q'SMONTHLYSALARYISRS.Q'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'['s monthly salary is Rs.]' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'['SMONTHLYSALARYISRS.]'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q']'s monthly salary is Rs.]' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q']'SMONTHLYSALARYISRS.]'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q']'s monthly salary is Rs.[' || SALARY || '/-.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT FIRST_NAME || Q'['s monthly salary is Rs.[' || SALARY || '/-.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT FIRST_NAME || Q'['s monthly salary is Rs.}' || SALARY || '/-.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT FIRST_NAME || Q'.'s monthly salary is Rs..' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'.'SMONTHLYSALARYISRS..'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'&'s monthly salary is Rs.&' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'&'SMONTHLYSALARYISRS.&'||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || Q'''s monthly salary is Rs.'' || SALARY || '/-.' FROM EMPLOYEES;
+
+FIRST_NAME||Q'''SMONTHLYSALARYISRS.''||SALARY||'/-.'                                                                                                                                                    
+----------------------------------------------------------------------------------                                                                                                                      
+Steven's monthly salary is Rs.24000/-.                                                                                                                                                                  
+Neena's monthly salary is Rs.17000/-.                                                                                                                                                                   
+Lex's monthly salary is Rs.17000/-.                                                                                                                                                                     
+Alexander's monthly salary is Rs.9000/-.                                                                                                                                                                
+Bruce's monthly salary is Rs.6000/-.                                                                                                                                                                    
+Diana's monthly salary is Rs.4200/-.                                                                                                                                                                    
+Kevin's monthly salary is Rs.5800/-.                                                                                                                                                                    
+Trenna's monthly salary is Rs.3500/-.                                                                                                                                                                   
+Curtis's monthly salary is Rs.3100/-.                                                                                                                                                                   
+Randall's monthly salary is Rs.2600/-.                                                                                                                                                                  
+Peter's monthly salary is Rs.2500/-.                                                                                                                                                                    
+Eleni's monthly salary is Rs.10500/-.                                                                                                                                                                   
+Ellen's monthly salary is Rs.11000/-.                                                                                                                                                                   
+Jonathon's monthly salary is Rs.8600/-.                                                                                                                                                                 
+Kimerely's monthly salary is Rs.7000/-.                                                                                                                                                                 
+Jennifer's monthly salary is Rs.4400/-.                                                                                                                                                                 
+Michael's monthly salary is Rs.13000/-.                                                                                                                                                                 
+Pat's monthly salary is Rs.6000/-.                                                                                                                                                                      
+Shelley's monthly salary is Rs.12000/-.                                                                                                                                                                 
+William's monthly salary is Rs.8300/-.                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM King's join date is 17-JUL-87.
+SQL> 
+SQL> REM 1 WITHOUT USING QUOTE OPERATOR
+SQL> 
+SQL> REM 2 USING QUOTE OPERATOR (SPECIAL CHARACTER)
+SQL> 
+SQL> REM 3 USING QUOTE OPERATOR (ALPHABET)
+SQL> 
+SQL> REM 3 USING QUOTE OPERATOR (NUMBER)
+SQL> 
+SQL> REM 5 USING QUOTE OPERATOR (BRACKET)
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT LAST_NAME || '''s join date is ' || HIRE_DATE || '.' FROM EMPLOYEES;
+
+LAST_NAME||'''SJOINDATEIS'||HIRE_DATE||'.'                                                                                                                                                              
+--------------------------------------------------                                                                                                                                                      
+King's join date is 17-JUL-87.                                                                                                                                                                          
+Kochhar's join date is 21-SEP-89.                                                                                                                                                                       
+De Haan's join date is 13-JAN-93.                                                                                                                                                                       
+Hunold's join date is 03-JAN-90.                                                                                                                                                                        
+Ernst's join date is 21-MAY-91.                                                                                                                                                                         
+Lorentz's join date is 07-FEB-99.                                                                                                                                                                       
+Mourgos's join date is 16-NOV-99.                                                                                                                                                                       
+Rajs's join date is 17-OCT-95.                                                                                                                                                                          
+Davies's join date is 29-JAN-97.                                                                                                                                                                        
+Matos's join date is 15-MAR-98.                                                                                                                                                                         
+Vargas's join date is 09-JUL-98.                                                                                                                                                                        
+Zlotkey's join date is 29-JAN-00.                                                                                                                                                                       
+Abel's join date is 11-MAY-96.                                                                                                                                                                          
+Taylor's join date is 24-MAR-98.                                                                                                                                                                        
+Grant's join date is 24-MAY-99.                                                                                                                                                                         
+Whalen's join date is 17-SEP-87.                                                                                                                                                                        
+Hartstein's join date is 17-FEB-96.                                                                                                                                                                     
+Fay's join date is 17-AUG-97.                                                                                                                                                                           
+Higgins's join date is 07-JUN-94.                                                                                                                                                                       
+Gietz's join date is 07-JUN-94.                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM 2 USING QUOTE OPERATOR (SPECIAL CHARACTER)
+SQL> 
+SQL> SELECT LAST_NAME || Q'$s join date is $' || HIRE_DATE || '.' FROM EMPLOYEES;
+
+LAST_NAME||Q'$SJOINDATEIS$'||HIRE_DATE||'.'                                                                                                                                                             
+-------------------------------------------------                                                                                                                                                       
+Kings join date is 17-JUL-87.                                                                                                                                                                           
+Kochhars join date is 21-SEP-89.                                                                                                                                                                        
+De Haans join date is 13-JAN-93.                                                                                                                                                                        
+Hunolds join date is 03-JAN-90.                                                                                                                                                                         
+Ernsts join date is 21-MAY-91.                                                                                                                                                                          
+Lorentzs join date is 07-FEB-99.                                                                                                                                                                        
+Mourgoss join date is 16-NOV-99.                                                                                                                                                                        
+Rajss join date is 17-OCT-95.                                                                                                                                                                           
+Daviess join date is 29-JAN-97.                                                                                                                                                                         
+Matoss join date is 15-MAR-98.                                                                                                                                                                          
+Vargass join date is 09-JUL-98.                                                                                                                                                                         
+Zlotkeys join date is 29-JAN-00.                                                                                                                                                                        
+Abels join date is 11-MAY-96.                                                                                                                                                                           
+Taylors join date is 24-MAR-98.                                                                                                                                                                         
+Grants join date is 24-MAY-99.                                                                                                                                                                          
+Whalens join date is 17-SEP-87.                                                                                                                                                                         
+Hartsteins join date is 17-FEB-96.                                                                                                                                                                      
+Fays join date is 17-AUG-97.                                                                                                                                                                            
+Higginss join date is 07-JUN-94.                                                                                                                                                                        
+Gietzs join date is 07-JUN-94.                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM 3 USING QUOTE OPERATOR (ALPHABET)
+SQL> 
+SQL> SELECT LAST_NAME || Q'A's join date is A' || HIRE_DATE || '.' FROM EMPLOYEES;
+
+LAST_NAME||Q'A'SJOINDATEISA'||HIRE_DATE||'.'                                                                                                                                                            
+--------------------------------------------------                                                                                                                                                      
+King's join date is 17-JUL-87.                                                                                                                                                                          
+Kochhar's join date is 21-SEP-89.                                                                                                                                                                       
+De Haan's join date is 13-JAN-93.                                                                                                                                                                       
+Hunold's join date is 03-JAN-90.                                                                                                                                                                        
+Ernst's join date is 21-MAY-91.                                                                                                                                                                         
+Lorentz's join date is 07-FEB-99.                                                                                                                                                                       
+Mourgos's join date is 16-NOV-99.                                                                                                                                                                       
+Rajs's join date is 17-OCT-95.                                                                                                                                                                          
+Davies's join date is 29-JAN-97.                                                                                                                                                                        
+Matos's join date is 15-MAR-98.                                                                                                                                                                         
+Vargas's join date is 09-JUL-98.                                                                                                                                                                        
+Zlotkey's join date is 29-JAN-00.                                                                                                                                                                       
+Abel's join date is 11-MAY-96.                                                                                                                                                                          
+Taylor's join date is 24-MAR-98.                                                                                                                                                                        
+Grant's join date is 24-MAY-99.                                                                                                                                                                         
+Whalen's join date is 17-SEP-87.                                                                                                                                                                        
+Hartstein's join date is 17-FEB-96.                                                                                                                                                                     
+Fay's join date is 17-AUG-97.                                                                                                                                                                           
+Higgins's join date is 07-JUN-94.                                                                                                                                                                       
+Gietz's join date is 07-JUN-94.                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> REM 4 USING QUOTE OPERATOR (NUMBER)
+SQL> 
+SQL> SELECT LAST_NAME || Q'4s join date is 4' || HIRE_DATE || '.' FROM EMPLOYEES;
+
+LAST_NAME||Q'4SJOINDATEIS4'||HIRE_DATE||'.'                                                                                                                                                             
+-------------------------------------------------                                                                                                                                                       
+Kings join date is 17-JUL-87.                                                                                                                                                                           
+Kochhars join date is 21-SEP-89.                                                                                                                                                                        
+De Haans join date is 13-JAN-93.                                                                                                                                                                        
+Hunolds join date is 03-JAN-90.                                                                                                                                                                         
+Ernsts join date is 21-MAY-91.                                                                                                                                                                          
+Lorentzs join date is 07-FEB-99.                                                                                                                                                                        
+Mourgoss join date is 16-NOV-99.                                                                                                                                                                        
+Rajss join date is 17-OCT-95.                                                                                                                                                                           
+Daviess join date is 29-JAN-97.                                                                                                                                                                         
+Matoss join date is 15-MAR-98.                                                                                                                                                                          
+Vargass join date is 09-JUL-98.                                                                                                                                                                         
+Zlotkeys join date is 29-JAN-00.                                                                                                                                                                        
+Abels join date is 11-MAY-96.                                                                                                                                                                           
+Taylors join date is 24-MAR-98.                                                                                                                                                                         
+Grants join date is 24-MAY-99.                                                                                                                                                                          
+Whalens join date is 17-SEP-87.                                                                                                                                                                         
+Hartsteins join date is 17-FEB-96.                                                                                                                                                                      
+Fays join date is 17-AUG-97.                                                                                                                                                                            
+Higginss join date is 07-JUN-94.                                                                                                                                                                        
+Gietzs join date is 07-JUN-94.                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM 5 USING QUOTE OPERATOR (BRACKET)
+SQL> 
+SQL> SELECT LAST_NAME || ')'s join date is )' || HIRE_DATE || '.' FROM EMPLOYEES;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT LAST_NAME || Q')'s join date is )' || HIRE_DATE || '.' FROM EMPLOYEES;
+
+LAST_NAME||Q')'SJOINDATEIS)'||HIRE_DATE||'.'                                                                                                                                                            
+--------------------------------------------------                                                                                                                                                      
+King's join date is 17-JUL-87.                                                                                                                                                                          
+Kochhar's join date is 21-SEP-89.                                                                                                                                                                       
+De Haan's join date is 13-JAN-93.                                                                                                                                                                       
+Hunold's join date is 03-JAN-90.                                                                                                                                                                        
+Ernst's join date is 21-MAY-91.                                                                                                                                                                         
+Lorentz's join date is 07-FEB-99.                                                                                                                                                                       
+Mourgos's join date is 16-NOV-99.                                                                                                                                                                       
+Rajs's join date is 17-OCT-95.                                                                                                                                                                          
+Davies's join date is 29-JAN-97.                                                                                                                                                                        
+Matos's join date is 15-MAR-98.                                                                                                                                                                         
+Vargas's join date is 09-JUL-98.                                                                                                                                                                        
+Zlotkey's join date is 29-JAN-00.                                                                                                                                                                       
+Abel's join date is 11-MAY-96.                                                                                                                                                                          
+Taylor's join date is 24-MAR-98.                                                                                                                                                                        
+Grant's join date is 24-MAY-99.                                                                                                                                                                         
+Whalen's join date is 17-SEP-87.                                                                                                                                                                        
+Hartstein's join date is 17-FEB-96.                                                                                                                                                                     
+Fay's join date is 17-AUG-97.                                                                                                                                                                           
+Higgins's join date is 07-JUN-94.                                                                                                                                                                       
+Gietz's join date is 07-JUN-94.                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT LAST_NAME || Q' 's join date is  ' || HIRE_DATE || '.' FROM EMPLOYEES;
+SELECT LAST_NAME || Q' 's join date is  ' || HIRE_DATE || '.' FROM EMPLOYEES
+                    *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> REM ROWNUM , ROWID
+SQL> 
+SQL> REM TABLENAME/TABLEALIAS AS QUALIFIER
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> SELECT 4 * 5 FROM DUAL;
+
+       4*5                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        20                                                                                                                                                                                              
+
+SQL> REM WHEN WE USE ONLY * IN SELECT LIST, ORACLE WILL USE * AS META CHARACTER.
+SQL> 
+SQL> REM WHEN WE USE SOMETHING ELSE WITH * IN SELECT LIST, ORACLE WILL USE * AS MULTIPLICATION OPERATOR.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM ROWNUM : IS A PSEUDOCOLUMN
+SQL> 
+SQL> REM PSEUDOCOLUMN : IS A VARIABLE DECLARED , INITIALIZED , REFERRED AND DISCARDED BY ORACLE ITSELF AS AND WHEN REQUIRED.
+SQL> 
+SQL> REM ROWNUM GENERATES SERIAL NUMBER FOR THE RESULTANT ROWS AT RUN TIME.
+SQL> 
+SQL> SELECT ROWNUM , * FROM EMPLOYEES;
+SELECT ROWNUM , * FROM EMPLOYEES
+                *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> REM WE CAN GUIDE ORACLE TO USE * AS META CHARACTER.
+SQL> 
+SQL> REM WE NEED TO QUALIFY * TO GUIDE ORACLE.
+SQL> 
+SQL> REM WE CAN QUALIFY * IN TWO STYLES : 1 TABLENAME. 2 TABLEALIAS.
+SQL> 
+SQL> SELECT ROWNUM , EMPLOYEES.* FROM EMPLOYEES;
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , E.* FROM EMPLOYEES E;
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> REM WHEN WE USE TABLE ALIAS WE MUST HAVE TO QUALIFY * WITH TABLE ALIAS ONLY.
+SQL> 
+SQL> SELECT ROWNUM , EMPLOYEES.* FROM EMPLOYEES E;
+SELECT ROWNUM , EMPLOYEES.* FROM EMPLOYEES E
+                          *
+ERROR at line 1:
+ORA-00904: "EMPLOYEES": invalid identifier 
+
+
+SQL> SELECT ROWNUM , EMPLOYEES.* FROM EMPLOYEES EMPLOYEES;
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , EMP.* FROM EMPLOYEES EMP;
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , EMP.* FROM EMPLOYEES emp;
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , Emp.* FROM EMPLOYEES "Emp";
+SELECT ROWNUM , Emp.* FROM EMPLOYEES "Emp"
+                    *
+ERROR at line 1:
+ORA-00904: "EMP": invalid identifier 
+
+
+SQL> SELECT ROWNUM , "Emp".* FROM EMPLOYEES "Emp";
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , "Emp Info.".* FROM EMPLOYEES "Emp Info.";
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                          
+         5         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                          
+         6         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                          
+         7         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                          
+         8         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                          
+         9         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                          
+        10         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                          
+        11         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                          
+        12         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+        13         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+        14         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                          
+        15         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                        
+        16         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                          
+        17         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+        18         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                          
+        19         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+        20         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                          
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , "Emp Info.".* FROM EMPLOYEES "Emp Info";
+SELECT ROWNUM , "Emp Info.".* FROM EMPLOYEES "Emp Info"
+                            *
+ERROR at line 1:
+ORA-00904: "Emp Info.": invalid identifier 
+
+
+SQL> SELECT ROWNUM , "Emp info.".* FROM EMPLOYEES "Emp Info.";
+SELECT ROWNUM , "Emp info.".* FROM EMPLOYEES "Emp Info."
+                            *
+ERROR at line 1:
+ORA-00904: "Emp info.": invalid identifier 
+
+
+SQL> SELECT ROWNUM , "EmpInfo.".* FROM EMPLOYEES "Emp Info.";
+SELECT ROWNUM , "EmpInfo.".* FROM EMPLOYEES "Emp Info."
+                           *
+ERROR at line 1:
+ORA-00904: "EmpInfo.": invalid identifier 
+
+
+SQL> SELECT ROWNUM , "Emp  Info.".* FROM EMPLOYEES "Emp Info.";
+SELECT ROWNUM , "Emp  Info.".* FROM EMPLOYEES "Emp Info."
+                             *
+ERROR at line 1:
+ORA-00904: "Emp  Info.": invalid identifier 
+
+
+SQL> REM CASE SENSITIVE TABLE ALIAS MUST BE : 1 DELIMITED WITH DOUBLE QUOTES 2 USE SAME SPELLING 3 USE SAME SPACING 4 USE SAME CASE
+SQL> 
+SQL> SELECT ROWNUM , EMP.* FROM EMPLOYEES emp WHERE SALARY > 10000;
+
+    ROWNUM EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                          
+---------- ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                          
+         1         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                          
+         2         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                          
+         3         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                          
+         4         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                          
+         5         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                          
+         6         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                          
+         7         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                          
+
+7 rows selected.
+
+SQL> REM ROWID : IS UNIQUE ROW ADDRESS OF EACH ROW.
+SQL> 
+SQL> REM ROWID GENERALLY GETS GENERATED AUTOMATICALLY WHEN WE INSERT NEW ROW.
+SQL> 
+SQL> REM ROWID HAS 18 CHARACTERS.
+SQL> 
+SQL> REM BY DEFAULT ALL ROWS ARE DISPLAYED IN ASCENDING ORDER OF IT'S ROWID.
+SQL> 
+SQL> SELECT ROWID , * FROM EMPLOYEES;
+SELECT ROWID , * FROM EMPLOYEES
+               *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT ROWID , E.* FROM EMPLOYEES E;
+
+ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                  
+------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                  
+AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                  
+AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                  
+AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                  
+AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                  
+AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                  
+AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                  
+AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                  
+AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                  
+AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                  
+AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                  
+AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                  
+AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                  
+AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                  
+AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                
+AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                  
+AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                  
+AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                  
+AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                  
+AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                  
+
+20 rows selected.
+
+SQL> REM ROWNUM GETS GENERATED IN ASCENDING ORDER OF IT'S ROWID.
+SQL> 
+SQL> SELECT ROWNUM , ROWID , E.* FROM EMPLOYEES E;
+
+    ROWNUM ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                       
+---------- ------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                       
+         1 AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                       
+         2 AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                       
+         3 AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                       
+         4 AAAcDnAAHAAAAVdAAD         103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                       
+         5 AAAcDnAAHAAAAVdAAE         104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                       
+         6 AAAcDnAAHAAAAVdAAF         107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                       
+         7 AAAcDnAAHAAAAVdAAG         124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                       
+         8 AAAcDnAAHAAAAVdAAH         141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                       
+         9 AAAcDnAAHAAAAVdAAI         142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                       
+        10 AAAcDnAAHAAAAVdAAJ         143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                       
+        11 AAAcDnAAHAAAAVdAAK         144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                       
+        12 AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                       
+        13 AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                       
+        14 AAAcDnAAHAAAAVdAAN         176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                       
+        15 AAAcDnAAHAAAAVdAAO         178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                     
+        16 AAAcDnAAHAAAAVdAAP         200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                       
+        17 AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                       
+        18 AAAcDnAAHAAAAVdAAR         202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                       
+        19 AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                       
+        20 AAAcDnAAHAAAAVdAAT         206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                       
+
+20 rows selected.
+
+SQL> SELECT ROWNUM , ROWID , E.* FROM EMPLOYEES E WHERE SALARY > 10000;
+
+    ROWNUM ROWID              EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                       
+---------- ------------------ ----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                       
+         1 AAAcDnAAHAAAAVdAAA         100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                       
+         2 AAAcDnAAHAAAAVdAAB         101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                       
+         3 AAAcDnAAHAAAAVdAAC         102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                       
+         4 AAAcDnAAHAAAAVdAAL         149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                       
+         5 AAAcDnAAHAAAAVdAAM         174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                       
+         6 AAAcDnAAHAAAAVdAAQ         201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                       
+         7 AAAcDnAAHAAAAVdAAS         205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                       
+
+7 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM DISPLAY ALL COLUMNS AND YEARLY_SALARY
+SQL> 
+SQL> SELECT E.* , SALARY * 12 YEARLY_SALARY FROM EMPLOYEES E;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID YEARLY_SALARY                                       
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- ------------- -------------                                       
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90        288000                                       
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90        204000                                       
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90        204000                                       
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60        108000                                       
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60         72000                                       
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60         50400                                       
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50         69600                                       
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50         42000                                       
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50         37200                                       
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50         31200                                       
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50         30000                                       
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80        126000                                       
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80        132000                                       
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80        103200                                       
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                       84000                                       
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10         52800                                       
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20        156000                                       
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20         72000                                       
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110        144000                                       
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110         99600                                       
+
+20 rows selected.
+
+SQL> SPOOL OFF

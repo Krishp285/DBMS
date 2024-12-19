@@ -1,0 +1,709 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM SYNTAX : COMPUTER LANGUAGE GRAMMER
+SQL> 
+SQL> REM SELECT SYNTAX : SELECT what_to_display FROM table_name;
+SQL> 
+SQL> REM CAPITAL : IT IS KEY/RESERVE WORD. WE NEED TO USE SAME SPELLING. WE CAN ENTER IT USING ANY CASE. SELECT , select , Select , selECT ..
+SQL> 
+SQL> REM LOWER : ENTER WHAT IT MEANS.
+SQL> 
+SQL> REM LEFT TO RIGHT SEQUENCE/ORDER
+SQL> 
+SQL> REM table_name : EMPLOYEES    DEPARTMENTS    LOCATIONS    COUNTRIES     REGIONS
+SQL> 
+SQL> REM E D L C R
+SQL> 
+SQL> REM what_to_display :  1 SINGLE COLUMN NAME 2 COLUMN LIST 3 */META CHARACTER  4 * + OTHER ITEMS
+SQL> 
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM VERTICAL : COLUMN
+SQL> 
+SQL> REM HORIZONTAL : ROW
+SQL> 
+SQL> REM INTERSECTION : FIELD
+SQL> 
+SQL> REM COMBINATION : TABLE
+SQL> 
+SQL> REM FIRST ROW : COLUMN NAMES/HEADINGS/ALIAS/TITLE
+SQL> 
+SQL> REM SECOND ROW : LINE SEPARATOR BETWEEN COLUMN HEADING AND ACTUAL ROWS/DATA/VALUES
+SQL> 
+SQL> REM 3rd ROW ONWARDS 20 ROWS : ACTUAL VALUES/DATA
+SQL> 
+SQL> REM LAST ROW : FEED BACK (WILL GET DISPLAYED FOR 6 OR MORE ROWS IN RESULT SET)
+SQL> 
+SQL> REM * IS AN EASY WAY TO DISPLAY ALL COLUMNS WITHOUT EVEN LISTING THEM ALL.
+SQL> 
+SQL> REM * IS CALLED META CHARACTER.
+SQL> 
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 Europe                                                                                                                                                                                       
+         2 Americas                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> SELECT REGION_ID , REGION_NAME FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 Europe                                                                                                                                                                                       
+         2 Americas                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> SELECT * FROM COUNTRIES;
+
+CO COUNTRY_NAME                              REGION_ID                                                                                                                                                  
+-- ---------------------------------------- ----------                                                                                                                                                  
+CA Canada                                            2                                                                                                                                                  
+DE Germany                                           1                                                                                                                                                  
+UK United Kingdom                                    1                                                                                                                                                  
+US United States of America                          2                                                                                                                                                  
+
+SQL> SELECT * FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , DEPARTMENT_NAME , MANAGER_ID , LOCATION_ID FROM DEPARTMENTS;
+
+DEPARTMENT_ID DEPARTMENT_NAME                MANAGER_ID LOCATION_ID                                                                                                                                     
+------------- ------------------------------ ---------- -----------                                                                                                                                     
+           10 Administration                        200        1700                                                                                                                                     
+           20 Marketing                             201        1800                                                                                                                                     
+           50 Shiping                               124        1500                                                                                                                                     
+           60 IT                                    103        1400                                                                                                                                     
+           80 Sales                                 149        2500                                                                                                                                     
+           90 Executive                             100        1700                                                                                                                                     
+          110 Accounting                            205        1700                                                                                                                                     
+          190 Contracting                                      1700                                                                                                                                     
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_NAME FROM DEPARTMENTS;
+
+DEPARTMENT_NAME                                                                                                                                                                                         
+------------------------------                                                                                                                                                                          
+Administration                                                                                                                                                                                          
+Marketing                                                                                                                                                                                               
+Shiping                                                                                                                                                                                                 
+IT                                                                                                                                                                                                      
+Sales                                                                                                                                                                                                   
+Executive                                                                                                                                                                                               
+Accounting                                                                                                                                                                                              
+Contracting                                                                                                                                                                                             
+
+8 rows selected.
+
+SQL> SELECT MANAGER_ID FROM DEPARTMENTS;
+
+MANAGER_ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       200                                                                                                                                                                                              
+       201                                                                                                                                                                                              
+       124                                                                                                                                                                                              
+       103                                                                                                                                                                                              
+       149                                                                                                                                                                                              
+       100                                                                                                                                                                                              
+       205                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+8 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas          PVARGAS    650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM DISPLAY ALL COLUMNS OF REGIONS TABLE
+SQL> 
+SQL> REM DISPLAY MANAGER_ID AND DEPARTMENT_NAME OF DEPARTMENTS TABLE
+SQL> 
+SQL> REM DISPLAY EMAIL OF EMPLOYEES TABLE
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DISPLAY ALL COLUMNS OF REGIONS TABLE
+SQL> 
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                                                  
+---------- -------------------------                                                                                                                                                                    
+         1 Europe                                                                                                                                                                                       
+         2 Americas                                                                                                                                                                                     
+         3 Asia                                                                                                                                                                                         
+         4 Middle East and Africa                                                                                                                                                                       
+
+SQL> REM DISPLAY MANAGER_ID AND DEPARTMENT_NAME OF DEPARTMENTS TABLE
+SQL> 
+SQL> SELECT MANAGER_ID , DEPARTMENT_NAME FROM DEPARTMENTS;
+
+MANAGER_ID DEPARTMENT_NAME                                                                                                                                                                              
+---------- ------------------------------                                                                                                                                                               
+       200 Administration                                                                                                                                                                               
+       201 Marketing                                                                                                                                                                                    
+       124 Shiping                                                                                                                                                                                      
+       103 IT                                                                                                                                                                                           
+       149 Sales                                                                                                                                                                                        
+       100 Executive                                                                                                                                                                                    
+       205 Accounting                                                                                                                                                                                   
+           Contracting                                                                                                                                                                                  
+
+8 rows selected.
+
+SQL> REM DISPLAY EMAIL OF EMPLOYEES TABLE
+SQL> 
+SQL> SELECT EMAIL FROM EMPLOYEES;
+
+EMAIL                                                                                                                                                                                                   
+----------                                                                                                                                                                                              
+SKING                                                                                                                                                                                                   
+NKOCHHAR                                                                                                                                                                                                
+LDEHAAN                                                                                                                                                                                                 
+AHUNOLD                                                                                                                                                                                                 
+BERNST                                                                                                                                                                                                  
+DLORENTZ                                                                                                                                                                                                
+KMOURGOS                                                                                                                                                                                                
+TRAJS                                                                                                                                                                                                   
+CDAVIES                                                                                                                                                                                                 
+RMATOS                                                                                                                                                                                                  
+PVARGAS                                                                                                                                                                                                 
+EZLOTKEY                                                                                                                                                                                                
+EABEL                                                                                                                                                                                                   
+JTAYLOR                                                                                                                                                                                                 
+KGRANT                                                                                                                                                                                                  
+JWHALEN                                                                                                                                                                                                 
+MHARTSTE                                                                                                                                                                                                
+PFAY                                                                                                                                                                                                    
+SHIGGINS                                                                                                                                                                                                
+WGIETZ                                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> REM CONCATENATION OPERATOR : ||
+SQL> 
+SQL> REM CONCATENATION OPERATOR : || : TO CLUB/JOIN/COMBINE TWO ITEMS
+SQL> 
+SQL> SELECT FIRST_NAME , LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME      LAST_NAME                                                                                                                                                                               
+--------------- ---------------                                                                                                                                                                         
+Steven          King                                                                                                                                                                                    
+Neena           Kochhar                                                                                                                                                                                 
+Lex             De Haan                                                                                                                                                                                 
+Alexander       Hunold                                                                                                                                                                                  
+Bruce           Ernst                                                                                                                                                                                   
+Diana           Lorentz                                                                                                                                                                                 
+Kevin           Mourgos                                                                                                                                                                                 
+Trenna          Rajs                                                                                                                                                                                    
+Curtis          Davies                                                                                                                                                                                  
+Randall         Matos                                                                                                                                                                                   
+Peter           Vargas                                                                                                                                                                                  
+Eleni           Zlotkey                                                                                                                                                                                 
+Ellen           Abel                                                                                                                                                                                    
+Jonathon        Taylor                                                                                                                                                                                  
+Kimerely        Grant                                                                                                                                                                                   
+Jennifer        Whalen                                                                                                                                                                                  
+Michael         Hartstein                                                                                                                                                                               
+Pat             Fay                                                                                                                                                                                     
+Shelley         Higgins                                                                                                                                                                                 
+William         Gietz                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT LAST_NAME , FIRST_NAME FROM EMPLOYEES;
+
+LAST_NAME       FIRST_NAME                                                                                                                                                                              
+--------------- ---------------                                                                                                                                                                         
+King            Steven                                                                                                                                                                                  
+Kochhar         Neena                                                                                                                                                                                   
+De Haan         Lex                                                                                                                                                                                     
+Hunold          Alexander                                                                                                                                                                               
+Ernst           Bruce                                                                                                                                                                                   
+Lorentz         Diana                                                                                                                                                                                   
+Mourgos         Kevin                                                                                                                                                                                   
+Rajs            Trenna                                                                                                                                                                                  
+Davies          Curtis                                                                                                                                                                                  
+Matos           Randall                                                                                                                                                                                 
+Vargas          Peter                                                                                                                                                                                   
+Zlotkey         Eleni                                                                                                                                                                                   
+Abel            Ellen                                                                                                                                                                                   
+Taylor          Jonathon                                                                                                                                                                                
+Grant           Kimerely                                                                                                                                                                                
+Whalen          Jennifer                                                                                                                                                                                
+Hartstein       Michael                                                                                                                                                                                 
+Fay             Pat                                                                                                                                                                                     
+Higgins         Shelley                                                                                                                                                                                 
+Gietz           William                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME||LAST_NAME                                                                                                                                                                                   
+------------------------------                                                                                                                                                                          
+StevenKing                                                                                                                                                                                              
+NeenaKochhar                                                                                                                                                                                            
+LexDe Haan                                                                                                                                                                                              
+AlexanderHunold                                                                                                                                                                                         
+BruceErnst                                                                                                                                                                                              
+DianaLorentz                                                                                                                                                                                            
+KevinMourgos                                                                                                                                                                                            
+TrennaRajs                                                                                                                                                                                              
+CurtisDavies                                                                                                                                                                                            
+RandallMatos                                                                                                                                                                                            
+PeterVargas                                                                                                                                                                                             
+EleniZlotkey                                                                                                                                                                                            
+EllenAbel                                                                                                                                                                                               
+JonathonTaylor                                                                                                                                                                                          
+KimerelyGrant                                                                                                                                                                                           
+JenniferWhalen                                                                                                                                                                                          
+MichaelHartstein                                                                                                                                                                                        
+PatFay                                                                                                                                                                                                  
+ShelleyHiggins                                                                                                                                                                                          
+WilliamGietz                                                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || ' ' || LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME||''||LAST_NAME                                                                                                                                                                               
+-------------------------------                                                                                                                                                                         
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                                                                                                                                                                                           
+Ellen Abel                                                                                                                                                                                              
+Jonathon Taylor                                                                                                                                                                                         
+Kimerely Grant                                                                                                                                                                                          
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || '-' || LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME||'-'||LAST_NAME                                                                                                                                                                              
+-------------------------------                                                                                                                                                                         
+Steven-King                                                                                                                                                                                             
+Neena-Kochhar                                                                                                                                                                                           
+Lex-De Haan                                                                                                                                                                                             
+Alexander-Hunold                                                                                                                                                                                        
+Bruce-Ernst                                                                                                                                                                                             
+Diana-Lorentz                                                                                                                                                                                           
+Kevin-Mourgos                                                                                                                                                                                           
+Trenna-Rajs                                                                                                                                                                                             
+Curtis-Davies                                                                                                                                                                                           
+Randall-Matos                                                                                                                                                                                           
+Peter-Vargas                                                                                                                                                                                            
+Eleni-Zlotkey                                                                                                                                                                                           
+Ellen-Abel                                                                                                                                                                                              
+Jonathon-Taylor                                                                                                                                                                                         
+Kimerely-Grant                                                                                                                                                                                          
+Jennifer-Whalen                                                                                                                                                                                         
+Michael-Hartstein                                                                                                                                                                                       
+Pat-Fay                                                                                                                                                                                                 
+Shelley-Higgins                                                                                                                                                                                         
+William-Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || ', ' || LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME||','||LAST_NAME                                                                                                                                                                              
+--------------------------------                                                                                                                                                                        
+Steven, King                                                                                                                                                                                            
+Neena, Kochhar                                                                                                                                                                                          
+Lex, De Haan                                                                                                                                                                                            
+Alexander, Hunold                                                                                                                                                                                       
+Bruce, Ernst                                                                                                                                                                                            
+Diana, Lorentz                                                                                                                                                                                          
+Kevin, Mourgos                                                                                                                                                                                          
+Trenna, Rajs                                                                                                                                                                                            
+Curtis, Davies                                                                                                                                                                                          
+Randall, Matos                                                                                                                                                                                          
+Peter, Vargas                                                                                                                                                                                           
+Eleni, Zlotkey                                                                                                                                                                                          
+Ellen, Abel                                                                                                                                                                                             
+Jonathon, Taylor                                                                                                                                                                                        
+Kimerely, Grant                                                                                                                                                                                         
+Jennifer, Whalen                                                                                                                                                                                        
+Michael, Hartstein                                                                                                                                                                                      
+Pat, Fay                                                                                                                                                                                                
+Shelley, Higgins                                                                                                                                                                                        
+William, Gietz                                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || '--->' || LAST_NAME FROM EMPLOYEES;
+
+FIRST_NAME||'--->'||LAST_NAME                                                                                                                                                                           
+----------------------------------                                                                                                                                                                      
+Steven--->King                                                                                                                                                                                          
+Neena--->Kochhar                                                                                                                                                                                        
+Lex--->De Haan                                                                                                                                                                                          
+Alexander--->Hunold                                                                                                                                                                                     
+Bruce--->Ernst                                                                                                                                                                                          
+Diana--->Lorentz                                                                                                                                                                                        
+Kevin--->Mourgos                                                                                                                                                                                        
+Trenna--->Rajs                                                                                                                                                                                          
+Curtis--->Davies                                                                                                                                                                                        
+Randall--->Matos                                                                                                                                                                                        
+Peter--->Vargas                                                                                                                                                                                         
+Eleni--->Zlotkey                                                                                                                                                                                        
+Ellen--->Abel                                                                                                                                                                                           
+Jonathon--->Taylor                                                                                                                                                                                      
+Kimerely--->Grant                                                                                                                                                                                       
+Jennifer--->Whalen                                                                                                                                                                                      
+Michael--->Hartstein                                                                                                                                                                                    
+Pat--->Fay                                                                                                                                                                                              
+Shelley--->Higgins                                                                                                                                                                                      
+William--->Gietz                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME LAST_NAME FROM EMPLOYEES;
+
+LAST_NAME                                                                                                                                                                                               
+---------------                                                                                                                                                                                         
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE || EMAIL FROM EMPLOYEES;
+
+FIRST_NAME      HIRE_DATE||EMAIL                                                                                                                                                                        
+--------------- ----------------------------                                                                                                                                                            
+Steven          17-JUL-87SKING                                                                                                                                                                          
+Neena           21-SEP-89NKOCHHAR                                                                                                                                                                       
+Lex             13-JAN-93LDEHAAN                                                                                                                                                                        
+Alexander       03-JAN-90AHUNOLD                                                                                                                                                                        
+Bruce           21-MAY-91BERNST                                                                                                                                                                         
+Diana           07-FEB-99DLORENTZ                                                                                                                                                                       
+Kevin           16-NOV-99KMOURGOS                                                                                                                                                                       
+Trenna          17-OCT-95TRAJS                                                                                                                                                                          
+Curtis          29-JAN-97CDAVIES                                                                                                                                                                        
+Randall         15-MAR-98RMATOS                                                                                                                                                                         
+Peter           09-JUL-98PVARGAS                                                                                                                                                                        
+Eleni           29-JAN-00EZLOTKEY                                                                                                                                                                       
+Ellen           11-MAY-96EABEL                                                                                                                                                                          
+Jonathon        24-MAR-98JTAYLOR                                                                                                                                                                        
+Kimerely        24-MAY-99KGRANT                                                                                                                                                                         
+Jennifer        17-SEP-87JWHALEN                                                                                                                                                                        
+Michael         17-FEB-96MHARTSTE                                                                                                                                                                       
+Pat             17-AUG-97PFAY                                                                                                                                                                           
+Shelley         07-JUN-94SHIGGINS                                                                                                                                                                       
+William         07-JUN-94WGIETZ                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || HIRE_DATE , EMAIL FROM EMPLOYEES;
+
+FIRST_NAME||HIRE_DATE             EMAIL                                                                                                                                                                 
+--------------------------------- ----------                                                                                                                                                            
+Steven17-JUL-87                   SKING                                                                                                                                                                 
+Neena21-SEP-89                    NKOCHHAR                                                                                                                                                              
+Lex13-JAN-93                      LDEHAAN                                                                                                                                                               
+Alexander03-JAN-90                AHUNOLD                                                                                                                                                               
+Bruce21-MAY-91                    BERNST                                                                                                                                                                
+Diana07-FEB-99                    DLORENTZ                                                                                                                                                              
+Kevin16-NOV-99                    KMOURGOS                                                                                                                                                              
+Trenna17-OCT-95                   TRAJS                                                                                                                                                                 
+Curtis29-JAN-97                   CDAVIES                                                                                                                                                               
+Randall15-MAR-98                  RMATOS                                                                                                                                                                
+Peter09-JUL-98                    PVARGAS                                                                                                                                                               
+Eleni29-JAN-00                    EZLOTKEY                                                                                                                                                              
+Ellen11-MAY-96                    EABEL                                                                                                                                                                 
+Jonathon24-MAR-98                 JTAYLOR                                                                                                                                                               
+Kimerely24-MAY-99                 KGRANT                                                                                                                                                                
+Jennifer17-SEP-87                 JWHALEN                                                                                                                                                               
+Michael17-FEB-96                  MHARTSTE                                                                                                                                                              
+Pat17-AUG-97                      PFAY                                                                                                                                                                  
+Shelley07-JUN-94                  SHIGGINS                                                                                                                                                              
+William07-JUN-94                  WGIETZ                                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || HIRE_DATE || EMAIL FROM EMPLOYEES;
+
+FIRST_NAME||HIRE_DATE||EMAIL                                                                                                                                                                            
+-------------------------------------------                                                                                                                                                             
+Steven17-JUL-87SKING                                                                                                                                                                                    
+Neena21-SEP-89NKOCHHAR                                                                                                                                                                                  
+Lex13-JAN-93LDEHAAN                                                                                                                                                                                     
+Alexander03-JAN-90AHUNOLD                                                                                                                                                                               
+Bruce21-MAY-91BERNST                                                                                                                                                                                    
+Diana07-FEB-99DLORENTZ                                                                                                                                                                                  
+Kevin16-NOV-99KMOURGOS                                                                                                                                                                                  
+Trenna17-OCT-95TRAJS                                                                                                                                                                                    
+Curtis29-JAN-97CDAVIES                                                                                                                                                                                  
+Randall15-MAR-98RMATOS                                                                                                                                                                                  
+Peter09-JUL-98PVARGAS                                                                                                                                                                                   
+Eleni29-JAN-00EZLOTKEY                                                                                                                                                                                  
+Ellen11-MAY-96EABEL                                                                                                                                                                                     
+Jonathon24-MAR-98JTAYLOR                                                                                                                                                                                
+Kimerely24-MAY-99KGRANT                                                                                                                                                                                 
+Jennifer17-SEP-87JWHALEN                                                                                                                                                                                
+Michael17-FEB-96MHARTSTE                                                                                                                                                                                
+Pat17-AUG-97PFAY                                                                                                                                                                                        
+Shelley07-JUN-94SHIGGINS                                                                                                                                                                                
+William07-JUN-94WGIETZ                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME || HIRE_DATE || , EMAIL FROM EMPLOYEES;
+SELECT FIRST_NAME || HIRE_DATE || , EMAIL FROM EMPLOYEES
+                                  *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT FIRST_NAME || HIRE_DATE EMAIL FROM EMPLOYEES;
+
+EMAIL                                                                                                                                                                                                   
+---------------------------------                                                                                                                                                                       
+Steven17-JUL-87                                                                                                                                                                                         
+Neena21-SEP-89                                                                                                                                                                                          
+Lex13-JAN-93                                                                                                                                                                                            
+Alexander03-JAN-90                                                                                                                                                                                      
+Bruce21-MAY-91                                                                                                                                                                                          
+Diana07-FEB-99                                                                                                                                                                                          
+Kevin16-NOV-99                                                                                                                                                                                          
+Trenna17-OCT-95                                                                                                                                                                                         
+Curtis29-JAN-97                                                                                                                                                                                         
+Randall15-MAR-98                                                                                                                                                                                        
+Peter09-JUL-98                                                                                                                                                                                          
+Eleni29-JAN-00                                                                                                                                                                                          
+Ellen11-MAY-96                                                                                                                                                                                          
+Jonathon24-MAR-98                                                                                                                                                                                       
+Kimerely24-MAY-99                                                                                                                                                                                       
+Jennifer17-SEP-87                                                                                                                                                                                       
+Michael17-FEB-96                                                                                                                                                                                        
+Pat17-AUG-97                                                                                                                                                                                            
+Shelley07-JUN-94                                                                                                                                                                                        
+William07-JUN-94                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM DISPLAY FIRST_NAME AND SALARY COMBINED
+SQL> 
+SQL> REM DISPLAY HIRE_DATE AND EMAIL SEPARATELY
+SQL> 
+SQL> REM DISPLAY FIRST_NAME AND HIRE_DATE COMBINED AND PHONE_NUMBER SEPARATELY
+SQL> 
+SQL> REM DISPLAY LAST_NAME SEPARATELY AND HIRE_DATE SALARY COMBINED
+SQL> 
+SQL> 
+REM DISPLAY FIRST_NAME AND SALARY COMBINED
+SQL> 
+SQL> SELECT FIRST_NAME || SALARY FROM EMPLOYEES;
+
+FIRST_NAME||SALARY                                                                                                                                                                                      
+-------------------------------------------------------                                                                                                                                                 
+Steven24000                                                                                                                                                                                             
+Neena17000                                                                                                                                                                                              
+Lex17000                                                                                                                                                                                                
+Alexander9000                                                                                                                                                                                           
+Bruce6000                                                                                                                                                                                               
+Diana4200                                                                                                                                                                                               
+Kevin5800                                                                                                                                                                                               
+Trenna3500                                                                                                                                                                                              
+Curtis3100                                                                                                                                                                                              
+Randall2600                                                                                                                                                                                             
+Peter2500                                                                                                                                                                                               
+Eleni10500                                                                                                                                                                                              
+Ellen11000                                                                                                                                                                                              
+Jonathon8600                                                                                                                                                                                            
+Kimerely7000                                                                                                                                                                                            
+Jennifer4400                                                                                                                                                                                            
+Michael13000                                                                                                                                                                                            
+Pat6000                                                                                                                                                                                                 
+Shelley12000                                                                                                                                                                                            
+William8300                                                                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM DISPLAY HIRE_DATE AND EMAIL SEPARATELY
+SQL> 
+SQL> SELECT HIRE_DATE , EMAIL FROM EMPLOYEES;
+
+HIRE_DATE EMAIL                                                                                                                                                                                         
+--------- ----------                                                                                                                                                                                    
+17-JUL-87 SKING                                                                                                                                                                                         
+21-SEP-89 NKOCHHAR                                                                                                                                                                                      
+13-JAN-93 LDEHAAN                                                                                                                                                                                       
+03-JAN-90 AHUNOLD                                                                                                                                                                                       
+21-MAY-91 BERNST                                                                                                                                                                                        
+07-FEB-99 DLORENTZ                                                                                                                                                                                      
+16-NOV-99 KMOURGOS                                                                                                                                                                                      
+17-OCT-95 TRAJS                                                                                                                                                                                         
+29-JAN-97 CDAVIES                                                                                                                                                                                       
+15-MAR-98 RMATOS                                                                                                                                                                                        
+09-JUL-98 PVARGAS                                                                                                                                                                                       
+29-JAN-00 EZLOTKEY                                                                                                                                                                                      
+11-MAY-96 EABEL                                                                                                                                                                                         
+24-MAR-98 JTAYLOR                                                                                                                                                                                       
+24-MAY-99 KGRANT                                                                                                                                                                                        
+17-SEP-87 JWHALEN                                                                                                                                                                                       
+17-FEB-96 MHARTSTE                                                                                                                                                                                      
+17-AUG-97 PFAY                                                                                                                                                                                          
+07-JUN-94 SHIGGINS                                                                                                                                                                                      
+07-JUN-94 WGIETZ                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM DISPLAY FIRST_NAME AND HIRE_DATE COMBINED AND PHONE_NUMBER SEPARATELY
+SQL> 
+SQL> SELECT FIRST_NAME || HIRE_DATE , PHONE_NUMBER FROM EMPLOYEES;
+
+FIRST_NAME||HIRE_DATE             PHONE_NUMBER                                                                                                                                                          
+--------------------------------- --------------------                                                                                                                                                  
+Steven17-JUL-87                   515.123.4567                                                                                                                                                          
+Neena21-SEP-89                    515.123.4568                                                                                                                                                          
+Lex13-JAN-93                      515.123.4569                                                                                                                                                          
+Alexander03-JAN-90                590.423.4567                                                                                                                                                          
+Bruce21-MAY-91                    590.423.4568                                                                                                                                                          
+Diana07-FEB-99                    590.423.5567                                                                                                                                                          
+Kevin16-NOV-99                    650.123.5234                                                                                                                                                          
+Trenna17-OCT-95                   650.121.8009                                                                                                                                                          
+Curtis29-JAN-97                   650.121.2994                                                                                                                                                          
+Randall15-MAR-98                  650.121.2874                                                                                                                                                          
+Peter09-JUL-98                    650.121.2004                                                                                                                                                          
+Eleni29-JAN-00                    011.44.1344.429018                                                                                                                                                    
+Ellen11-MAY-96                    011.44.1644.429267                                                                                                                                                    
+Jonathon24-MAR-98                 011.44.1644.429265                                                                                                                                                    
+Kimerely24-MAY-99                 011.44.1644.429263                                                                                                                                                    
+Jennifer17-SEP-87                 515.123.4444                                                                                                                                                          
+Michael17-FEB-96                  515.123.5555                                                                                                                                                          
+Pat17-AUG-97                      603.123.6666                                                                                                                                                          
+Shelley07-JUN-94                  515.123.8080                                                                                                                                                          
+William07-JUN-94                  515.123.8181                                                                                                                                                          
+
+20 rows selected.
+
+SQL> REM DISPLAY LAST_NAME SEPARATELY AND HIRE_DATE SALARY COMBINED
+SQL> 
+SQL> SELECT LAST_NAME , HIRE_DATE || SALARY FROM EMPLOYEES;
+
+LAST_NAME       HIRE_DATE||SALARY                                                                                                                                                                       
+--------------- ----------------------------------------------------------                                                                                                                              
+King            17-JUL-8724000                                                                                                                                                                          
+Kochhar         21-SEP-8917000                                                                                                                                                                          
+De Haan         13-JAN-9317000                                                                                                                                                                          
+Hunold          03-JAN-909000                                                                                                                                                                           
+Ernst           21-MAY-916000                                                                                                                                                                           
+Lorentz         07-FEB-994200                                                                                                                                                                           
+Mourgos         16-NOV-995800                                                                                                                                                                           
+Rajs            17-OCT-953500                                                                                                                                                                           
+Davies          29-JAN-973100                                                                                                                                                                           
+Matos           15-MAR-982600                                                                                                                                                                           
+Vargas          09-JUL-982500                                                                                                                                                                           
+Zlotkey         29-JAN-0010500                                                                                                                                                                          
+Abel            11-MAY-9611000                                                                                                                                                                          
+Taylor          24-MAR-988600                                                                                                                                                                           
+Grant           24-MAY-997000                                                                                                                                                                           
+Whalen          17-SEP-874400                                                                                                                                                                           
+Hartstein       17-FEB-9613000                                                                                                                                                                          
+Fay             17-AUG-976000                                                                                                                                                                           
+Higgins         07-JUN-9412000                                                                                                                                                                          
+Gietz           07-JUN-948300                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SPOOL OFF

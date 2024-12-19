@@ -1,0 +1,495 @@
+SQL> 
+SQL> CL SCR
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Steven                                                                                                                                                                                                  
+Neena                                                                                                                                                                                                   
+Lex                                                                                                                                                                                                     
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Diana                                                                                                                                                                                                   
+Kevin                                                                                                                                                                                                   
+Trenna                                                                                                                                                                                                  
+Curtis                                                                                                                                                                                                  
+Randall                                                                                                                                                                                                 
+Peter                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jonathon                                                                                                                                                                                                
+Kimerely                                                                                                                                                                                                
+Jennifer                                                                                                                                                                                                
+Michael                                                                                                                                                                                                 
+Pat                                                                                                                                                                                                     
+Shelley                                                                                                                                                                                                 
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+FIRST_NAME                                                                                                                                                                                              
+---------------                                                                                                                                                                                         
+Alexander                                                                                                                                                                                               
+Bruce                                                                                                                                                                                                   
+Curtis                                                                                                                                                                                                  
+Diana                                                                                                                                                                                                   
+Eleni                                                                                                                                                                                                   
+Ellen                                                                                                                                                                                                   
+Jennifer                                                                                                                                                                                                
+Jonathon                                                                                                                                                                                                
+Kevin                                                                                                                                                                                                   
+Kimerely                                                                                                                                                                                                
+Lex                                                                                                                                                                                                     
+Michael                                                                                                                                                                                                 
+Neena                                                                                                                                                                                                   
+Pat                                                                                                                                                                                                     
+Peter                                                                                                                                                                                                   
+Randall                                                                                                                                                                                                 
+Shelley                                                                                                                                                                                                 
+Steven                                                                                                                                                                                                  
+Trenna                                                                                                                                                                                                  
+William                                                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT HIRE_DATE FROM EMPLOYEES;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+17-JUL-87                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+13-JAN-93                                                                                                                                                                                               
+03-JAN-90                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+07-FEB-99                                                                                                                                                                                               
+16-NOV-99                                                                                                                                                                                               
+17-OCT-95                                                                                                                                                                                               
+29-JAN-97                                                                                                                                                                                               
+15-MAR-98                                                                                                                                                                                               
+09-JUL-98                                                                                                                                                                                               
+29-JAN-00                                                                                                                                                                                               
+11-MAY-96                                                                                                                                                                                               
+24-MAR-98                                                                                                                                                                                               
+24-MAY-99                                                                                                                                                                                               
+17-SEP-87                                                                                                                                                                                               
+17-FEB-96                                                                                                                                                                                               
+17-AUG-97                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE FROM EMPLOYEES ORDER BY 1 DESC;
+
+HIRE_DATE                                                                                                                                                                                               
+---------                                                                                                                                                                                               
+29-JAN-00                                                                                                                                                                                               
+16-NOV-99                                                                                                                                                                                               
+24-MAY-99                                                                                                                                                                                               
+07-FEB-99                                                                                                                                                                                               
+09-JUL-98                                                                                                                                                                                               
+24-MAR-98                                                                                                                                                                                               
+15-MAR-98                                                                                                                                                                                               
+17-AUG-97                                                                                                                                                                                               
+29-JAN-97                                                                                                                                                                                               
+11-MAY-96                                                                                                                                                                                               
+17-FEB-96                                                                                                                                                                                               
+17-OCT-95                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+07-JUN-94                                                                                                                                                                                               
+13-JAN-93                                                                                                                                                                                               
+21-MAY-91                                                                                                                                                                                               
+03-JAN-90                                                                                                                                                                                               
+21-SEP-89                                                                                                                                                                                               
+17-SEP-87                                                                                                                                                                                               
+17-JUL-87                                                                                                                                                                                               
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+           90 Lex                                                                                                                                                                                       
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           50 Kevin                                                                                                                                                                                     
+           50 Trenna                                                                                                                                                                                    
+           50 Curtis                                                                                                                                                                                    
+           50 Randall                                                                                                                                                                                   
+           50 Peter                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+              Kimerely                                                                                                                                                                                  
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM IN ASCENDING ORDER OF IT'S ROWID
+SQL> 
+SQL> 
+SQL> SELECT ROWID , DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+ROWID              DEPARTMENT_ID FIRST_NAME                                                                                                                                                             
+------------------ ------------- ---------------                                                                                                                                                        
+AAAcDnAAHAAAAVdAAA            90 Steven                                                                                                                                                                 
+AAAcDnAAHAAAAVdAAB            90 Neena                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAC            90 Lex                                                                                                                                                                    
+AAAcDnAAHAAAAVdAAD            60 Alexander                                                                                                                                                              
+AAAcDnAAHAAAAVdAAE            60 Bruce                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAF            60 Diana                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAG            50 Kevin                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAH            50 Trenna                                                                                                                                                                 
+AAAcDnAAHAAAAVdAAI            50 Curtis                                                                                                                                                                 
+AAAcDnAAHAAAAVdAAJ            50 Randall                                                                                                                                                                
+AAAcDnAAHAAAAVdAAK            50 Peter                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAL            80 Eleni                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAM            80 Ellen                                                                                                                                                                  
+AAAcDnAAHAAAAVdAAN            80 Jonathon                                                                                                                                                               
+AAAcDnAAHAAAAVdAAO               Kimerely                                                                                                                                                               
+AAAcDnAAHAAAAVdAAP            10 Jennifer                                                                                                                                                               
+AAAcDnAAHAAAAVdAAQ            20 Michael                                                                                                                                                                
+AAAcDnAAHAAAAVdAAR            20 Pat                                                                                                                                                                    
+AAAcDnAAHAAAAVdAAS           110 Shelley                                                                                                                                                                
+AAAcDnAAHAAAAVdAAT           110 William                                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+           90 Lex                                                                                                                                                                                       
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           50 Kevin                                                                                                                                                                                     
+           50 Trenna                                                                                                                                                                                    
+           50 Curtis                                                                                                                                                                                    
+           50 Randall                                                                                                                                                                                   
+           50 Peter                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+              Kimerely                                                                                                                                                                                  
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> 
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Curtis                                                                                                                                                                                    
+           50 Trenna                                                                                                                                                                                    
+           60 Diana                                                                                                                                                                                     
+           60 Bruce                                                                                                                                                                                     
+           60 Alexander                                                                                                                                                                                 
+           80 Ellen                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           90 Steven                                                                                                                                                                                    
+           90 Neena                                                                                                                                                                                     
+          110 William                                                                                                                                                                                   
+          110 Shelley                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1 , 2;
+
+DEPARTMENT_ID FIRST_NAME                                                                                                                                                                                
+------------- ---------------                                                                                                                                                                           
+           10 Jennifer                                                                                                                                                                                  
+           20 Michael                                                                                                                                                                                   
+           20 Pat                                                                                                                                                                                       
+           50 Curtis                                                                                                                                                                                    
+           50 Kevin                                                                                                                                                                                     
+           50 Peter                                                                                                                                                                                     
+           50 Randall                                                                                                                                                                                   
+           50 Trenna                                                                                                                                                                                    
+           60 Alexander                                                                                                                                                                                 
+           60 Bruce                                                                                                                                                                                     
+           60 Diana                                                                                                                                                                                     
+           80 Eleni                                                                                                                                                                                     
+           80 Ellen                                                                                                                                                                                     
+           80 Jonathon                                                                                                                                                                                  
+           90 Lex                                                                                                                                                                                       
+           90 Neena                                                                                                                                                                                     
+           90 Steven                                                                                                                                                                                    
+          110 Shelley                                                                                                                                                                                   
+          110 William                                                                                                                                                                                   
+              Kimerely                                                                                                                                                                                  
+
+20 rows selected.
+
+SQL> SELECT MANAGER_ID , LAST_NAME FROM EMPLOYEES;
+
+MANAGER_ID LAST_NAME                                                                                                                                                                                    
+---------- ---------------                                                                                                                                                                              
+           King                                                                                                                                                                                         
+       100 Kochhar                                                                                                                                                                                      
+       100 De Haan                                                                                                                                                                                      
+       102 Hunold                                                                                                                                                                                       
+       103 Ernst                                                                                                                                                                                        
+       103 Lorentz                                                                                                                                                                                      
+       100 Mourgos                                                                                                                                                                                      
+       124 Rajs                                                                                                                                                                                         
+       124 Davies                                                                                                                                                                                       
+       124 Matos                                                                                                                                                                                        
+       124 Vargas                                                                                                                                                                                       
+       100 Zlotkey                                                                                                                                                                                      
+       149 Abel                                                                                                                                                                                         
+       149 Taylor                                                                                                                                                                                       
+       149 Grant                                                                                                                                                                                        
+       101 Whalen                                                                                                                                                                                       
+       100 Hartstein                                                                                                                                                                                    
+       201 Fay                                                                                                                                                                                          
+       101 Higgins                                                                                                                                                                                      
+       205 Gietz                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT MANAGER_ID , LAST_NAME FROM EMPLOYEES ORDER BY 1 , 2 DESC;
+
+MANAGER_ID LAST_NAME                                                                                                                                                                                    
+---------- ---------------                                                                                                                                                                              
+       100 Zlotkey                                                                                                                                                                                      
+       100 Mourgos                                                                                                                                                                                      
+       100 Kochhar                                                                                                                                                                                      
+       100 Hartstein                                                                                                                                                                                    
+       100 De Haan                                                                                                                                                                                      
+       101 Whalen                                                                                                                                                                                       
+       101 Higgins                                                                                                                                                                                      
+       102 Hunold                                                                                                                                                                                       
+       103 Lorentz                                                                                                                                                                                      
+       103 Ernst                                                                                                                                                                                        
+       124 Vargas                                                                                                                                                                                       
+       124 Rajs                                                                                                                                                                                         
+       124 Matos                                                                                                                                                                                        
+       124 Davies                                                                                                                                                                                       
+       149 Taylor                                                                                                                                                                                       
+       149 Grant                                                                                                                                                                                        
+       149 Abel                                                                                                                                                                                         
+       201 Fay                                                                                                                                                                                          
+       205 Gietz                                                                                                                                                                                        
+           King                                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , EMAIL FROM EMPLOYEES;
+
+JOB_ID     EMAIL                                                                                                                                                                                        
+---------- ----------                                                                                                                                                                                   
+AD_PRES    SKING                                                                                                                                                                                        
+AD_VP      NKOCHHAR                                                                                                                                                                                     
+AD_VP      LDEHAAN                                                                                                                                                                                      
+IT_PROG    AHUNOLD                                                                                                                                                                                      
+IT_PROG    BERNST                                                                                                                                                                                       
+IT_PROG    DLORENTZ                                                                                                                                                                                     
+ST_MAN     KMOURGOS                                                                                                                                                                                     
+ST_CLERK   TRAJS                                                                                                                                                                                        
+ST_CLERK   CDAVIES                                                                                                                                                                                      
+ST_CLERK   RMATOS                                                                                                                                                                                       
+ST_CLERK                                                                                                                                                                                                
+SA_MAN     EZLOTKEY                                                                                                                                                                                     
+SA_REP     EABEL                                                                                                                                                                                        
+SA_REP     JTAYLOR                                                                                                                                                                                      
+SA_REP     KGRANT                                                                                                                                                                                       
+AD_ASST    JWHALEN                                                                                                                                                                                      
+MK_MAN     MHARTSTE                                                                                                                                                                                     
+MK_REP     PFAY                                                                                                                                                                                         
+AC_MGR     SHIGGINS                                                                                                                                                                                     
+AC_ACCOUNT WGIETZ                                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT JOB_ID , EMAIL FROM EMPLOYEES ORDER BY 1 , 2 DESC;
+
+JOB_ID     EMAIL                                                                                                                                                                                        
+---------- ----------                                                                                                                                                                                   
+AC_ACCOUNT WGIETZ                                                                                                                                                                                       
+AC_MGR     SHIGGINS                                                                                                                                                                                     
+AD_ASST    JWHALEN                                                                                                                                                                                      
+AD_PRES    SKING                                                                                                                                                                                        
+AD_VP      NKOCHHAR                                                                                                                                                                                     
+AD_VP      LDEHAAN                                                                                                                                                                                      
+IT_PROG    DLORENTZ                                                                                                                                                                                     
+IT_PROG    BERNST                                                                                                                                                                                       
+IT_PROG    AHUNOLD                                                                                                                                                                                      
+MK_MAN     MHARTSTE                                                                                                                                                                                     
+MK_REP     PFAY                                                                                                                                                                                         
+SA_MAN     EZLOTKEY                                                                                                                                                                                     
+SA_REP     KGRANT                                                                                                                                                                                       
+SA_REP     JTAYLOR                                                                                                                                                                                      
+SA_REP     EABEL                                                                                                                                                                                        
+ST_CLERK                                                                                                                                                                                                
+ST_CLERK   TRAJS                                                                                                                                                                                        
+ST_CLERK   RMATOS                                                                                                                                                                                       
+ST_CLERK   CDAVIES                                                                                                                                                                                      
+ST_MAN     KMOURGOS                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , FIRST_NAME FROM EMPLOYEES;
+
+HIRE_DATE FIRST_NAME                                                                                                                                                                                    
+--------- ---------------                                                                                                                                                                               
+17-JUL-87 Steven                                                                                                                                                                                        
+21-SEP-89 Neena                                                                                                                                                                                         
+13-JAN-93 Lex                                                                                                                                                                                           
+03-JAN-90 Alexander                                                                                                                                                                                     
+21-MAY-91 Bruce                                                                                                                                                                                         
+07-FEB-99 Diana                                                                                                                                                                                         
+16-NOV-99 Kevin                                                                                                                                                                                         
+17-OCT-95 Trenna                                                                                                                                                                                        
+29-JAN-97 Curtis                                                                                                                                                                                        
+15-MAR-98 Randall                                                                                                                                                                                       
+09-JUL-98 Peter                                                                                                                                                                                         
+29-JAN-00 Eleni                                                                                                                                                                                         
+11-MAY-96 Ellen                                                                                                                                                                                         
+24-MAR-98 Jonathon                                                                                                                                                                                      
+24-MAY-99 Kimerely                                                                                                                                                                                      
+17-SEP-87 Jennifer                                                                                                                                                                                      
+17-FEB-96 Michael                                                                                                                                                                                       
+17-AUG-97 Pat                                                                                                                                                                                           
+07-JUN-94 Shelley                                                                                                                                                                                       
+07-JUN-94 William                                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT HIRE_DATE , FIRST_NAME FROM EMPLOYEES ORDER BY 1 DESC , 2 DESC;
+
+HIRE_DATE FIRST_NAME                                                                                                                                                                                    
+--------- ---------------                                                                                                                                                                               
+29-JAN-00 Eleni                                                                                                                                                                                         
+16-NOV-99 Kevin                                                                                                                                                                                         
+24-MAY-99 Kimerely                                                                                                                                                                                      
+07-FEB-99 Diana                                                                                                                                                                                         
+09-JUL-98 Peter                                                                                                                                                                                         
+24-MAR-98 Jonathon                                                                                                                                                                                      
+15-MAR-98 Randall                                                                                                                                                                                       
+17-AUG-97 Pat                                                                                                                                                                                           
+29-JAN-97 Curtis                                                                                                                                                                                        
+11-MAY-96 Ellen                                                                                                                                                                                         
+17-FEB-96 Michael                                                                                                                                                                                       
+17-OCT-95 Trenna                                                                                                                                                                                        
+07-JUN-94 William                                                                                                                                                                                       
+07-JUN-94 Shelley                                                                                                                                                                                       
+13-JAN-93 Lex                                                                                                                                                                                           
+21-MAY-91 Bruce                                                                                                                                                                                         
+03-JAN-90 Alexander                                                                                                                                                                                     
+21-SEP-89 Neena                                                                                                                                                                                         
+17-SEP-87 Jennifer                                                                                                                                                                                      
+17-JUL-87 Steven                                                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID FROM EMPLOYEES;
+
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                                                                                                                                 
+-------------- ---------- -------------                                                                                                                                                                 
+                                     90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      102            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      100            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+            .2        100            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+           .15        149                                                                                                                                                                               
+                      101            10                                                                                                                                                                 
+                      100            20                                                                                                                                                                 
+                      201            20                                                                                                                                                                 
+                      101           110                                                                                                                                                                 
+                      205           110                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES;
+
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID FIRST_NAME                                                                                                                                                      
+-------------- ---------- ------------- ---------------                                                                                                                                                 
+                                     90 Steven                                                                                                                                                          
+                      100            90 Neena                                                                                                                                                           
+                      100            90 Lex                                                                                                                                                             
+                      102            60 Alexander                                                                                                                                                       
+                      103            60 Bruce                                                                                                                                                           
+                      103            60 Diana                                                                                                                                                           
+                      100            50 Kevin                                                                                                                                                           
+                      124            50 Trenna                                                                                                                                                          
+                      124            50 Curtis                                                                                                                                                          
+                      124            50 Randall                                                                                                                                                         
+                      124            50 Peter                                                                                                                                                           
+            .2        100            80 Eleni                                                                                                                                                           
+            .3        149            80 Ellen                                                                                                                                                           
+            .3        149            80 Jonathon                                                                                                                                                        
+           .15        149               Kimerely                                                                                                                                                        
+                      101            10 Jennifer                                                                                                                                                        
+                      100            20 Michael                                                                                                                                                         
+                      201            20 Pat                                                                                                                                                             
+                      101           110 Shelley                                                                                                                                                         
+                      205           110 William                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID , FIRST_NAME FROM EMPLOYEES ORDER BY 1,2,3,4;
+
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID FIRST_NAME                                                                                                                                                      
+-------------- ---------- ------------- ---------------                                                                                                                                                 
+           .15        149               Kimerely                                                                                                                                                        
+            .2        100            80 Eleni                                                                                                                                                           
+            .3        149            80 Ellen                                                                                                                                                           
+            .3        149            80 Jonathon                                                                                                                                                        
+                      100            20 Michael                                                                                                                                                         
+                      100            50 Kevin                                                                                                                                                           
+                      100            90 Lex                                                                                                                                                             
+                      100            90 Neena                                                                                                                                                           
+                      101            10 Jennifer                                                                                                                                                        
+                      101           110 Shelley                                                                                                                                                         
+                      102            60 Alexander                                                                                                                                                       
+                      103            60 Bruce                                                                                                                                                           
+                      103            60 Diana                                                                                                                                                           
+                      124            50 Curtis                                                                                                                                                          
+                      124            50 Peter                                                                                                                                                           
+                      124            50 Randall                                                                                                                                                         
+                      124            50 Trenna                                                                                                                                                          
+                      201            20 Pat                                                                                                                                                             
+                      205           110 William                                                                                                                                                         
+                                     90 Steven                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SPOOL OFF

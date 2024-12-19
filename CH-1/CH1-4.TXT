@@ -1,0 +1,743 @@
+SQL> 
+SQL> CL SCR
+
+SQL> REM PRECEDENCE / ORDER / SEQUENCE OF ARITHMETIC , CONCATENATION AND POWER FUNCTION EXECUTION :
+SQL> 
+SQL> REM 1 BRACKETS : () : (   )  (   ) : LEFT TO RIGHT , (   (   )  ) : NESTED BRACKET : INNER TO OUTER
+SQL> 
+SQL> REM 2 POWER : LEFT TO RIGHT , INNER TO OUTER
+SQL> 
+SQL> REM 3 / * : LEFT TO RIGHT IN FORMULA
+SQL> 
+SQL> REM 4 + - || : LEFT TO RIGHT IN FORMULA
+SQL> 
+SQL> 
+SQL> SELECT 4 + 3 * 5 FROM DUAL;
+
+     4+3*5                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        19                                                                                                                                                                                              
+
+SQL> SELECT (4 + 3) * 5 FROM DUAL;
+
+   (4+3)*5                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        35                                                                                                                                                                                              
+
+SQL> SELECT FIRST_NAME , SALARY , COMMISSION_PCT FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT                                                                                                                                                               
+--------------- ---------- --------------                                                                                                                                                               
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500             .2                                                                                                                                                               
+Ellen                11000             .3                                                                                                                                                               
+Jonathon              8600             .3                                                                                                                                                               
+Kimerely              7000            .15                                                                                                                                                               
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM COMM_AMOUNT = SALARY * COMMISSION_PCT
+SQL> 
+SQL> 
+SQL> REM FIND 30% OF 11000?
+SQL> 
+SQL> SELECT 11000 * 30 / 100 FROM DUAL;
+
+11000*30/100                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+        3300                                                                                                                                                                                            
+
+SQL> SELECT 30 / 100 FROM DUAL;
+
+    30/100                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        .3                                                                                                                                                                                              
+
+SQL> SELECT 11000 * .3 FROM DUAL;
+
+  11000*.3                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+      3300                                                                                                                                                                                              
+
+SQL> REM ANY ARITHMETIC CALCULATION WITH NULL ALWAYS RETURNS NULL VALUE.
+SQL> 
+SQL> SELECT 5 * NULL FROM DUAL;
+
+    5*NULL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> SELECT 5 / NULL FROM DUAL;
+
+    5/NULL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> SELECT 5 + NULL FROM DUAL;
+
+    5+NULL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> SELECT 5 - NULL FROM DUAL;
+
+    5-NULL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> SELECT FIRST_NAME , SALARY , COMMISSION_PCT , SALARY * COMMISSION_PCT COMM_AMT FROM EMPLOYEES;
+
+FIRST_NAME          SALARY COMMISSION_PCT   COMM_AMT                                                                                                                                                    
+--------------- ---------- -------------- ----------                                                                                                                                                    
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500             .2       2100                                                                                                                                                    
+Ellen                11000             .3       3300                                                                                                                                                    
+Jonathon              8600             .3       2580                                                                                                                                                    
+Kimerely              7000            .15       1050                                                                                                                                                    
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM COMPANY DECLARES +1500 INCREMENT FOR ALL EMPLOYEES. DISPLAY NEW SALARY AMOUNT.
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY + 1500 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_SALARY                                                                                                                                                                   
+--------------- ---------- ----------                                                                                                                                                                   
+Steven               24000      25500                                                                                                                                                                   
+Neena                17000      18500                                                                                                                                                                   
+Lex                  17000      18500                                                                                                                                                                   
+Alexander             9000      10500                                                                                                                                                                   
+Bruce                 6000       7500                                                                                                                                                                   
+Diana                 4200       5700                                                                                                                                                                   
+Kevin                 5800       7300                                                                                                                                                                   
+Trenna                3500       5000                                                                                                                                                                   
+Curtis                3100       4600                                                                                                                                                                   
+Randall               2600       4100                                                                                                                                                                   
+Peter                 2500       4000                                                                                                                                                                   
+Eleni                10500      12000                                                                                                                                                                   
+Ellen                11000      12500                                                                                                                                                                   
+Jonathon              8600      10100                                                                                                                                                                   
+Kimerely              7000       8500                                                                                                                                                                   
+Jennifer              4400       5900                                                                                                                                                                   
+Michael              13000      14500                                                                                                                                                                   
+Pat                   6000       7500                                                                                                                                                                   
+Shelley              12000      13500                                                                                                                                                                   
+William               8300       9800                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COMPANY DECLARES +1500 INCREMENT FOR ALL EMPLOYEES. DISPLAY NEW YEARLY SALARY AMOUNT.
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY + 1500 * 12 NEW_YEARLY_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_YEARLY_SALARY                                                                                                                                                            
+--------------- ---------- -----------------                                                                                                                                                            
+Steven               24000             42000                                                                                                                                                            
+Neena                17000             35000                                                                                                                                                            
+Lex                  17000             35000                                                                                                                                                            
+Alexander             9000             27000                                                                                                                                                            
+Bruce                 6000             24000                                                                                                                                                            
+Diana                 4200             22200                                                                                                                                                            
+Kevin                 5800             23800                                                                                                                                                            
+Trenna                3500             21500                                                                                                                                                            
+Curtis                3100             21100                                                                                                                                                            
+Randall               2600             20600                                                                                                                                                            
+Peter                 2500             20500                                                                                                                                                            
+Eleni                10500             28500                                                                                                                                                            
+Ellen                11000             29000                                                                                                                                                            
+Jonathon              8600             26600                                                                                                                                                            
+Kimerely              7000             25000                                                                                                                                                            
+Jennifer              4400             22400                                                                                                                                                            
+Michael              13000             31000                                                                                                                                                            
+Pat                   6000             24000                                                                                                                                                            
+Shelley              12000             30000                                                                                                                                                            
+William               8300             26300                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY , (SALARY + 1500) * 12 NEW_YEARLY_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_YEARLY_SALARY                                                                                                                                                            
+--------------- ---------- -----------------                                                                                                                                                            
+Steven               24000            306000                                                                                                                                                            
+Neena                17000            222000                                                                                                                                                            
+Lex                  17000            222000                                                                                                                                                            
+Alexander             9000            126000                                                                                                                                                            
+Bruce                 6000             90000                                                                                                                                                            
+Diana                 4200             68400                                                                                                                                                            
+Kevin                 5800             87600                                                                                                                                                            
+Trenna                3500             60000                                                                                                                                                            
+Curtis                3100             55200                                                                                                                                                            
+Randall               2600             49200                                                                                                                                                            
+Peter                 2500             48000                                                                                                                                                            
+Eleni                10500            144000                                                                                                                                                            
+Ellen                11000            150000                                                                                                                                                            
+Jonathon              8600            121200                                                                                                                                                            
+Kimerely              7000            102000                                                                                                                                                            
+Jennifer              4400             70800                                                                                                                                                            
+Michael              13000            174000                                                                                                                                                            
+Pat                   6000             90000                                                                                                                                                            
+Shelley              12000            162000                                                                                                                                                            
+William               8300            117600                                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT 3 + 48 / ((5 - 2) * 4) FROM DUAL;
+
+3+48/((5-2)*4)                                                                                                                                                                                          
+--------------                                                                                                                                                                                          
+             7                                                                                                                                                                                          
+
+SQL> SELECT POWER(3,2) FROM DUAL;
+
+POWER(3,2)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         9                                                                                                                                                                                              
+
+SQL> SELECT POWER(3,3) FROM DUAL;
+
+POWER(3,3)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        27                                                                                                                                                                                              
+
+SQL> SELECT POWER(3,4) FROM DUAL;
+
+POWER(3,4)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        81                                                                                                                                                                                              
+
+SQL> SELECT POWER(9,1/2) FROM DUAL;
+
+POWER(9,1/2)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+           3                                                                                                                                                                                            
+
+SQL> SELECT POWER(27,1/3) FROM DUAL;
+
+POWER(27,1/3)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+            3                                                                                                                                                                                           
+
+SQL> SELECT POWER(3.45,2) FROM DUAL;
+
+POWER(3.45,2)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+      11.9025                                                                                                                                                                                           
+
+SQL> SELECT POWER(3,2.56) FROM DUAL;
+
+POWER(3,2.56)                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+   16.6506201                                                                                                                                                                                           
+
+SQL> SELECT POWER(3.567,2.56) FROM DUAL;
+
+POWER(3.567,2.56)                                                                                                                                                                                       
+-----------------                                                                                                                                                                                       
+       25.9355797                                                                                                                                                                                       
+
+SQL> SELECT POWER(-5,2) FROM DUAL;
+
+POWER(-5,2)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         25                                                                                                                                                                                             
+
+SQL> SELECT POWER(-5,3) FROM DUAL;
+
+POWER(-5,3)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+       -125                                                                                                                                                                                             
+
+SQL> SELECT POWER(5,-2) FROM DUAL;
+
+POWER(5,-2)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+        .04                                                                                                                                                                                             
+
+SQL> SELECT 1/POWER(5,2) FROM DUAL;
+
+1/POWER(5,2)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+         .04                                                                                                                                                                                            
+
+SQL> SELECT POWER(-5,2.34) FROM DUAL;
+SELECT POWER(-5,2.34) FROM DUAL
+             *
+ERROR at line 1:
+ORA-01428: argument '-5' is out of range 
+
+
+SQL> REM PRECEDENCE / ORDER / SEQUENCE OF ARITHMETIC , CONCATENATION AND POWER FUNCTION EXECUTION :
+SQL> 
+SQL> REM 1 BRACKETS : () : (   )  (   ) : LEFT TO RIGHT , (   (   )  ) : NESTED BRACKET : INNER TO OUTER
+SQL> 
+SQL> REM 2 POWER : LEFT TO RIGHT , INNER TO OUTER
+SQL> 
+SQL> REM 3 / * : LEFT TO RIGHT IN FORMULA
+SQL> 
+SQL> REM 4 + - || : LEFT TO RIGHT IN FORMULA
+SQL> 
+SQL> SELECT 'SHRI' || 210 + 210 FROM DUAL;
+SELECT 'SHRI' || 210 + 210 FROM DUAL
+               *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> SELECT 'SHRI' || (210 + 210) FROM DUAL;
+
+'SHRI'|                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+SHRI420                                                                                                                                                                                                 
+
+SQL> SELECT 'SHRI' || 210 * 2 FROM DUAL;
+
+'SHRI'|                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+SHRI420                                                                                                                                                                                                 
+
+SQL> REM 1 || + 2 || *
+SQL> 
+SQL> 
+SQL> REM 1 || - 2 || /
+SQL> 
+SQL> SELECT 'SHRI' || (430 - 10) FROM DUAL;
+
+'SHRI'|                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+SHRI420                                                                                                                                                                                                 
+
+SQL> SELECT 'SHRI' || 840 / 2 FROM DUAL;
+
+'SHRI'|                                                                                                                                                                                                 
+-------                                                                                                                                                                                                 
+SHRI420                                                                                                                                                                                                 
+
+SQL> REM JAMES BOND 007
+SQL> 
+SQL> REM 1 + ||
+SQL> 
+SQL> SELECT 'JAMES BOND 00' || (5 + 2) FROM DUAL;
+
+'JAMESBOND00'|                                                                                                                                                                                          
+--------------                                                                                                                                                                                          
+JAMES BOND 007                                                                                                                                                                                          
+
+SQL> REM COLUMN ALIAS : NEW COLUMN HEADING
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY PAYMENT FROM EMPLOYEES;
+
+FIRST_NAME         PAYMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY pyament FROM EMPLOYEES;
+
+FIRST_NAME         PYAMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY payment FROM EMPLOYEES;
+
+FIRST_NAME         PAYMENT                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM TWO TYPES OF COLUMN ALIASES : 1 CASE INSENSITIVE 2 CASE SENSITIVE
+SQL> 
+SQL> REM CASE INSENSITIVE : WILL ALWAYS GET DISPLAYED IN CAPITAL/UPPER
+SQL> 
+SQL> REM CASE SENSITIVE : WILL GET DISPLAYED EXACTLY AS WE SPELL IT.
+SQL> 
+SQL> 
+SQL> REM WE NEED TO PUT COLUMN ALIAS WITHIN DOUBLE QUOTES IN BELOW 4 CASES :
+SQL> 
+SQL> REM 1 IF WE WANT TO DISPLAY CASE SENSITIVE COLUMN ALIAS : MonthlyPayment
+SQL> 
+SQL> REM 2 IF WE WANT TO DISPLAY MULTIPLE WORDS AS COLUMN ALIAS : MONTHLY PAYMENT
+SQL> 
+SQL> REM 3 IF WE WANT TO USE SPECIAL CHARACTERS IN COLUMN ALIAS EXCEPT _ # $. : MONTHLY^PAYMENT
+SQL> 
+SQL> REM 4 IF WE WANT TO USE SQL/ORACLE KEY/RESERVE WORD AS COLUMN ALIAS.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY MonthlyPayment FROM EMPLOYEES;
+
+FIRST_NAME      MONTHLYPAYMENT                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                   24000                                                                                                                                                                          
+Neena                    17000                                                                                                                                                                          
+Lex                      17000                                                                                                                                                                          
+Alexander                 9000                                                                                                                                                                          
+Bruce                     6000                                                                                                                                                                          
+Diana                     4200                                                                                                                                                                          
+Kevin                     5800                                                                                                                                                                          
+Trenna                    3500                                                                                                                                                                          
+Curtis                    3100                                                                                                                                                                          
+Randall                   2600                                                                                                                                                                          
+Peter                     2500                                                                                                                                                                          
+Eleni                    10500                                                                                                                                                                          
+Ellen                    11000                                                                                                                                                                          
+Jonathon                  8600                                                                                                                                                                          
+Kimerely                  7000                                                                                                                                                                          
+Jennifer                  4400                                                                                                                                                                          
+Michael                  13000                                                                                                                                                                          
+Pat                       6000                                                                                                                                                                          
+Shelley                  12000                                                                                                                                                                          
+William                   8300                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY "MonthlyPayment" FROM EMPLOYEES;
+
+FIRST_NAME      MonthlyPayment                                                                                                                                                                          
+--------------- --------------                                                                                                                                                                          
+Steven                   24000                                                                                                                                                                          
+Neena                    17000                                                                                                                                                                          
+Lex                      17000                                                                                                                                                                          
+Alexander                 9000                                                                                                                                                                          
+Bruce                     6000                                                                                                                                                                          
+Diana                     4200                                                                                                                                                                          
+Kevin                     5800                                                                                                                                                                          
+Trenna                    3500                                                                                                                                                                          
+Curtis                    3100                                                                                                                                                                          
+Randall                   2600                                                                                                                                                                          
+Peter                     2500                                                                                                                                                                          
+Eleni                    10500                                                                                                                                                                          
+Ellen                    11000                                                                                                                                                                          
+Jonathon                  8600                                                                                                                                                                          
+Kimerely                  7000                                                                                                                                                                          
+Jennifer                  4400                                                                                                                                                                          
+Michael                  13000                                                                                                                                                                          
+Pat                       6000                                                                                                                                                                          
+Shelley                  12000                                                                                                                                                                          
+William                   8300                                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY Monthly Payment FROM EMPLOYEES;
+SELECT FIRST_NAME , SALARY Monthly Payment FROM EMPLOYEES
+                                   *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FIRST_NAME , SALARY "Monthly Payment" FROM EMPLOYEES;
+
+FIRST_NAME      Monthly Payment                                                                                                                                                                         
+--------------- ---------------                                                                                                                                                                         
+Steven                    24000                                                                                                                                                                         
+Neena                     17000                                                                                                                                                                         
+Lex                       17000                                                                                                                                                                         
+Alexander                  9000                                                                                                                                                                         
+Bruce                      6000                                                                                                                                                                         
+Diana                      4200                                                                                                                                                                         
+Kevin                      5800                                                                                                                                                                         
+Trenna                     3500                                                                                                                                                                         
+Curtis                     3100                                                                                                                                                                         
+Randall                    2600                                                                                                                                                                         
+Peter                      2500                                                                                                                                                                         
+Eleni                     10500                                                                                                                                                                         
+Ellen                     11000                                                                                                                                                                         
+Jonathon                   8600                                                                                                                                                                         
+Kimerely                   7000                                                                                                                                                                         
+Jennifer                   4400                                                                                                                                                                         
+Michael                   13000                                                                                                                                                                         
+Pat                        6000                                                                                                                                                                         
+Shelley                   12000                                                                                                                                                                         
+William                    8300                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY Monthly_#$Payment FROM EMPLOYEES;
+
+FIRST_NAME      MONTHLY_#$PAYMENT                                                                                                                                                                       
+--------------- -----------------                                                                                                                                                                       
+Steven                      24000                                                                                                                                                                       
+Neena                       17000                                                                                                                                                                       
+Lex                         17000                                                                                                                                                                       
+Alexander                    9000                                                                                                                                                                       
+Bruce                        6000                                                                                                                                                                       
+Diana                        4200                                                                                                                                                                       
+Kevin                        5800                                                                                                                                                                       
+Trenna                       3500                                                                                                                                                                       
+Curtis                       3100                                                                                                                                                                       
+Randall                      2600                                                                                                                                                                       
+Peter                        2500                                                                                                                                                                       
+Eleni                       10500                                                                                                                                                                       
+Ellen                       11000                                                                                                                                                                       
+Jonathon                     8600                                                                                                                                                                       
+Kimerely                     7000                                                                                                                                                                       
+Jennifer                     4400                                                                                                                                                                       
+Michael                     13000                                                                                                                                                                       
+Pat                          6000                                                                                                                                                                       
+Shelley                     12000                                                                                                                                                                       
+William                      8300                                                                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY Monthly^Payment FROM EMPLOYEES;
+SELECT FIRST_NAME , SALARY Monthly^Payment FROM EMPLOYEES
+                                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FIRST_NAME , SALARY Monthly@Payment FROM EMPLOYEES;
+SELECT FIRST_NAME , SALARY Monthly@Payment FROM EMPLOYEES
+                                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FIRST_NAME , SALARY "Monthly@Payment" FROM EMPLOYEES;
+
+FIRST_NAME      Monthly@Payment                                                                                                                                                                         
+--------------- ---------------                                                                                                                                                                         
+Steven                    24000                                                                                                                                                                         
+Neena                     17000                                                                                                                                                                         
+Lex                       17000                                                                                                                                                                         
+Alexander                  9000                                                                                                                                                                         
+Bruce                      6000                                                                                                                                                                         
+Diana                      4200                                                                                                                                                                         
+Kevin                      5800                                                                                                                                                                         
+Trenna                     3500                                                                                                                                                                         
+Curtis                     3100                                                                                                                                                                         
+Randall                    2600                                                                                                                                                                         
+Peter                      2500                                                                                                                                                                         
+Eleni                     10500                                                                                                                                                                         
+Ellen                     11000                                                                                                                                                                         
+Jonathon                   8600                                                                                                                                                                         
+Kimerely                   7000                                                                                                                                                                         
+Jennifer                   4400                                                                                                                                                                         
+Michael                   13000                                                                                                                                                                         
+Pat                        6000                                                                                                                                                                         
+Shelley                   12000                                                                                                                                                                         
+William                    8300                                                                                                                                                                         
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , SALARY select FROM EMPLOYEES;
+SELECT FIRST_NAME , SALARY select FROM EMPLOYEES
+                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> SELECT FIRST_NAME , SALARY "select" FROM EMPLOYEES;
+
+FIRST_NAME          select                                                                                                                                                                              
+--------------- ----------                                                                                                                                                                              
+Steven               24000                                                                                                                                                                              
+Neena                17000                                                                                                                                                                              
+Lex                  17000                                                                                                                                                                              
+Alexander             9000                                                                                                                                                                              
+Bruce                 6000                                                                                                                                                                              
+Diana                 4200                                                                                                                                                                              
+Kevin                 5800                                                                                                                                                                              
+Trenna                3500                                                                                                                                                                              
+Curtis                3100                                                                                                                                                                              
+Randall               2600                                                                                                                                                                              
+Peter                 2500                                                                                                                                                                              
+Eleni                10500                                                                                                                                                                              
+Ellen                11000                                                                                                                                                                              
+Jonathon              8600                                                                                                                                                                              
+Kimerely              7000                                                                                                                                                                              
+Jennifer              4400                                                                                                                                                                              
+Michael              13000                                                                                                                                                                              
+Pat                   6000                                                                                                                                                                              
+Shelley              12000                                                                                                                                                                              
+William               8300                                                                                                                                                                              
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY FIRST_NAME , SALARY AND YEARLY SALARY
+SQL> 
+SQL> REM 2 DISPLAY LAST_NAME AND Daily
+SQL> 
+SQL> REM 2 DISPLAY LAST_NAME AND DailySalary
+SQL> 
+SQL> REM 3 DISPLAY FULL_NAME , COMM^AMOUNT
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY * 12 "YEARLY SALARY" FROM EMPLOYEES;
+
+FIRST_NAME          SALARY YEARLY SALARY                                                                                                                                                                
+--------------- ---------- -------------                                                                                                                                                                
+Steven               24000        288000                                                                                                                                                                
+Neena                17000        204000                                                                                                                                                                
+Lex                  17000        204000                                                                                                                                                                
+Alexander             9000        108000                                                                                                                                                                
+Bruce                 6000         72000                                                                                                                                                                
+Diana                 4200         50400                                                                                                                                                                
+Kevin                 5800         69600                                                                                                                                                                
+Trenna                3500         42000                                                                                                                                                                
+Curtis                3100         37200                                                                                                                                                                
+Randall               2600         31200                                                                                                                                                                
+Peter                 2500         30000                                                                                                                                                                
+Eleni                10500        126000                                                                                                                                                                
+Ellen                11000        132000                                                                                                                                                                
+Jonathon              8600        103200                                                                                                                                                                
+Kimerely              7000         84000                                                                                                                                                                
+Jennifer              4400         52800                                                                                                                                                                
+Michael              13000        156000                                                                                                                                                                
+Pat                   6000         72000                                                                                                                                                                
+Shelley              12000        144000                                                                                                                                                                
+William               8300         99600                                                                                                                                                                
+
+20 rows selected.
+
+SQL> REM 2 DISPLAY LAST_NAME AND DailySalary
+SQL> 
+SQL> SELECT LAST_NAME , SALARY / 30 "DailySalary" FROM EMPLOYEES;
+
+LAST_NAME       DailySalary                                                                                                                                                                             
+--------------- -----------                                                                                                                                                                             
+King                    800                                                                                                                                                                             
+Kochhar          566.666667                                                                                                                                                                             
+De Haan          566.666667                                                                                                                                                                             
+Hunold                  300                                                                                                                                                                             
+Ernst                   200                                                                                                                                                                             
+Lorentz                 140                                                                                                                                                                             
+Mourgos          193.333333                                                                                                                                                                             
+Rajs             116.666667                                                                                                                                                                             
+Davies           103.333333                                                                                                                                                                             
+Matos            86.6666667                                                                                                                                                                             
+Vargas           83.3333333                                                                                                                                                                             
+Zlotkey                 350                                                                                                                                                                             
+Abel             366.666667                                                                                                                                                                             
+Taylor           286.666667                                                                                                                                                                             
+Grant            233.333333                                                                                                                                                                             
+Whalen           146.666667                                                                                                                                                                             
+Hartstein        433.333333                                                                                                                                                                             
+Fay                     200                                                                                                                                                                             
+Higgins                 400                                                                                                                                                                             
+Gietz            276.666667                                                                                                                                                                             
+
+20 rows selected.
+
+SQL> REM 3 DISPLAY FULL_NAME , COMM^AMOUNT
+SQL> 
+SQL> SELECT FIRST_NAME || ' ' || LAST_NAME FULL_NAME , SALARY * COMMISSION_PCT "COMM^AMOUNT" FROM EMPLOYEES;
+
+FULL_NAME                       COMM^AMOUNT                                                                                                                                                             
+------------------------------- -----------                                                                                                                                                             
+Steven King                                                                                                                                                                                             
+Neena Kochhar                                                                                                                                                                                           
+Lex De Haan                                                                                                                                                                                             
+Alexander Hunold                                                                                                                                                                                        
+Bruce Ernst                                                                                                                                                                                             
+Diana Lorentz                                                                                                                                                                                           
+Kevin Mourgos                                                                                                                                                                                           
+Trenna Rajs                                                                                                                                                                                             
+Curtis Davies                                                                                                                                                                                           
+Randall Matos                                                                                                                                                                                           
+Peter Vargas                                                                                                                                                                                            
+Eleni Zlotkey                          2100                                                                                                                                                             
+Ellen Abel                             3300                                                                                                                                                             
+Jonathon Taylor                        2580                                                                                                                                                             
+Kimerely Grant                         1050                                                                                                                                                             
+Jennifer Whalen                                                                                                                                                                                         
+Michael Hartstein                                                                                                                                                                                       
+Pat Fay                                                                                                                                                                                                 
+Shelley Higgins                                                                                                                                                                                         
+William Gietz                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SPOOL OFF

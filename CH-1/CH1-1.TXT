@@ -1,0 +1,100 @@
+SQL> 
+SQL> REM RDBMS PRODUCT
+SQL> 
+SQL> REM RDBMS : Relational Data Base Management System
+SQL> 
+SQL> REM ORACLE IS CONSIDERED AS NUMBER 1 COMPANY OF THE WORLD.
+SQL> 
+SQL> REM 43% OF THE WHOLE WORLD USES ORACLE FOR MAINTAINING THEIR DATA.
+SQL> 
+SQL> REM E R CODD : 12 RULES FOR IDEAL RDBMS PRODUCT : MAX 10 RULES ORACLE IMPLEMENT
+SQL> 
+SQL> REM FOBES/FORTUNE 500 : 95%+ ORACLE FOR DATA
+SQL> 
+SQL> REM CHAIRMAN : LARRY ELISON : 5rd RICHEST PERSON OF THE WORLD.
+SQL> REM CEO : SA
+SQL> 
+SQL> 
+SQL> 
+SQL> REM SQL> IT IS CALLED PROMPT
+SQL> 
+SQL> REM WHEN IT SHOWS PROMPT, IT MEANS IT IS READY TO TAKE INPUT FROM USER.
+SQL> 
+SQL> REM TYPES OF INPUT : 1 COMMENT 2 COMMAND
+SQL> 
+SQL> 
+SQL> 
+SQL> REM COMMENT : IS FOR OURSELVES.
+SQL> 
+SQL> REM COMMAND : IS FOR ORACLE COMPILER.
+SQL> 
+SQL> 
+SQL> REM COMMENT : WILL BE IGNORED BY ORACLE COMPILER.
+SQL> 
+SQL> REM COMMAND : WILL BE EXECUTED BY ORACLE COMPILER.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM TYPES COMMENTS : 1 SINGLE LINE 2 MULTI LINE 3 INLINE 4 INLINE MULTI LINE
+SQL> 
+SQL> 
+SQL> REM THIS IS FIRST STYLE OF WRITING COMMENT.
+SQL> 
+SQL> -- THIS IS SECOND STYLE OF WRITING COMMENT.
+SQL> 
+SQL> 
+SQL> REMARK THIS IS OK
+SQL> 
+SQL> 
+SQL> /*
+SQL> THIS
+SQL> IS
+SQL> EXAMPLE
+SQL> OF
+SQL> MULTI
+SQL> LINE
+SQL> COMMENT.
+SQL> */
+SQL> 
+SQL> 
+SQL> SELECT * FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                              
+---------- -------------------------                                                                                                                                                
+         1 Europe                                                                                                                                                                   
+         2 Americas                                                                                                                                                                 
+         3 Asia                                                                                                                                                                     
+         4 Middle East and Africa                                                                                                                                                   
+
+SQL> SELECT /* THIS IS INLINE COMMENT. */ * FROM REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                              
+---------- -------------------------                                                                                                                                                
+         1 Europe                                                                                                                                                                   
+         2 Americas                                                                                                                                                                 
+         3 Asia                                                                                                                                                                     
+         4 Middle East and Africa                                                                                                                                                   
+
+SQL> SELECT
+  2  /*
+  3  THIS
+  4  IS
+  5  MULTI LINE
+  6  INLINE
+  7  COMMENT.
+  8  */
+  9  *
+ 10  FROM
+ 11  REGIONS;
+
+ REGION_ID REGION_NAME                                                                                                                                                              
+---------- -------------------------                                                                                                                                                
+         1 Europe                                                                                                                                                                   
+         2 Americas                                                                                                                                                                 
+         3 Asia                                                                                                                                                                     
+         4 Middle East and Africa                                                                                                                                                   
+
+SQL> 
+SQL> REM CHAPTERS : 10
+SQL> 
+SQL> SPOOL OFF
