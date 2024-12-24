@@ -1,0 +1,848 @@
+SQL> 
+SQL> REM LIST OF SUMMARY FUNCTIONS : MIN MAX COUNT  SUM AVG
+SQL> 
+SQL> REM IF WE OMIT 'GROUP BY' CLAUSE, IT WILL RETURN SINGLE ROW.
+SQL> 
+SQL> REM IF WE USE 'GROUP BY' CLAUSE, IT WILL RETURN MULTIPLE ROWS.
+SQL> 
+SQL> 
+SQL> 
+SQL> REM DISPLAY TOTAL SALARY PAID BY COMPANY.
+SQL> 
+SQL> SELECT SUM(SALARY) FROM EMPLOYEES;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+     175500                                                                                                                                                                                             
+
+SQL> REM DISPLAY TOTAL SALARY PAID BY COMPANY TO DEPARTMENT 80.
+SQL> 
+SQL> SELECT SUM(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID = 80;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+      30100                                                                                                                                                                                             
+
+SQL> REM DISPLAY TOTAL SALARY PAID BY COMPANY TO DEPARTMENT 90.
+SQL> 
+SQL> SELECT SUM(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID = 90;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+      58000                                                                                                                                                                                             
+
+SQL> 
+SQL> REM DISPLAY TOTAL SALARY PAID BY COMPANY TO DEPARTMENT 110.
+SQL> 
+SQL> SELECT SUM(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID = 110;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+      20300                                                                                                                                                                                             
+
+SQL> 
+SQL> REM DISPLAY SUM OF SALARY FOR EACH DEPARTMENT.
+SQL> 
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+           20       19000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+           50       17500                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+           60       19200                                                                                                                                                                               
+           10        4400                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , SALARY FROM EMPLOYEES ORDER BY DEPARTMENT_ID;
+
+DEPARTMENT_ID     SALARY                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           10       4400                                                                                                                                                                                
+           20      13000                                                                                                                                                                                
+           20       6000                                                                                                                                                                                
+           50       5800                                                                                                                                                                                
+           50       2500                                                                                                                                                                                
+           50       2600                                                                                                                                                                                
+           50       3100                                                                                                                                                                                
+           50       3500                                                                                                                                                                                
+           60       4200                                                                                                                                                                                
+           60       6000                                                                                                                                                                                
+           60       9000                                                                                                                                                                                
+           80      11000                                                                                                                                                                                
+           80      10500                                                                                                                                                                                
+           80       8600                                                                                                                                                                                
+           90      17000                                                                                                                                                                                
+           90      24000                                                                                                                                                                                
+           90      17000                                                                                                                                                                                
+          110       8300                                                                                                                                                                                
+          110      12000                                                                                                                                                                                
+                    7000                                                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID ORDER BY 1;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           10        4400                                                                                                                                                                               
+           20       19000                                                                                                                                                                               
+           50       17500                                                                                                                                                                               
+           60       19200                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID SUM(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+           90       58000                                                                                                                                                                               
+           20       19000                                                                                                                                                                               
+          110       20300                                                                                                                                                                               
+           50       17500                                                                                                                                                                               
+           80       30100                                                                                                                                                                               
+           60       19200                                                                                                                                                                               
+           10        4400                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES;
+SELECT DEPARTMENT_ID , SUM(SALARY) FROM EMPLOYEES
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> SELECT DEPARTMENT_ID FROM EMPLOYEES;
+
+DEPARTMENT_ID                                                                                                                                                                                           
+-------------                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           90                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           60                                                                                                                                                                                           
+           50                                                                                                                                                                                           
+           50                                                                                                                                                                                           
+           50                                                                                                                                                                                           
+           50                                                                                                                                                                                           
+           50                                                                                                                                                                                           
+           80                                                                                                                                                                                           
+           80                                                                                                                                                                                           
+           80                                                                                                                                                                                           
+                                                                                                                                                                                                        
+           10                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+           20                                                                                                                                                                                           
+          110                                                                                                                                                                                           
+          110                                                                                                                                                                                           
+
+20 rows selected.
+
+SQL> SELECT SUM(SALARY) FROM EMPLOYEES;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+     175500                                                                                                                                                                                             
+
+SQL> SELECT SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+
+SUM(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+       7000                                                                                                                                                                                             
+      58000                                                                                                                                                                                             
+      19000                                                                                                                                                                                             
+      20300                                                                                                                                                                                             
+      17500                                                                                                                                                                                             
+      30100                                                                                                                                                                                             
+      19200                                                                                                                                                                                             
+       4400                                                                                                                                                                                             
+
+8 rows selected.
+
+SQL> SELECT JOB_ID , COUNT(*) FROM EMPLOYEES GROUP BY JOB_ID;
+
+JOB_ID       COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+IT_PROG             3                                                                                                                                                                                   
+AC_MGR              1                                                                                                                                                                                   
+AC_ACCOUNT          1                                                                                                                                                                                   
+ST_MAN              1                                                                                                                                                                                   
+AD_ASST             1                                                                                                                                                                                   
+AD_VP               2                                                                                                                                                                                   
+SA_MAN              1                                                                                                                                                                                   
+MK_MAN              1                                                                                                                                                                                   
+AD_PRES             1                                                                                                                                                                                   
+SA_REP              3                                                                                                                                                                                   
+MK_REP              1                                                                                                                                                                                   
+ST_CLERK            4                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> SELECT LOWER(JOB_ID) , COUNT(*) FROM EMPLOYEES GROUP BY LOWER(JOB_ID);
+
+LOWER(JOB_   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+sa_rep              3                                                                                                                                                                                   
+mk_rep              1                                                                                                                                                                                   
+ad_pres             1                                                                                                                                                                                   
+ad_vp               2                                                                                                                                                                                   
+it_prog             3                                                                                                                                                                                   
+st_man              1                                                                                                                                                                                   
+ac_account          1                                                                                                                                                                                   
+sa_man              1                                                                                                                                                                                   
+ad_asst             1                                                                                                                                                                                   
+ac_mgr              1                                                                                                                                                                                   
+st_clerk            4                                                                                                                                                                                   
+mk_man              1                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> SELECT LOWER(JOB_ID) , COUNT(*) FROM EMPLOYEES GROUP BY JOB_ID;
+
+LOWER(JOB_   COUNT(*)                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+it_prog             3                                                                                                                                                                                   
+ac_mgr              1                                                                                                                                                                                   
+ac_account          1                                                                                                                                                                                   
+st_man              1                                                                                                                                                                                   
+ad_asst             1                                                                                                                                                                                   
+ad_vp               2                                                                                                                                                                                   
+sa_man              1                                                                                                                                                                                   
+mk_man              1                                                                                                                                                                                   
+ad_pres             1                                                                                                                                                                                   
+sa_rep              3                                                                                                                                                                                   
+mk_rep              1                                                                                                                                                                                   
+st_clerk            4                                                                                                                                                                                   
+
+12 rows selected.
+
+SQL> SELECT JOB_ID , COUNT(*) FROM EMPLOYEES GROUP BY LOWER(JOB_ID);
+SELECT JOB_ID , COUNT(*) FROM EMPLOYEES GROUP BY LOWER(JOB_ID)
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT LOWER(JOB_ID) , COUNT(*) FROM EMPLOYEES GROUP BY INITCAP(JOB_ID);
+SELECT LOWER(JOB_ID) , COUNT(*) FROM EMPLOYEES GROUP BY INITCAP(JOB_ID)
+             *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> REM DISPLAY HIRE YEAR WISE NUMBER OF EMPLOYEES HIRED
+SQL> 
+SQL> SELECT SUBSTR(HIRE_dATE,-2) , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,-2);
+
+SUBSTR(H   COUNT(*)                                                                                                                                                                                     
+-------- ----------                                                                                                                                                                                     
+99                3                                                                                                                                                                                     
+87                2                                                                                                                                                                                     
+93                1                                                                                                                                                                                     
+97                2                                                                                                                                                                                     
+00                1                                                                                                                                                                                     
+89                1                                                                                                                                                                                     
+95                1                                                                                                                                                                                     
+94                2                                                                                                                                                                                     
+98                3                                                                                                                                                                                     
+90                1                                                                                                                                                                                     
+91                1                                                                                                                                                                                     
+96                2                                                                                                                                                                                     
+
+12 rows selected.
+
+SQL> SELECT SUBSTR(HIRE_dATE,-2) , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,8);
+SELECT SUBSTR(HIRE_dATE,-2) , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,8)
+              *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT SUBSTR(HIRE_dATE,8) , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,8);
+
+SUBSTR(HIRE_DATE,8)                            COUNT(*)                                                                                                                                                 
+-------------------------------------------- ----------                                                                                                                                                 
+99                                                    3                                                                                                                                                 
+87                                                    2                                                                                                                                                 
+93                                                    1                                                                                                                                                 
+97                                                    2                                                                                                                                                 
+00                                                    1                                                                                                                                                 
+89                                                    1                                                                                                                                                 
+95                                                    1                                                                                                                                                 
+94                                                    2                                                                                                                                                 
+98                                                    3                                                                                                                                                 
+90                                                    1                                                                                                                                                 
+91                                                    1                                                                                                                                                 
+96                                                    2                                                                                                                                                 
+
+12 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_dATE,'RR') , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,8);
+SELECT TO_CHAR(HIRE_dATE,'RR') , COUNT(*) FROM EMPLOYEES GROUP BY SUBSTR(HIRE_DATE,8)
+               *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT TO_CHAR(HIRE_dATE,'RR') , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YY');
+SELECT TO_CHAR(HIRE_dATE,'RR') , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'YY')
+               *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DEPARTMENT_ID , JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID , JOB_ID;
+
+DEPARTMENT_ID JOB_ID     SUM(SALARY)                                                                                                                                                                    
+------------- ---------- -----------                                                                                                                                                                    
+          110 AC_ACCOUNT        8300                                                                                                                                                                    
+           90 AD_VP            34000                                                                                                                                                                    
+           50 ST_CLERK         11700                                                                                                                                                                    
+           80 SA_REP           19600                                                                                                                                                                    
+           50 ST_MAN            5800                                                                                                                                                                    
+           80 SA_MAN           10500                                                                                                                                                                    
+          110 AC_MGR           12000                                                                                                                                                                    
+           90 AD_PRES          24000                                                                                                                                                                    
+           60 IT_PROG          19200                                                                                                                                                                    
+           20 MK_MAN           13000                                                                                                                                                                    
+              SA_REP            7000                                                                                                                                                                    
+           10 AD_ASST           4400                                                                                                                                                                    
+           20 MK_REP            6000                                                                                                                                                                    
+
+13 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID , DEPARTMENT_ID;
+
+DEPARTMENT_ID JOB_ID     SUM(SALARY)                                                                                                                                                                    
+------------- ---------- -----------                                                                                                                                                                    
+           60 IT_PROG          19200                                                                                                                                                                    
+           50 ST_MAN            5800                                                                                                                                                                    
+           80 SA_REP           19600                                                                                                                                                                    
+           90 AD_VP            34000                                                                                                                                                                    
+           10 AD_ASST           4400                                                                                                                                                                    
+           20 MK_MAN           13000                                                                                                                                                                    
+           20 MK_REP            6000                                                                                                                                                                    
+           80 SA_MAN           10500                                                                                                                                                                    
+              SA_REP            7000                                                                                                                                                                    
+           90 AD_PRES          24000                                                                                                                                                                    
+           50 ST_CLERK         11700                                                                                                                                                                    
+          110 AC_MGR           12000                                                                                                                                                                    
+          110 AC_ACCOUNT        8300                                                                                                                                                                    
+
+13 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID;
+SELECT DEPARTMENT_ID , JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DEPARTMENT_ID || JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID || JOB_ID;
+
+DEPARTMENT_ID||JOB_ID                              SUM(SALARY)                                                                                                                                          
+-------------------------------------------------- -----------                                                                                                                                          
+90AD_VP                                                  34000                                                                                                                                          
+80SA_REP                                                 19600                                                                                                                                          
+20MK_MAN                                                 13000                                                                                                                                          
+20MK_REP                                                  6000                                                                                                                                          
+60IT_PROG                                                19200                                                                                                                                          
+10AD_ASST                                                 4400                                                                                                                                          
+50ST_MAN                                                  5800                                                                                                                                          
+110AC_ACCOUNT                                             8300                                                                                                                                          
+50ST_CLERK                                               11700                                                                                                                                          
+90AD_PRES                                                24000                                                                                                                                          
+80SA_MAN                                                 10500                                                                                                                                          
+SA_REP                                                    7000                                                                                                                                          
+110AC_MGR                                                12000                                                                                                                                          
+
+13 rows selected.
+
+SQL> SELECT DEPARTMENT_ID || JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID || DEPARTMENT_ID;
+SELECT DEPARTMENT_ID || JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID || DEPARTMENT_ID
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT DEPARTMENT_ID || JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID , DEPARTMENT_ID;
+
+DEPARTMENT_ID||JOB_ID                              SUM(SALARY)                                                                                                                                          
+-------------------------------------------------- -----------                                                                                                                                          
+60IT_PROG                                                19200                                                                                                                                          
+50ST_MAN                                                  5800                                                                                                                                          
+80SA_REP                                                 19600                                                                                                                                          
+90AD_VP                                                  34000                                                                                                                                          
+10AD_ASST                                                 4400                                                                                                                                          
+20MK_MAN                                                 13000                                                                                                                                          
+20MK_REP                                                  6000                                                                                                                                          
+80SA_MAN                                                 10500                                                                                                                                          
+SA_REP                                                    7000                                                                                                                                          
+90AD_PRES                                                24000                                                                                                                                          
+50ST_CLERK                                               11700                                                                                                                                          
+110AC_MGR                                                12000                                                                                                                                          
+110AC_ACCOUNT                                             8300                                                                                                                                          
+
+13 rows selected.
+
+SQL> SELECT DEPARTMENT_ID || JOB_ID , SUM(SALARY) FROM EMPLOYEES GROUP BY CONCAT(DEPARTMENT_ID, JOB_ID);
+
+DEPARTMENT_ID||JOB_ID                              SUM(SALARY)                                                                                                                                          
+-------------------------------------------------- -----------                                                                                                                                          
+90AD_VP                                                  34000                                                                                                                                          
+80SA_REP                                                 19600                                                                                                                                          
+20MK_MAN                                                 13000                                                                                                                                          
+20MK_REP                                                  6000                                                                                                                                          
+60IT_PROG                                                19200                                                                                                                                          
+10AD_ASST                                                 4400                                                                                                                                          
+50ST_MAN                                                  5800                                                                                                                                          
+110AC_ACCOUNT                                             8300                                                                                                                                          
+50ST_CLERK                                               11700                                                                                                                                          
+90AD_PRES                                                24000                                                                                                                                          
+80SA_MAN                                                 10500                                                                                                                                          
+SA_REP                                                    7000                                                                                                                                          
+110AC_MGR                                                12000                                                                                                                                          
+
+13 rows selected.
+
+SQL> SELECT CONCAT(DEPARTMENT_ID , JOB_ID) , SUM(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID||  JOB_ID;
+
+CONCAT(DEPARTMENT_ID,JOB_ID)                       SUM(SALARY)                                                                                                                                          
+-------------------------------------------------- -----------                                                                                                                                          
+90AD_VP                                                  34000                                                                                                                                          
+80SA_REP                                                 19600                                                                                                                                          
+20MK_MAN                                                 13000                                                                                                                                          
+20MK_REP                                                  6000                                                                                                                                          
+60IT_PROG                                                19200                                                                                                                                          
+10AD_ASST                                                 4400                                                                                                                                          
+50ST_MAN                                                  5800                                                                                                                                          
+110AC_ACCOUNT                                             8300                                                                                                                                          
+50ST_CLERK                                               11700                                                                                                                                          
+90AD_PRES                                                24000                                                                                                                                          
+80SA_MAN                                                 10500                                                                                                                                          
+SA_REP                                                    7000                                                                                                                                          
+110AC_MGR                                                12000                                                                                                                                          
+
+13 rows selected.
+
+SQL> SELECT CONCAT(DEPARTMENT_ID , JOB_ID) , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID || DEPARTMENT_ID;
+SELECT CONCAT(DEPARTMENT_ID , JOB_ID) , SUM(SALARY) FROM EMPLOYEES GROUP BY JOB_ID || DEPARTMENT_ID
+              *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY JOB_ID AND HIGHEST SALARY PAID TO EACH JOB.
+SQL> 
+SQL> REM 2 DISPLAY DEPARTMENT_ID AND LOWEST SALARY PAID TO EACH DEPARTMENT.
+SQL> 
+SQL> REM 3 DISPLAY MANAGER_ID , AVERGE SALARY AND TOTAL SALARY PAID TO EACH MANAGER_ID.
+SQL> R
+  1* SELECT * FROM EMPLOYEES
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY JOB_ID AND HIGHEST SALARY PAID TO EACH JOB.
+SQL> 
+SQL> REM 2 DISPLAY DEPARTMENT_ID AND LOWEST SALARY PAID TO EACH DEPARTMENT.
+SQL> 
+SQL> REM 3 DISPLAY MANAGER_ID , AVERGE SALARY AND TOTAL SALARY PAID TO EACH MANAGER_ID.
+SQL> 
+SQL> REM 4 DISPLAY DEPARTMENT_ID WISE , MANAGER_ID WISE NUMBER OF EMPLOYEES HIRED
+SQL> 
+SQL> REM 5 DISPLAY HIRE QUARTER WISE TOTAL SALARY PAID
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY JOB_ID AND HIGHEST SALARY PAID TO EACH JOB.
+SQL> 
+SQL> SELECT JOB_ID , MAX(SALARY) FROM EMPLOYEES GROUP BY JOB_ID ORDER BY 1;
+
+JOB_ID     MAX(SALARY)                                                                                                                                                                                  
+---------- -----------                                                                                                                                                                                  
+AC_ACCOUNT        8300                                                                                                                                                                                  
+AC_MGR           12000                                                                                                                                                                                  
+AD_ASST           4400                                                                                                                                                                                  
+AD_PRES          24000                                                                                                                                                                                  
+AD_VP            17000                                                                                                                                                                                  
+IT_PROG           9000                                                                                                                                                                                  
+MK_MAN           13000                                                                                                                                                                                  
+MK_REP            6000                                                                                                                                                                                  
+SA_MAN           10500                                                                                                                                                                                  
+SA_REP           11000                                                                                                                                                                                  
+ST_CLERK          3500                                                                                                                                                                                  
+ST_MAN            5800                                                                                                                                                                                  
+
+12 rows selected.
+
+SQL> REM 2 DISPLAY DEPARTMENT_ID AND LOWEST SALARY PAID TO EACH DEPARTMENT.
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MIN(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID ORDER BY 1;
+
+DEPARTMENT_ID MIN(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           10        4400                                                                                                                                                                               
+           20        6000                                                                                                                                                                               
+           50        2500                                                                                                                                                                               
+           60        4200                                                                                                                                                                               
+           80        8600                                                                                                                                                                               
+           90       17000                                                                                                                                                                               
+          110        8300                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> REM 3 DISPLAY MANAGER_ID , AVERGE SALARY AND TOTAL SALARY PAID TO EACH MANAGER_ID.
+SQL> 
+SQL> SELECT MANAGER_ID , AVG(SALARY) , SUM(SALARY) FROM EMPLOYEES GROUP BY MANAGER_ID ORDER BY 1;
+
+MANAGER_ID AVG(SALARY) SUM(SALARY)                                                                                                                                                                      
+---------- ----------- -----------                                                                                                                                                                      
+       100       12660       63300                                                                                                                                                                      
+       101        8200       16400                                                                                                                                                                      
+       102        9000        9000                                                                                                                                                                      
+       103        5100       10200                                                                                                                                                                      
+       124        2925       11700                                                                                                                                                                      
+       149  8866.66667       26600                                                                                                                                                                      
+       201        6000        6000                                                                                                                                                                      
+       205        8300        8300                                                                                                                                                                      
+                 24000       24000                                                                                                                                                                      
+
+9 rows selected.
+
+SQL> REM 4 DISPLAY DEPARTMENT_ID WISE , MANAGER_ID WISE NUMBER OF EMPLOYEES HIRED
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , COUNT(*) FROM EMPLOYEES GROUP BY DEPARTMENT_ID , MANAGER_ID ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID   COUNT(*)                                                                                                                                                                     
+------------- ---------- ----------                                                                                                                                                                     
+           10        101          1                                                                                                                                                                     
+           20        100          1                                                                                                                                                                     
+           20        201          1                                                                                                                                                                     
+           50        100          1                                                                                                                                                                     
+           50        124          4                                                                                                                                                                     
+           60        102          1                                                                                                                                                                     
+           60        103          2                                                                                                                                                                     
+           80        100          1                                                                                                                                                                     
+           80        149          2                                                                                                                                                                     
+           90        100          2                                                                                                                                                                     
+           90                     1                                                                                                                                                                     
+          110        101          1                                                                                                                                                                     
+          110        205          1                                                                                                                                                                     
+                     149          1                                                                                                                                                                     
+
+14 rows selected.
+
+SQL> REM 5 DISPLAY HIRE QUARTER WISE TOTAL SALARY PAID
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_dATE,'Q') , SUM(SALARY) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'Q') ORDER BY 1;
+
+T SUM(SALARY)                                                                                                                                                                                           
+- -----------                                                                                                                                                                                           
+1       68000                                                                                                                                                                                           
+2       44300                                                                                                                                                                                           
+3       53900                                                                                                                                                                                           
+4        9300                                                                                                                                                                                           
+
+SQL> SELECT HIRE_DATE , TRUNC(HIRE_DATE,'Q') FROM EMPLOYEES;
+
+HIRE_DATE TRUNC(HIR                                                                                                                                                                                     
+--------- ---------                                                                                                                                                                                     
+17-JUL-87 01-JUL-87                                                                                                                                                                                     
+21-SEP-89 01-JUL-89                                                                                                                                                                                     
+13-JAN-93 01-JAN-93                                                                                                                                                                                     
+03-JAN-90 01-JAN-90                                                                                                                                                                                     
+21-MAY-91 01-APR-91                                                                                                                                                                                     
+07-FEB-99 01-JAN-99                                                                                                                                                                                     
+16-NOV-99 01-OCT-99                                                                                                                                                                                     
+17-OCT-95 01-OCT-95                                                                                                                                                                                     
+29-JAN-97 01-JAN-97                                                                                                                                                                                     
+15-MAR-98 01-JAN-98                                                                                                                                                                                     
+09-JUL-98 01-JUL-98                                                                                                                                                                                     
+29-JAN-00 01-JAN-00                                                                                                                                                                                     
+11-MAY-96 01-APR-96                                                                                                                                                                                     
+24-MAR-98 01-JAN-98                                                                                                                                                                                     
+24-MAY-99 01-APR-99                                                                                                                                                                                     
+17-SEP-87 01-JUL-87                                                                                                                                                                                     
+17-FEB-96 01-JAN-96                                                                                                                                                                                     
+17-AUG-97 01-JUL-97                                                                                                                                                                                     
+07-JUN-94 01-APR-94                                                                                                                                                                                     
+07-JUN-94 01-APR-94                                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> REM 01-JAN    01-APR    01-JUL    01-OCT
+SQL> 
+SQL> SELECT HIRE_DATE , TRUNC(HIRE_DATE,'Q') , TO_CHAR(HIRE_DATE,'Q') FROM EMPLOYEES;
+
+HIRE_DATE TRUNC(HIR T                                                                                                                                                                                   
+--------- --------- -                                                                                                                                                                                   
+17-JUL-87 01-JUL-87 3                                                                                                                                                                                   
+21-SEP-89 01-JUL-89 3                                                                                                                                                                                   
+13-JAN-93 01-JAN-93 1                                                                                                                                                                                   
+03-JAN-90 01-JAN-90 1                                                                                                                                                                                   
+21-MAY-91 01-APR-91 2                                                                                                                                                                                   
+07-FEB-99 01-JAN-99 1                                                                                                                                                                                   
+16-NOV-99 01-OCT-99 4                                                                                                                                                                                   
+17-OCT-95 01-OCT-95 4                                                                                                                                                                                   
+29-JAN-97 01-JAN-97 1                                                                                                                                                                                   
+15-MAR-98 01-JAN-98 1                                                                                                                                                                                   
+09-JUL-98 01-JUL-98 3                                                                                                                                                                                   
+29-JAN-00 01-JAN-00 1                                                                                                                                                                                   
+11-MAY-96 01-APR-96 2                                                                                                                                                                                   
+24-MAR-98 01-JAN-98 1                                                                                                                                                                                   
+24-MAY-99 01-APR-99 2                                                                                                                                                                                   
+17-SEP-87 01-JUL-87 3                                                                                                                                                                                   
+17-FEB-96 01-JAN-96 1                                                                                                                                                                                   
+17-AUG-97 01-JUL-97 3                                                                                                                                                                                   
+07-JUN-94 01-APR-94 2                                                                                                                                                                                   
+07-JUN-94 01-APR-94 2                                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY HIRE MONTH WISE COUNT OF EMPLOYEES
+SQL> 
+SQL> REM 2 DISPLAY LEFTMOST VOWELS OF FIRST_NAME WISE TOTAL SALARY
+SQL> R
+  1* SELECT * FROM EMPLOYEES
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DISPLAY HIRE MONTH WISE COUNT OF EMPLOYEES
+SQL> 
+SQL> REM 2 DISPLAY LEFTMOST VOWELS OF FIRST_NAME WISE TOTAL SALARY
+SQL> 
+SQL> REM 3 DISPLAY NUMBER OF VOWELS WISE , LOWEST SALARY PAID
+SQL> 
+SQL> REM 4 DISPLAY WEEK OF MONTH WISE , AVERAGE SALARY PAID
+SQL> 
+SQL> REM 5 DISPLAY LENGTH OF LAST_NAME WISE HIGHEST SALARY PAID
+SQL> 
+SQL> 
+SQL> REM 1 DISPLAY HIRE MONTH WISE COUNT OF EMPLOYEES
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_DATE,'MON') , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MON') ORDER BY TO_CHAR(HIRE_DATE,'MM');
+SELECT TO_CHAR(HIRE_DATE,'MON') , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MON') ORDER BY TO_CHAR(HIRE_DATE,'MM')
+                                                                                                             *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MON') , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MON') , TO_CHAR(HIRE_dATE,'MM') ORDER BY TO_CHAR(HIRE_DATE,'MM');
+
+TO_CHAR(HIRE   COUNT(*)                                                                                                                                                                                 
+------------ ----------                                                                                                                                                                                 
+JAN                   4                                                                                                                                                                                 
+FEB                   2                                                                                                                                                                                 
+MAR                   2                                                                                                                                                                                 
+MAY                   3                                                                                                                                                                                 
+JUN                   2                                                                                                                                                                                 
+JUL                   2                                                                                                                                                                                 
+AUG                   1                                                                                                                                                                                 
+SEP                   2                                                                                                                                                                                 
+OCT                   1                                                                                                                                                                                 
+NOV                   1                                                                                                                                                                                 
+
+10 rows selected.
+
+SQL> SELECT TO_CHAR(HIRE_DATE,'MON') , COUNT(*) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'MON') ORDER BY 1;
+
+TO_CHAR(HIRE   COUNT(*)                                                                                                                                                                                 
+------------ ----------                                                                                                                                                                                 
+AUG                   1                                                                                                                                                                                 
+FEB                   2                                                                                                                                                                                 
+JAN                   4                                                                                                                                                                                 
+JUL                   2                                                                                                                                                                                 
+JUN                   2                                                                                                                                                                                 
+MAR                   2                                                                                                                                                                                 
+MAY                   3                                                                                                                                                                                 
+NOV                   1                                                                                                                                                                                 
+OCT                   1                                                                                                                                                                                 
+SEP                   2                                                                                                                                                                                 
+
+10 rows selected.
+
+SQL> REM 2 DISPLAY LEFTMOST VOWELS OF FIRST_NAME WISE TOTAL SALARY
+SQL> 
+SQL> SELECT SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) , SUM(SALARY) FROM EMPLOYEES GROUP BY SUBSTR(LTRIM(LOWER(FIRST_NAME),'qwrtypsdfghjklzxcvbnm'),1,1) ORDER BY 1;
+
+SUBS SUM(SALARY)                                                                                                                                                                                        
+---- -----------                                                                                                                                                                                        
+a          17600                                                                                                                                                                                        
+e         107700                                                                                                                                                                                        
+i          32500                                                                                                                                                                                        
+o           8600                                                                                                                                                                                        
+u           9100                                                                                                                                                                                        
+
+SQL> REM 3 DISPLAY NUMBER OF VOWELS WISE , LOWEST SALARY PAID
+SQL> 
+SQL> SELECT LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')) , MIN(SALARY)
+  2  FROM EMPLOYEES
+  3  GROUP BY LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#'))
+  4  ORDER BY 1;
+
+LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#QWRTYPSDFGHJKLZXCVBNM','#')) MIN(SALARY)                                                                                                                           
+----------------------------------------------------------------- -----------                                                                                                                           
+                                                                1        6000                                                                                                                           
+                                                                2        2500                                                                                                                           
+                                                                3        4200                                                                                                                           
+                                                                4        9000                                                                                                                           
+
+SQL> SELECT LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#')) VOWELS, MIN(SALARY)
+  2  FROM EMPLOYEES
+  3  GROUP BY LENGTH(TRANSLATE(LOWER(FIRST_NAME),'#qwrtypsdfghjklzxcvbnm','#'))
+  4  ORDER BY 1;
+
+    VOWELS MIN(SALARY)                                                                                                                                                                                  
+---------- -----------                                                                                                                                                                                  
+         1        6000                                                                                                                                                                                  
+         2        2500                                                                                                                                                                                  
+         3        4200                                                                                                                                                                                  
+         4        9000                                                                                                                                                                                  
+
+SQL> REM 4 DISPLAY WEEK OF MONTH WISE , AVERAGE SALARY PAID
+SQL> 
+SQL> SELECT TO_CHAR(HIRE_dATE,'W') , AVG(SALARY) FROM EMPLOYEES GROUP BY TO_CHAR(HIRE_DATE,'W') ORDER BY 1;
+
+T AVG(SALARY)                                                                                                                                                                                           
+- -----------                                                                                                                                                                                           
+1        8375                                                                                                                                                                                           
+2  10166.6667                                                                                                                                                                                           
+3  9144.44444                                                                                                                                                                                           
+4        7800                                                                                                                                                                                           
+5        6800                                                                                                                                                                                           
+
+SQL> REM 5 DISPLAY LENGTH OF LAST_NAME WISE HIGHEST SALARY PAID
+SQL> 
+SQL> SELECT LENGTH(LAST_NAME) , MAX(SALARY) FROM EMPLOYEES GROUP BY LENGTH(FIRST_NAME) ORDER BY 1;
+SELECT LENGTH(LAST_NAME) , MAX(SALARY) FROM EMPLOYEES GROUP BY LENGTH(FIRST_NAME) ORDER BY 1
+              *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> SELECT LENGTH(LAST_NAME) , MAX(SALARY) FROM EMPLOYEES GROUP BY LENGTH(LAST_NAME) ORDER BY 1;
+
+LENGTH(LAST_NAME) MAX(SALARY)                                                                                                                                                                           
+----------------- -----------                                                                                                                                                                           
+                3        6000                                                                                                                                                                           
+                4       24000                                                                                                                                                                           
+                5        8300                                                                                                                                                                           
+                6        9000                                                                                                                                                                           
+                7       17000                                                                                                                                                                           
+                9       13000                                                                                                                                                                           
+
+6 rows selected.
+
+SQL> SPOOL OFF

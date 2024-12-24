@@ -1,0 +1,822 @@
+SQL> 
+SQL> REM COALESCE : IT TAKES INFINITE ARGUMENTS
+SQL> 
+SQL> REM DATA TYPES OF ALL ARGUMENTS MUST MATCH.
+SQL> 
+SQL> REM IT WILL CHECK FROM LEFT TO RIGHT.
+SQL> 
+SQL> REM IT WILL RETURN FIRST NON-NULL ARGUMENT FROM THE LIST.
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT * FROM CONTACTNO;
+
+NAME                     MOBILE     OPHONE     RPHONE                                                                                                                                                   
+-------------------- ---------- ---------- ----------                                                                                                                                                   
+AMIT                 1234567890 9876543210 1122334455                                                                                                                                                   
+BIREN                6644882244            9876452316                                                                                                                                                   
+CHETAN                          2277554488                                                                                                                                                              
+DHIREN                                     6789054123                                                                                                                                                   
+EKTA                                                                                                                                                                                                    
+
+SQL> SET LINES 200 PAGES 24
+SQL> 
+SQL> REM   NAME   CONTACTNO
+SQL> 
+SQL> REM   AMIT   1234567890
+SQL> REM   BIREN  6644882244
+SQL> RE    CHETAN 2277554488
+SP2-0734: unknown command beginning "RE    CHET..." - rest of line ignored.
+SQL> REM   DHIREN 6789054123
+SQL> 
+SQL> REM   EKTA
+SQL> 
+SQL> 
+SQL> SELECT NAME , COALESCE(MOBILE, OPHONE, RPHONE) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 1234567890                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT * FROM CONTACTNO;
+
+NAME                     MOBILE     OPHONE     RPHONE                                                                                                                                                   
+-------------------- ---------- ---------- ----------                                                                                                                                                   
+AMIT                 1234567890 9876543210 1122334455                                                                                                                                                   
+BIREN                6644882244            9876452316                                                                                                                                                   
+CHETAN                          2277554488                                                                                                                                                              
+DHIREN                                     6789054123                                                                                                                                                   
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , COALESCE(OPHONE, MOBILE, RPHONE) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 9876543210                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                                                                                                                                                                                                    
+
+SQL> SELECT NAME , COALESCE(OPHONE, MOBILE, RPHONE,1800600300) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 9876543210                                                                                                                                                                         
+BIREN                6644882244                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               6789054123                                                                                                                                                                         
+EKTA                 1800600300                                                                                                                                                                         
+
+SQL> SELECT NAME , COALESCE(OPHONE, 1800600300,MOBILE, RPHONE) CONTACTNO FROM CONTACTNO;
+
+NAME                  CONTACTNO                                                                                                                                                                         
+-------------------- ----------                                                                                                                                                                         
+AMIT                 9876543210                                                                                                                                                                         
+BIREN                1800600300                                                                                                                                                                         
+CHETAN               2277554488                                                                                                                                                                         
+DHIREN               1800600300                                                                                                                                                                         
+EKTA                 1800600300                                                                                                                                                                         
+
+SQL> SELECT COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID FROM EMPLOYEES;
+
+COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                                                                                                                                 
+-------------- ---------- -------------                                                                                                                                                                 
+                                     90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      100            90                                                                                                                                                                 
+                      102            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      103            60                                                                                                                                                                 
+                      100            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+                      124            50                                                                                                                                                                 
+            .2        100            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+            .3        149            80                                                                                                                                                                 
+           .15        149                                                                                                                                                                               
+                      101            10                                                                                                                                                                 
+                      100            20                                                                                                                                                                 
+                      201            20                                                                                                                                                                 
+                      101           110                                                                                                                                                                 
+                      205           110                                                                                                                                                                 
+
+20 rows selected.
+
+SQL> SELECT COALESCE(COMMISSION_PCT , MANAGER_ID , DEPARTMENT_ID) FROM EMPLOYEES;
+
+COALESCE(COMMISSION_PCT,MANAGER_ID,DEPARTMENT_ID)                                                                                                                                                       
+-------------------------------------------------                                                                                                                                                       
+                                               90                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              102                                                                                                                                                       
+                                              103                                                                                                                                                       
+                                              103                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                              124                                                                                                                                                       
+                                               .2                                                                                                                                                       
+                                               .3                                                                                                                                                       
+                                               .3                                                                                                                                                       
+                                              .15                                                                                                                                                       
+                                              101                                                                                                                                                       
+                                              100                                                                                                                                                       
+                                              201                                                                                                                                                       
+                                              101                                                                                                                                                       
+                                              205                                                                                                                                                       
+
+20 rows selected.
+
+SQL> REM COMM 4 , MAN 15 , DEP 1 = 20 ROWS
+SQL> 
+SQL> REM CONDITIONAL FUNCTIONS :
+SQL> 
+SQL> REM LIST CONDITIONAL FUNCTIONS : 1 DECODE 2 CASE
+SQL> 
+SQL> REM CASE HAS TWO SYNTAXES
+SQL> 
+SQL> REM DECODE :
+SQL> 
+SQL> REM COMPANY DECLARES 1200 INCREMENT TO ALL
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY + 1200 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_SALARY                                                                                                                                                                   
+--------------- ---------- ----------                                                                                                                                                                   
+Steven               24000      25200                                                                                                                                                                   
+Neena                17000      18200                                                                                                                                                                   
+Lex                  17000      18200                                                                                                                                                                   
+Alexander             9000      10200                                                                                                                                                                   
+Bruce                 6000       7200                                                                                                                                                                   
+Diana                 4200       5400                                                                                                                                                                   
+Kevin                 5800       7000                                                                                                                                                                   
+Trenna                3500       4700                                                                                                                                                                   
+Curtis                3100       4300                                                                                                                                                                   
+Randall               2600       3800                                                                                                                                                                   
+Peter                 2500       3700                                                                                                                                                                   
+Eleni                10500      11700                                                                                                                                                                   
+Ellen                11000      12200                                                                                                                                                                   
+Jonathon              8600       9800                                                                                                                                                                   
+Kimerely              7000       8200                                                                                                                                                                   
+Jennifer              4400       5600                                                                                                                                                                   
+Michael              13000      14200                                                                                                                                                                   
+Pat                   6000       7200                                                                                                                                                                   
+Shelley              12000      13200                                                                                                                                                                   
+William               8300       9500                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM COMPANY DECLARES 20% INCREMENT TO ALL
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY , SALARY * 1.2 NEW_SALARY FROM EMPLOYEES;
+
+FIRST_NAME          SALARY NEW_SALARY                                                                                                                                                                   
+--------------- ---------- ----------                                                                                                                                                                   
+Steven               24000      28800                                                                                                                                                                   
+Neena                17000      20400                                                                                                                                                                   
+Lex                  17000      20400                                                                                                                                                                   
+Alexander             9000      10800                                                                                                                                                                   
+Bruce                 6000       7200                                                                                                                                                                   
+Diana                 4200       5040                                                                                                                                                                   
+Kevin                 5800       6960                                                                                                                                                                   
+Trenna                3500       4200                                                                                                                                                                   
+Curtis                3100       3720                                                                                                                                                                   
+Randall               2600       3120                                                                                                                                                                   
+Peter                 2500       3000                                                                                                                                                                   
+Eleni                10500      12600                                                                                                                                                                   
+Ellen                11000      13200                                                                                                                                                                   
+Jonathon              8600      10320                                                                                                                                                                   
+Kimerely              7000       8400                                                                                                                                                                   
+Jennifer              4400       5280                                                                                                                                                                   
+Michael              13000      15600                                                                                                                                                                   
+Pat                   6000       7200                                                                                                                                                                   
+Shelley              12000      14400                                                                                                                                                                   
+William               8300       9960                                                                                                                                                                   
+
+20 rows selected.
+
+SQL> REM DEPARTMENT_ID : 20 +2000 , 50 +1500 , 80 +1000 REMAINING +750
+SQL> 
+SQL> SELECT FIRST_NAME , SALARY ,
+  2  DECODE ( DEPARTMENT_ID , 20 , SALARY + 2000 ,
+  3                         , 50 , SALARY + 1500 ,
+  4                         , 80 , SALARY + 1000 , SALARY + 750) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  .
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE ( DEPARTMENT_ID , 20 , SALARY + 2000 ,
+  3                         , 50 , SALARY + 1500 ,
+  4                         , 80 , SALARY + 1000 , SALARY + 750) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+                       , 50 , SALARY + 1500 ,
+                       *
+ERROR at line 3:
+ORA-00936: missing expression 
+
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE ( DEPARTMENT_ID , 20 , SALARY + 2000
+  3                         , 50 , SALARY + 1500
+  4                         , 80 , SALARY + 1000 , SALARY + 750) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                     
+--------------- ------------- ---------- ----------                                                                                                                                                     
+Jennifer                   10       4400       5150                                                                                                                                                     
+Michael                    20      13000      15000                                                                                                                                                     
+Pat                        20       6000       8000                                                                                                                                                     
+Kevin                      50       5800       7300                                                                                                                                                     
+Peter                      50       2500       4000                                                                                                                                                     
+Randall                    50       2600       4100                                                                                                                                                     
+Curtis                     50       3100       4600                                                                                                                                                     
+Trenna                     50       3500       5000                                                                                                                                                     
+Diana                      60       4200       4950                                                                                                                                                     
+Bruce                      60       6000       6750                                                                                                                                                     
+Alexander                  60       9000       9750                                                                                                                                                     
+Ellen                      80      11000      12000                                                                                                                                                     
+Eleni                      80      10500      11500                                                                                                                                                     
+Jonathon                   80       8600       9600                                                                                                                                                     
+Lex                        90      17000      17750                                                                                                                                                     
+Steven                     90      24000      24750                                                                                                                                                     
+Neena                      90      17000      17750                                                                                                                                                     
+William                   110       8300       9050                                                                                                                                                     
+Shelley                   110      12000      12750                                                                                                                                                     
+Kimerely                            7000       7750                                                                                                                                                     
+
+20 rows selected.
+
+SQL> REM DEPARTMENT_ID : 20 +2000 , 50 +1500 , 80 +1000 REMAINING +750
+SQL> 
+SQL> REM DEPARTMENT_ID : 20 +2000 , 50 +1500 , 80 +1000 REMAINING NO INCREMENT
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE ( DEPARTMENT_ID , 20 , SALARY + 2000
+  3                         , 50 , SALARY + 1500
+  4                         , 80 , SALARY + 1000 ) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                     
+--------------- ------------- ---------- ----------                                                                                                                                                     
+Jennifer                   10       4400                                                                                                                                                                
+Michael                    20      13000      15000                                                                                                                                                     
+Pat                        20       6000       8000                                                                                                                                                     
+Kevin                      50       5800       7300                                                                                                                                                     
+Peter                      50       2500       4000                                                                                                                                                     
+Randall                    50       2600       4100                                                                                                                                                     
+Curtis                     50       3100       4600                                                                                                                                                     
+Trenna                     50       3500       5000                                                                                                                                                     
+Diana                      60       4200                                                                                                                                                                
+Bruce                      60       6000                                                                                                                                                                
+Alexander                  60       9000                                                                                                                                                                
+Ellen                      80      11000      12000                                                                                                                                                     
+Eleni                      80      10500      11500                                                                                                                                                     
+Jonathon                   80       8600       9600                                                                                                                                                     
+Lex                        90      17000                                                                                                                                                                
+Steven                     90      24000                                                                                                                                                                
+Neena                      90      17000                                                                                                                                                                
+William                   110       8300                                                                                                                                                                
+Shelley                   110      12000                                                                                                                                                                
+Kimerely                            7000                                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE ( DEPARTMENT_ID , 20 , SALARY + 2000
+  3                         , 50 , SALARY + 1500
+  4                         , 80 , SALARY + 1000 , SALARY) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                     
+--------------- ------------- ---------- ----------                                                                                                                                                     
+Jennifer                   10       4400       4400                                                                                                                                                     
+Michael                    20      13000      15000                                                                                                                                                     
+Pat                        20       6000       8000                                                                                                                                                     
+Kevin                      50       5800       7300                                                                                                                                                     
+Peter                      50       2500       4000                                                                                                                                                     
+Randall                    50       2600       4100                                                                                                                                                     
+Curtis                     50       3100       4600                                                                                                                                                     
+Trenna                     50       3500       5000                                                                                                                                                     
+Diana                      60       4200       4200                                                                                                                                                     
+Bruce                      60       6000       6000                                                                                                                                                     
+Alexander                  60       9000       9000                                                                                                                                                     
+Ellen                      80      11000      12000                                                                                                                                                     
+Eleni                      80      10500      11500                                                                                                                                                     
+Jonathon                   80       8600       9600                                                                                                                                                     
+Lex                        90      17000      17000                                                                                                                                                     
+Steven                     90      24000      24000                                                                                                                                                     
+Neena                      90      17000      17000                                                                                                                                                     
+William                   110       8300       8300                                                                                                                                                     
+Shelley                   110      12000      12000                                                                                                                                                     
+Kimerely                            7000       7000                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , SALARY FROM EMPLOYEES ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID     SALARY                                                                                                                                                                     
+------------- ---------- ----------                                                                                                                                                                     
+           10        101       4400                                                                                                                                                                     
+           20        100      13000                                                                                                                                                                     
+           20        201       6000                                                                                                                                                                     
+           50        100       5800                                                                                                                                                                     
+           50        124       3100                                                                                                                                                                     
+           50        124       2500                                                                                                                                                                     
+           50        124       2600                                                                                                                                                                     
+           50        124       3500                                                                                                                                                                     
+           60        102       9000                                                                                                                                                                     
+           60        103       4200                                                                                                                                                                     
+           60        103       6000                                                                                                                                                                     
+           80        100      10500                                                                                                                                                                     
+           80        149      11000                                                                                                                                                                     
+           80        149       8600                                                                                                                                                                     
+           90        100      17000                                                                                                                                                                     
+           90        100      17000                                                                                                                                                                     
+           90                 24000                                                                                                                                                                     
+          110        101      12000                                                                                                                                                                     
+          110        205       8300                                                                                                                                                                     
+                     149       7000                                                                                                                                                                     
+
+20 rows selected.
+
+SQL> REM 50 124 : +1000    60 103 +800   80 149 +600 REMAINING +400
+SQL> 
+SQL> 
+SQL> SELECT DEPARTMENT_ID , MANAGER_ID , SALARY ,
+  2  DECODE (DEPARTMENT_ID || MANAGER_ID , '50124' , SALARY + 1000
+  3                                      , '60103' , SALARY + 800
+  4                                      , '80149' , SALARY + 600 , SALARY + 400) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 1,2;
+
+DEPARTMENT_ID MANAGER_ID     SALARY NEW_SALARY                                                                                                                                                          
+------------- ---------- ---------- ----------                                                                                                                                                          
+           10        101       4400       4800                                                                                                                                                          
+           20        100      13000      13400                                                                                                                                                          
+           20        201       6000       6400                                                                                                                                                          
+           50        100       5800       6200                                                                                                                                                          
+           50        124       3100       4100                                                                                                                                                          
+           50        124       2500       3500                                                                                                                                                          
+           50        124       2600       3600                                                                                                                                                          
+           50        124       3500       4500                                                                                                                                                          
+           60        102       9000       9400                                                                                                                                                          
+           60        103       4200       5000                                                                                                                                                          
+           60        103       6000       6800                                                                                                                                                          
+           80        100      10500      10900                                                                                                                                                          
+           80        149      11000      11600                                                                                                                                                          
+           80        149       8600       9200                                                                                                                                                          
+           90        100      17000      17400                                                                                                                                                          
+           90        100      17000      17400                                                                                                                                                          
+           90                 24000      24400                                                                                                                                                          
+          110        101      12000      12400                                                                                                                                                          
+          110        205       8300       8700                                                                                                                                                          
+                     149       7000       7400                                                                                                                                                          
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 MGR_100_SUM_SAL   MGR_124_SUM_SAL    MGR_149_SUM_SAL
+SQL> 
+SQL> 
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 MANAGER_ID : 100 +1200   124 +900    149 +600 , REMAINING +300
+SQL> 
+SQL> REM 2 JOB_ID : IT_PROG +20%    ST_CLERK +30%    SA_REP -15%    REMAINING -7.5%
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 MANAGER_ID : 100 +1200   124 +900    149 +600 , REMAINING +300
+SQL> 
+SQL> SELECT FIRST_NAME , MANAGER_ID , SALRAY ,
+  2  DECODE(
+  3  
+SQL> SELECT FIRST_NAME , MANAGER_ID , SALARY ,
+  2  DECODE( MANAGER_ID , 100 , SALARY + 1200
+  3                     , 124 , SALARY + 900
+  4                     , 149 , SALARY + 600  , SALARY + 300) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      MANAGER_ID     SALARY NEW_SALARY                                                                                                                                                        
+--------------- ---------- ---------- ----------                                                                                                                                                        
+Michael                100      13000      14200                                                                                                                                                        
+Neena                  100      17000      18200                                                                                                                                                        
+Lex                    100      17000      18200                                                                                                                                                        
+Eleni                  100      10500      11700                                                                                                                                                        
+Kevin                  100       5800       7000                                                                                                                                                        
+Shelley                101      12000      12300                                                                                                                                                        
+Jennifer               101       4400       4700                                                                                                                                                        
+Alexander              102       9000       9300                                                                                                                                                        
+Bruce                  103       6000       6300                                                                                                                                                        
+Diana                  103       4200       4500                                                                                                                                                        
+Curtis                 124       3100       4000                                                                                                                                                        
+Randall                124       2600       3500                                                                                                                                                        
+Peter                  124       2500       3400                                                                                                                                                        
+Trenna                 124       3500       4400                                                                                                                                                        
+Kimerely               149       7000       7600                                                                                                                                                        
+Ellen                  149      11000      11600                                                                                                                                                        
+Jonathon               149       8600       9200                                                                                                                                                        
+Pat                    201       6000       6300                                                                                                                                                        
+William                205       8300       8600                                                                                                                                                        
+Steven                          24000      24300                                                                                                                                                        
+
+20 rows selected.
+
+SQL> REM 2 JOB_ID : IT_PROG +20%    ST_CLERK +30%    SA_REP -15%    REMAINING -7.5%
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  DECODE ( JOB_ID , 'IT_PROG' , SALARY * 1.2
+  3                  , 'ST_CLERK', SALARY * 1.3
+  4                  , 'SA_REP' ,  SALARY * .85  , SALARY * .925) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      JOB_ID         SALARY NEW_SALARY                                                                                                                                                        
+--------------- ---------- ---------- ----------                                                                                                                                                        
+William         AC_ACCOUNT       8300     7677.5                                                                                                                                                        
+Shelley         AC_MGR          12000      11100                                                                                                                                                        
+Jennifer        AD_ASST          4400       4070                                                                                                                                                        
+Steven          AD_PRES         24000      22200                                                                                                                                                        
+Lex             AD_VP           17000      15725                                                                                                                                                        
+Neena           AD_VP           17000      15725                                                                                                                                                        
+Alexander       IT_PROG          9000      10800                                                                                                                                                        
+Bruce           IT_PROG          6000       7200                                                                                                                                                        
+Diana           IT_PROG          4200       5040                                                                                                                                                        
+Michael         MK_MAN          13000      12025                                                                                                                                                        
+Pat             MK_REP           6000       5550                                                                                                                                                        
+Eleni           SA_MAN          10500     9712.5                                                                                                                                                        
+Ellen           SA_REP          11000       9350                                                                                                                                                        
+Kimerely        SA_REP           7000       5950                                                                                                                                                        
+Jonathon        SA_REP           8600       7310                                                                                                                                                        
+Randall         ST_CLERK         2600       3380                                                                                                                                                        
+Curtis          ST_CLERK         3100       4030                                                                                                                                                        
+Trenna          ST_CLERK         3500       4550                                                                                                                                                        
+Peter           ST_CLERK         2500       3250                                                                                                                                                        
+Kevin           ST_MAN           5800       5365                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT 100 - 15 FROM DUAL;
+
+    100-15                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        85                                                                                                                                                                                              
+
+SQL> SELECT 100 + 20 FROM DUAL;
+
+    100+20                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       120                                                                                                                                                                                              
+
+SQL> REM .85 , 1.2
+SQL> 
+SQL> REM HIRE YEAR : 99 +1500 , 98 +1200 , 99 -900 , REMAINING -600
+SQL> 
+SQL> REM HIRE YEAR : 99 +1500 , 98 +1200 , 94 -900 , REMAINING -600
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , SUBSTR(HIRE_DATE,8) ,
+  2  DECODE ( SUBSTR(HIRE_DATE,8) , '99' , SALARY + 1500
+  3                               , '98' , SALARY + 1200
+  4                               , '94' , SALARY - 900  , SALARY -600) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 3;
+
+FIRST_NAME      HIRE_DATE SUBSTR(HIRE_DATE,8)                          NEW_SALARY                                                                                                                       
+--------------- --------- -------------------------------------------- ----------                                                                                                                       
+Eleni           29-JAN-00 00                                                 9900                                                                                                                       
+Steven          17-JUL-87 87                                                23400                                                                                                                       
+Jennifer        17-SEP-87 87                                                 3800                                                                                                                       
+Neena           21-SEP-89 89                                                16400                                                                                                                       
+Alexander       03-JAN-90 90                                                 8400                                                                                                                       
+Bruce           21-MAY-91 91                                                 5400                                                                                                                       
+Lex             13-JAN-93 93                                                16400                                                                                                                       
+Shelley         07-JUN-94 94                                                11100                                                                                                                       
+William         07-JUN-94 94                                                 7400                                                                                                                       
+Trenna          17-OCT-95 95                                                 2900                                                                                                                       
+Ellen           11-MAY-96 96                                                10400                                                                                                                       
+Michael         17-FEB-96 96                                                12400                                                                                                                       
+Curtis          29-JAN-97 97                                                 2500                                                                                                                       
+Pat             17-AUG-97 97                                                 5400                                                                                                                       
+Randall         15-MAR-98 98                                                 3800                                                                                                                       
+Jonathon        24-MAR-98 98                                                 9800                                                                                                                       
+Peter           09-JUL-98 98                                                 3700                                                                                                                       
+Diana           07-FEB-99 99                                                 5700                                                                                                                       
+Kevin           16-NOV-99 99                                                 7300                                                                                                                       
+Kimerely        24-MAY-99 99                                                 8500                                                                                                                       
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , HIRE_DATE , SUBSTR(HIRE_DATE,8) , SALARY ,
+  2  DECODE ( SUBSTR(HIRE_DATE,8) , '99' , SALARY + 1500
+  3                               , '98' , SALARY + 1200
+  4                               , '94' , SALARY - 900  , SALARY -600) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 3;
+
+FIRST_NAME      HIRE_DATE SUBSTR(HIRE_DATE,8)                              SALARY NEW_SALARY                                                                                                            
+--------------- --------- -------------------------------------------- ---------- ----------                                                                                                            
+Eleni           29-JAN-00 00                                                10500       9900                                                                                                            
+Steven          17-JUL-87 87                                                24000      23400                                                                                                            
+Jennifer        17-SEP-87 87                                                 4400       3800                                                                                                            
+Neena           21-SEP-89 89                                                17000      16400                                                                                                            
+Alexander       03-JAN-90 90                                                 9000       8400                                                                                                            
+Bruce           21-MAY-91 91                                                 6000       5400                                                                                                            
+Lex             13-JAN-93 93                                                17000      16400                                                                                                            
+Shelley         07-JUN-94 94                                                12000      11100                                                                                                            
+William         07-JUN-94 94                                                 8300       7400                                                                                                            
+Trenna          17-OCT-95 95                                                 3500       2900                                                                                                            
+Ellen           11-MAY-96 96                                                11000      10400                                                                                                            
+Michael         17-FEB-96 96                                                13000      12400                                                                                                            
+Curtis          29-JAN-97 97                                                 3100       2500                                                                                                            
+Pat             17-AUG-97 97                                                 6000       5400                                                                                                            
+Randall         15-MAR-98 98                                                 2600       3800                                                                                                            
+Jonathon        24-MAR-98 98                                                 8600       9800                                                                                                            
+Peter           09-JUL-98 98                                                 2500       3700                                                                                                            
+Diana           07-FEB-99 99                                                 4200       5700                                                                                                            
+Kevin           16-NOV-99 99                                                 5800       7300                                                                                                            
+Kimerely        24-MAY-99 99                                                 7000       8500                                                                                                            
+
+20 rows selected.
+
+SQL> REM HIRE YEAR : 99 +1500 , 98 +1200 , 94 -900 , REMAINING -600
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  DECODE ( DEPARTMENT_ID , 20 , SALARY + 2000
+  3                         , 50 , SALARY + 1500
+  4                         , 80 , SALARY + 1000 , SALARY) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2
+  7  
+SQL> 
+SQL> 
+SQL> SELECT FIRST_NAME , DEPARTMENT_ID , SALARY ,
+  2  CASE DEPARTMENT_ID WHEN 20 THEN SALARY + 2000
+  3                     WHEN 50 THEN SALARY + 1500
+  4                     WHEN 80 THEN SALARY + 1000 ELSE SALARY END NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      DEPARTMENT_ID     SALARY NEW_SALARY                                                                                                                                                     
+--------------- ------------- ---------- ----------                                                                                                                                                     
+Jennifer                   10       4400       4400                                                                                                                                                     
+Michael                    20      13000      15000                                                                                                                                                     
+Pat                        20       6000       8000                                                                                                                                                     
+Kevin                      50       5800       7300                                                                                                                                                     
+Peter                      50       2500       4000                                                                                                                                                     
+Randall                    50       2600       4100                                                                                                                                                     
+Curtis                     50       3100       4600                                                                                                                                                     
+Trenna                     50       3500       5000                                                                                                                                                     
+Diana                      60       4200       4200                                                                                                                                                     
+Bruce                      60       6000       6000                                                                                                                                                     
+Alexander                  60       9000       9000                                                                                                                                                     
+Ellen                      80      11000      12000                                                                                                                                                     
+Eleni                      80      10500      11500                                                                                                                                                     
+Jonathon                   80       8600       9600                                                                                                                                                     
+Lex                        90      17000      17000                                                                                                                                                     
+Steven                     90      24000      24000                                                                                                                                                     
+Neena                      90      17000      17000                                                                                                                                                     
+William                   110       8300       8300                                                                                                                                                     
+Shelley                   110      12000      12000                                                                                                                                                     
+Kimerely                            7000       7000                                                                                                                                                     
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 JOB_ID : IT_PROG +20%   ST_CLERK +30%   , SA_REP -10% , REMAINING -5%
+SQL> 
+SQL> REM 2 HIRE MONTH : JAN +2000   , MAY +1500  , JUN -500 , REMAINING -250
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 JOB_ID : IT_PROG +20%   ST_CLERK +30%   , SA_REP -10% , REMAINING -5%
+SQL> 
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  DECODE (JOB_ID , 'IT_PROG' , SALARY * 1.2
+  3                 , 'ST_CLERK' , SALARY * 1.3
+  4                 , 'SA_REP' , SALARY * .9    , SALARY * .95) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      JOB_ID         SALARY NEW_SALARY                                                                                                                                                        
+--------------- ---------- ---------- ----------                                                                                                                                                        
+William         AC_ACCOUNT       8300       7885                                                                                                                                                        
+Shelley         AC_MGR          12000      11400                                                                                                                                                        
+Jennifer        AD_ASST          4400       4180                                                                                                                                                        
+Steven          AD_PRES         24000      22800                                                                                                                                                        
+Lex             AD_VP           17000      16150                                                                                                                                                        
+Neena           AD_VP           17000      16150                                                                                                                                                        
+Alexander       IT_PROG          9000      10800                                                                                                                                                        
+Bruce           IT_PROG          6000       7200                                                                                                                                                        
+Diana           IT_PROG          4200       5040                                                                                                                                                        
+Michael         MK_MAN          13000      12350                                                                                                                                                        
+Pat             MK_REP           6000       5700                                                                                                                                                        
+Eleni           SA_MAN          10500       9975                                                                                                                                                        
+Ellen           SA_REP          11000       9900                                                                                                                                                        
+Kimerely        SA_REP           7000       6300                                                                                                                                                        
+Jonathon        SA_REP           8600       7740                                                                                                                                                        
+Randall         ST_CLERK         2600       3380                                                                                                                                                        
+Curtis          ST_CLERK         3100       4030                                                                                                                                                        
+Trenna          ST_CLERK         3500       4550                                                                                                                                                        
+Peter           ST_CLERK         2500       3250                                                                                                                                                        
+Kevin           ST_MAN           5800       5510                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  CASE JOB_ID WHEN 'IT_PROG' THEN SALARY * 1.2
+  3              WHEN 'ST_CLERK' THEN SALARY * 1.3
+  4              WHEN 'SA_REP' THEN SALARY * .9  ELSE SALARY * .95 END NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 2;
+
+FIRST_NAME      JOB_ID         SALARY NEW_SALARY                                                                                                                                                        
+--------------- ---------- ---------- ----------                                                                                                                                                        
+William         AC_ACCOUNT       8300       7885                                                                                                                                                        
+Shelley         AC_MGR          12000      11400                                                                                                                                                        
+Jennifer        AD_ASST          4400       4180                                                                                                                                                        
+Steven          AD_PRES         24000      22800                                                                                                                                                        
+Lex             AD_VP           17000      16150                                                                                                                                                        
+Neena           AD_VP           17000      16150                                                                                                                                                        
+Alexander       IT_PROG          9000      10800                                                                                                                                                        
+Bruce           IT_PROG          6000       7200                                                                                                                                                        
+Diana           IT_PROG          4200       5040                                                                                                                                                        
+Michael         MK_MAN          13000      12350                                                                                                                                                        
+Pat             MK_REP           6000       5700                                                                                                                                                        
+Eleni           SA_MAN          10500       9975                                                                                                                                                        
+Ellen           SA_REP          11000       9900                                                                                                                                                        
+Kimerely        SA_REP           7000       6300                                                                                                                                                        
+Jonathon        SA_REP           8600       7740                                                                                                                                                        
+Randall         ST_CLERK         2600       3380                                                                                                                                                        
+Curtis          ST_CLERK         3100       4030                                                                                                                                                        
+Trenna          ST_CLERK         3500       4550                                                                                                                                                        
+Peter           ST_CLERK         2500       3250                                                                                                                                                        
+Kevin           ST_MAN           5800       5510                                                                                                                                                        
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  
+SQL> REM 2 HIRE MONTH : JAN +2000   , MAY +1500  , JUN -500 , REMAINING -250
+SQL> 
+SQL> SELECT FIRST_NAME , HIRE_DATE , SUBSTR(HIRE_DATE,4,3) , SALARY ,
+  2  DECODE ( SUBSTR(HIRE_dATE,4,3) , 'JAN' , SALARY + 2000
+  3                                 , 'MAY' , SALARY + 1500
+  4                                 , 'JUN' , SALARY - 500       , SALARY - 250) NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 3;
+
+FIRST_NAME      HIRE_DATE SUBSTR(HIRE_     SALARY NEW_SALARY                                                                                                                                            
+--------------- --------- ------------ ---------- ----------                                                                                                                                            
+Pat             17-AUG-97 AUG                6000       5750                                                                                                                                            
+Diana           07-FEB-99 FEB                4200       3950                                                                                                                                            
+Michael         17-FEB-96 FEB               13000      12750                                                                                                                                            
+Alexander       03-JAN-90 JAN                9000      11000                                                                                                                                            
+Eleni           29-JAN-00 JAN               10500      12500                                                                                                                                            
+Curtis          29-JAN-97 JAN                3100       5100                                                                                                                                            
+Lex             13-JAN-93 JAN               17000      19000                                                                                                                                            
+Steven          17-JUL-87 JUL               24000      23750                                                                                                                                            
+Peter           09-JUL-98 JUL                2500       2250                                                                                                                                            
+William         07-JUN-94 JUN                8300       7800                                                                                                                                            
+Shelley         07-JUN-94 JUN               12000      11500                                                                                                                                            
+Randall         15-MAR-98 MAR                2600       2350                                                                                                                                            
+Jonathon        24-MAR-98 MAR                8600       8350                                                                                                                                            
+Kimerely        24-MAY-99 MAY                7000       8500                                                                                                                                            
+Bruce           21-MAY-91 MAY                6000       7500                                                                                                                                            
+Ellen           11-MAY-96 MAY               11000      12500                                                                                                                                            
+Kevin           16-NOV-99 NOV                5800       5550                                                                                                                                            
+Trenna          17-OCT-95 OCT                3500       3250                                                                                                                                            
+Neena           21-SEP-89 SEP               17000      16750                                                                                                                                            
+Jennifer        17-SEP-87 SEP                4400       4150                                                                                                                                            
+
+20 rows selected.
+
+SQL> SELECT FIRST_NAME , JOB_ID , SALARY ,
+  2  
+SQL> SELECT FIRST_NAME , HIRE_DATE , SUBSTR(HIRE_DATE,4,3) , SALARY ,
+  2  CASE SUBSTR(HIRE_dATE,4,3) WHEN 'JAN' THEN SALARY + 2000
+  3                             WHEN 'MAY' THEN SALARY + 1500
+  4                             WHEN 'JUN' THEN SALARY - 500   ELSE SALARY - 250 END NEW_SALARY
+  5  FROM EMPLOYEES
+  6  ORDER BY 3;
+
+FIRST_NAME      HIRE_DATE SUBSTR(HIRE_     SALARY NEW_SALARY                                                                                                                                            
+--------------- --------- ------------ ---------- ----------                                                                                                                                            
+Pat             17-AUG-97 AUG                6000       5750                                                                                                                                            
+Diana           07-FEB-99 FEB                4200       3950                                                                                                                                            
+Michael         17-FEB-96 FEB               13000      12750                                                                                                                                            
+Alexander       03-JAN-90 JAN                9000      11000                                                                                                                                            
+Eleni           29-JAN-00 JAN               10500      12500                                                                                                                                            
+Curtis          29-JAN-97 JAN                3100       5100                                                                                                                                            
+Lex             13-JAN-93 JAN               17000      19000                                                                                                                                            
+Steven          17-JUL-87 JUL               24000      23750                                                                                                                                            
+Peter           09-JUL-98 JUL                2500       2250                                                                                                                                            
+William         07-JUN-94 JUN                8300       7800                                                                                                                                            
+Shelley         07-JUN-94 JUN               12000      11500                                                                                                                                            
+Randall         15-MAR-98 MAR                2600       2350                                                                                                                                            
+Jonathon        24-MAR-98 MAR                8600       8350                                                                                                                                            
+Kimerely        24-MAY-99 MAY                7000       8500                                                                                                                                            
+Bruce           21-MAY-91 MAY                6000       7500                                                                                                                                            
+Ellen           11-MAY-96 MAY               11000      12500                                                                                                                                            
+Kevin           16-NOV-99 NOV                5800       5550                                                                                                                                            
+Trenna          17-OCT-95 OCT                3500       3250                                                                                                                                            
+Neena           21-SEP-89 SEP               17000      16750                                                                                                                                            
+Jennifer        17-SEP-87 SEP                4400       4150                                                                                                                                            
+
+20 rows selected.
+
+SQL> SPOOL OFF

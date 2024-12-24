@@ -1,0 +1,435 @@
+SQL> 
+SQL> REM PCM : PIVOT / CROSS TAB / MATRIX REPORT
+SQL> 
+SQL> REM DISPLAY AVERAGE PAID BY COMPANY
+SQL> 
+SQL> SELECT AVG(SALARY) FROM EMPLOYEES;
+
+AVG(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+       8775                                                                                                                                                                                             
+
+SQL> REM DISPLAY AVERAGE SALARY PAID TO EACH DEPARTMENT
+SQL> 
+SQL> SELECT DEPARTMENT_ID , AVG(SALARY) FROM EMPLOYEES GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID AVG(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+                     7000                                                                                                                                                                               
+           90  19333.3333                                                                                                                                                                               
+           20        9500                                                                                                                                                                               
+          110       10150                                                                                                                                                                               
+           50        3500                                                                                                                                                                               
+           80  10033.3333                                                                                                                                                                               
+           60        6400                                                                                                                                                                               
+           10        4400                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> REM DISPLAY AVERAGE SALARY PAID TO DEPARTMENTS 20 60 110
+SQL> 
+SQL> SELECT DEPARTMENT_ID , AVG(SALARY) FROM EMPLOYEES WHERE DEPARTMENTID IN (20,60,110) GROUP BY DEPARTMENT_ID;
+SELECT DEPARTMENT_ID , AVG(SALARY) FROM EMPLOYEES WHERE DEPARTMENTID IN (20,60,110) GROUP BY DEPARTMENT_ID
+                                                        *
+ERROR at line 1:
+ORA-00904: "DEPARTMENTID": invalid identifier 
+
+
+SQL> SELECT DEPARTMENT_ID , AVG(SALARY) FROM EMPLOYEES WHERE DEPARTMENT_ID IN (20,60,110) GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID AVG(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           20        9500                                                                                                                                                                               
+          110       10150                                                                                                                                                                               
+           60        6400                                                                                                                                                                               
+
+SQL> SELECT DEPARTMENT_ID , AVG(SALARY) FROM EMPLOYEES HAVING DEPARTMENT_ID IN (20,60,110) GROUP BY DEPARTMENT_ID;
+
+DEPARTMENT_ID AVG(SALARY)                                                                                                                                                                               
+------------- -----------                                                                                                                                                                               
+           20        9500                                                                                                                                                                               
+          110       10150                                                                                                                                                                               
+           60        6400                                                                                                                                                                               
+
+SQL> /*
+SQL> 
+SQL> 
+SQL> DEPT_20_AVG_SAL         DEPT_110_AVG_SAL            DEPT_60_AVG_SAL
+SQL> ---------------         ----------------            ---------------
+SQL>            9500                    10150                       6400
+SQL> 
+SQL> */
+SQL> 
+SQL> 
+SQL> SELECT AVG(DECODE(DEPARTMENT_ID , 20 , SALARY)) DEPT_20_AVG_SAL,
+  2         AVG(DECODE(DEPARTMENT_ID , 60 , SALARY)) DEPT_60_AVG_SAL,
+  3         AVG(DECODE(DEPARTMENT_ID , 110 , SALARY)) DEPT_110_AVG_SAL
+  4  FROM EMPLOYEES;
+
+DEPT_20_AVG_SAL DEPT_60_AVG_SAL DEPT_110_AVG_SAL                                                                                                                                                        
+--------------- --------------- ----------------                                                                                                                                                        
+           9500            6400            10150                                                                                                                                                        
+
+SQL> SELECT DEPARTMENT_ID , SALARY FROM EMPLOYEES;
+
+DEPARTMENT_ID     SALARY                                                                                                                                                                                
+------------- ----------                                                                                                                                                                                
+           90      24000                                                                                                                                                                                
+           90      17000                                                                                                                                                                                
+           90      17000                                                                                                                                                                                
+           60       9000                                                                                                                                                                                
+           60       6000                                                                                                                                                                                
+           60       4200                                                                                                                                                                                
+           50       5800                                                                                                                                                                                
+           50       3500                                                                                                                                                                                
+           50       3100                                                                                                                                                                                
+           50       2600                                                                                                                                                                                
+           50       2500                                                                                                                                                                                
+           80      10500                                                                                                                                                                                
+           80      11000                                                                                                                                                                                
+           80       8600                                                                                                                                                                                
+                    7000                                                                                                                                                                                
+           10       4400                                                                                                                                                                                
+           20      13000                                                                                                                                                                                
+           20       6000                                                                                                                                                                                
+          110      12000                                                                                                                                                                                
+          110       8300                                                                                                                                                                                
+
+20 rows selected.
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE                     JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                 
+----------- --------------- --------------- ---------- -------------------- ----------------------------- ---------- ---------- -------------- ---------- -------------                                 
+        100 Steven          King            SKING      515.123.4567         17-JULY     -1987 12:00.00 AM AD_PRES         24000                                      90                                 
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEPTEMBER-1989 12:00.00 AM AD_VP           17000                       100            90                                 
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JANUARY  -1993 12:00.00 AM AD_VP           17000                       100            90                                 
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JANUARY  -1990 12:00.00 AM IT_PROG          9000                       102            60                                 
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY      -1991 12:00.00 AM IT_PROG          6000                       103            60                                 
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEBRUARY -1999 12:00.00 AM IT_PROG          4200                       103            60                                 
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOVEMBER -1999 12:00.00 AM ST_MAN           5800                       100            50                                 
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCTOBER  -1995 12:00.00 AM ST_CLERK         3500                       124            50                                 
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JANUARY  -1997 12:00.00 AM ST_CLERK         3100                       124            50                                 
+        143 Randall         Matos           RMATOS     650.121.2874         15-MARCH    -1998 12:00.00 AM ST_CLERK         2600                       124            50                                 
+        144 Peter           Vargas                     650.121.2004         09-JULY     -1998 12:00.00 AM ST_CLERK         2500                       124            50                                 
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JANUARY  -2000 12:00.00 AM SA_MAN          10500             .2        100            80                                 
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY      -1996 12:00.00 AM SA_REP          11000             .3        149            80                                 
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MARCH    -1998 12:00.00 AM SA_REP           8600             .3        149            80                                 
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY      -1999 12:00.00 AM SA_REP           7000            .15        149                                               
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEPTEMBER-1987 12:00.00 AM AD_ASST          4400                       101            10                                 
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEBRUARY -1996 12:00.00 AM MK_MAN          13000                       100            20                                 
+        202 Pat             Fay             PFAY       603.123.6666         17-AUGUST   -1997 12:00.00 AM MK_REP           6000                       201            20                                 
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUNE     -1994 12:00.00 AM AC_MGR          12000                       101           110                                 
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUNE     -1994 12:00.00 AM AC_ACCOUNT       8300                       205           110                                 
+
+20 rows selected.
+
+SQL> REM 1 MGR_100_SUM_SAL    MGR_124_SUM_SAL     MGR_149_SUM_SAL
+SQL> 
+SQL> REM 2 IT_PROG_MIN_SAL    SA_REP_AVG_SAL      ST_CLERK_MAX_SAL
+SQL> 
+SQL> SELECT AVG(DECODE(DEPARTMENT_ID , 20 , SALARY)) DEPT_20_AVG_SAL,
+  2         AVG(DECODE(DEPARTMENT_ID , 60 , SALARY)) DEPT_60_AVG_SAL,
+  3         AVG(DECODE(DEPARTMENT_ID , 110 , SALARY)) DEPT_110_AVG_SAL
+  4  FROM EMPLOYEES
+  5  
+SQL> 
+SQL> 
+SQL> REM 1 MGR_100_SUM_SAL    MGR_124_SUM_SAL     MGR_149_SUM_SAL
+SQL> 
+SQL> SELECT SUM(DECODE(MANAGER_ID , 100 , SALARY)) MGR_100_SUM_SAL,
+  2         SUM(DECODE(MANAGER_ID , 124 , SALARY)) MGR_124_SUM_SAL,
+  3         SUM(DECODE(MANAGER_ID , 149 , SALARY)) MGR_149_SUM_SAL
+  4  FROM EMPLOYEES;
+
+MGR_100_SUM_SAL MGR_124_SUM_SAL MGR_149_SUM_SAL                                                                                                                                                         
+--------------- --------------- ---------------                                                                                                                                                         
+          63300           11700           26600                                                                                                                                                         
+
+SQL> REM 2 IT_PROG_MIN_SAL    SA_REP_AVG_SAL      ST_CLERK_MAX_SAL
+SQL> 
+SQL> SELECT MIN(DECODE(JOB_ID , 'IT_PROG' , SALARY)) IT_PROG_MIN_SAL,
+  2         AVG(DECODE(JOB_ID , 'SA_REP'  , SALARY)) SA_REP_AVG_SAL,
+  3         MAX(DECODE(JOB_ID , 'ST_CLERK'  , SALARY)) ST_CLERK_MAX_SAL
+  4  FROM EMPLOYEES;
+
+IT_PROG_MIN_SAL SA_REP_AVG_SAL ST_CLERK_MAX_SAL                                                                                                                                                         
+--------------- -------------- ----------------                                                                                                                                                         
+           4200     8866.66667             3500                                                                                                                                                         
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE                     JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                 
+----------- --------------- --------------- ---------- -------------------- ----------------------------- ---------- ---------- -------------- ---------- -------------                                 
+        100 Steven          King            SKING      515.123.4567         17-JULY     -1987 12:00.00 AM AD_PRES         24000                                      90                                 
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEPTEMBER-1989 12:00.00 AM AD_VP           17000                       100            90                                 
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JANUARY  -1993 12:00.00 AM AD_VP           17000                       100            90                                 
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JANUARY  -1990 12:00.00 AM IT_PROG          9000                       102            60                                 
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY      -1991 12:00.00 AM IT_PROG          6000                       103            60                                 
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEBRUARY -1999 12:00.00 AM IT_PROG          4200                       103            60                                 
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOVEMBER -1999 12:00.00 AM ST_MAN           5800                       100            50                                 
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCTOBER  -1995 12:00.00 AM ST_CLERK         3500                       124            50                                 
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JANUARY  -1997 12:00.00 AM ST_CLERK         3100                       124            50                                 
+        143 Randall         Matos           RMATOS     650.121.2874         15-MARCH    -1998 12:00.00 AM ST_CLERK         2600                       124            50                                 
+        144 Peter           Vargas                     650.121.2004         09-JULY     -1998 12:00.00 AM ST_CLERK         2500                       124            50                                 
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JANUARY  -2000 12:00.00 AM SA_MAN          10500             .2        100            80                                 
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY      -1996 12:00.00 AM SA_REP          11000             .3        149            80                                 
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MARCH    -1998 12:00.00 AM SA_REP           8600             .3        149            80                                 
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY      -1999 12:00.00 AM SA_REP           7000            .15        149                                               
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEPTEMBER-1987 12:00.00 AM AD_ASST          4400                       101            10                                 
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEBRUARY -1996 12:00.00 AM MK_MAN          13000                       100            20                                 
+        202 Pat             Fay             PFAY       603.123.6666         17-AUGUST   -1997 12:00.00 AM MK_REP           6000                       201            20                                 
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUNE     -1994 12:00.00 AM AC_MGR          12000                       101           110                                 
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUNE     -1994 12:00.00 AM AC_ACCOUNT       8300                       205           110                                 
+
+20 rows selected.
+
+SQL> REM DEPT_90_MIN_SAL , DEPT_20_MAX_SAL
+SQL> 
+SQL> SELECT MIN(CASE DEPARTMENT_ID WHEN 90 THEN SALARY END) DEPT_90_MIN_SAL,
+  2         MAX(CASE DEPARTMENT_ID WHEN 20 THEN SALARY END) DEPT_20_MAX_SAL
+  3  FROM EMPLOYEES;
+
+DEPT_90_MIN_SAL DEPT_20_MAX_SAL                                                                                                                                                                         
+--------------- ---------------                                                                                                                                                                         
+          17000           13000                                                                                                                                                                         
+
+SQL> CONN SCOTT/TIGER
+Connected.
+SQL> 
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 MGR_103_SUM_SAL    MGR_100_MIN_SAL     MGR_101_MAX_SAL
+SQL> 
+SQL> REM 2 SA_REP_AVG_SAL     ST_CLERK_SUM_SAL    IT_PROG_MIN_SAL
+SQL> 
+SQL> 
+SQL> REM 1 MGR_103_SUM_SAL    MGR_100_MIN_SAL     MGR_101_MAX_SAL
+SQL> 
+SQL> SELECT SUM(CASE MANAGER_ID WHEN 103 THEN SALARY END) MGR_103_SUM_SAL,
+  2         MIN(CASE MANAGER_ID WHEN 100 THEN SALARY END) MGR_100_MIN_SAL,
+  3         MAX(CASE MANAGER_ID WHEN 101 THEN SALARY END) MGR_101_MAX_SAL
+  4  FROM EMPLOYEES;
+
+MGR_103_SUM_SAL MGR_100_MIN_SAL MGR_101_MAX_SAL                                                                                                                                                         
+--------------- --------------- ---------------                                                                                                                                                         
+          10200            5800           12000                                                                                                                                                         
+
+SQL> REM 2 SA_REP_AVG_SAL     ST_CLERK_SUM_SAL    IT_PROG_MIN_SAL
+SQL> 
+SQL> SELECT AVG(CASE JOB_ID WHEN 'SA_REP' THEN SALARY END) SA_REP_AVG_SAL,
+  2         SUM(CASE JOB_ID WHEN 'ST_CLERK' THEN SALARY END) ST_CLERK_SUM_SAL,
+  3         MIN(CASE JOB_ID WHEN 'IT_PROG' THEN SALARY END) IT_PROG_MIN_SAL
+  4  FROM EMPLOYEES;
+
+SA_REP_AVG_SAL ST_CLERK_SUM_SAL IT_PROG_MIN_SAL                                                                                                                                                         
+-------------- ---------------- ---------------                                                                                                                                                         
+    8866.66667            11700            4200                                                                                                                                                         
+
+SQL> SELECT * FROM EMPLOYEES
+  2  ;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM HY_99_MIN_SAL    HY_98_MAX_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN TO_CHAR(HIRE_DATE,'RRRR') = 1999 THEN SALARY END) HY_99_MIN_SAL,
+  2         MAX(CASE WHEN TO_CHAR(HIRE_DATE,'YYYY') = 1998 THEN SALARY END) HY_98_MAX_SAL
+  3  FROM EMPLOYEES;
+
+HY_99_MIN_SAL HY_98_MAX_SAL                                                                                                                                                                             
+------------- -------------                                                                                                                                                                             
+         4200          8600                                                                                                                                                                             
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM 1 DEPT_20_MIN_SAL    IT_PROG_MAX_SAL     MGR_100_AVG_SAL
+SQL> 
+SQL> REM 2 DEPT_10_110_50_MIN_SAL    AD_VP_SA_REP_MK_REP_MAX_SAL
+SQL> 
+SQL> 
+SQL> 
+SQL> REM 1 DEPT_20_MIN_SAL    IT_PROG_MAX_SAL     MGR_100_AVG_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN DEPARTMENT_ID = 20 THEN SALARY END) DEPT_20_MIN_SAL,
+  2         MAX(CASE WHEN JOB_ID = 'IT_PROG' THEN SALARY END) IT_PROG_MAX_SAL,
+  3         AVG(CASE WHEN MANAGER_ID = 100 THEN SALARY END) MGR_100_AVG_SAL
+  4  FROM EMPLOYEES;
+
+DEPT_20_MIN_SAL IT_PROG_MAX_SAL MGR_100_AVG_SAL                                                                                                                                                         
+--------------- --------------- ---------------                                                                                                                                                         
+           6000            9000           12660                                                                                                                                                         
+
+SQL> REM 2 DEPT_10_110_50_MIN_SAL    AD_VP_SA_REP_MK_REP_MAX_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN DEPARTMENT_ID IN (10,110,50) THEN SALARY END) DEPT_10_110_50_MIN_SAL,
+  2         MAX(CASE WHEN JOB_ID LIKE '%P' THEN SALARY END) AD_VP_SA_REP_MK_REP_MAX_SAL
+  3  FROM EMPLOYEES;
+
+DEPT_10_110_50_MIN_SAL AD_VP_SA_REP_MK_REP_MAX_SAL                                                                                                                                                      
+---------------------- ---------------------------                                                                                                                                                      
+                  2500                       17000                                                                                                                                                      
+
+SQL> SELECT * FROM EMPLOYEES;
+
+EMPLOYEE_ID FIRST_NAME      LAST_NAME       EMAIL      PHONE_NUMBER         HIRE_DATE JOB_ID         SALARY COMMISSION_PCT MANAGER_ID DEPARTMENT_ID                                                     
+----------- --------------- --------------- ---------- -------------------- --------- ---------- ---------- -------------- ---------- -------------                                                     
+        100 Steven          King            SKING      515.123.4567         17-JUL-87 AD_PRES         24000                                      90                                                     
+        101 Neena           Kochhar         NKOCHHAR   515.123.4568         21-SEP-89 AD_VP           17000                       100            90                                                     
+        102 Lex             De Haan         LDEHAAN    515.123.4569         13-JAN-93 AD_VP           17000                       100            90                                                     
+        103 Alexander       Hunold          AHUNOLD    590.423.4567         03-JAN-90 IT_PROG          9000                       102            60                                                     
+        104 Bruce           Ernst           BERNST     590.423.4568         21-MAY-91 IT_PROG          6000                       103            60                                                     
+        107 Diana           Lorentz         DLORENTZ   590.423.5567         07-FEB-99 IT_PROG          4200                       103            60                                                     
+        124 Kevin           Mourgos         KMOURGOS   650.123.5234         16-NOV-99 ST_MAN           5800                       100            50                                                     
+        141 Trenna          Rajs            TRAJS      650.121.8009         17-OCT-95 ST_CLERK         3500                       124            50                                                     
+        142 Curtis          Davies          CDAVIES    650.121.2994         29-JAN-97 ST_CLERK         3100                       124            50                                                     
+        143 Randall         Matos           RMATOS     650.121.2874         15-MAR-98 ST_CLERK         2600                       124            50                                                     
+        144 Peter           Vargas                     650.121.2004         09-JUL-98 ST_CLERK         2500                       124            50                                                     
+        149 Eleni           Zlotkey         EZLOTKEY   011.44.1344.429018   29-JAN-00 SA_MAN          10500             .2        100            80                                                     
+        174 Ellen           Abel            EABEL      011.44.1644.429267   11-MAY-96 SA_REP          11000             .3        149            80                                                     
+        176 Jonathon        Taylor          JTAYLOR    011.44.1644.429265   24-MAR-98 SA_REP           8600             .3        149            80                                                     
+        178 Kimerely        Grant           KGRANT     011.44.1644.429263   24-MAY-99 SA_REP           7000            .15        149                                                                   
+        200 Jennifer        Whalen          JWHALEN    515.123.4444         17-SEP-87 AD_ASST          4400                       101            10                                                     
+        201 Michael         Hartstein       MHARTSTE   515.123.5555         17-FEB-96 MK_MAN          13000                       100            20                                                     
+        202 Pat             Fay             PFAY       603.123.6666         17-AUG-97 MK_REP           6000                       201            20                                                     
+        205 Shelley         Higgins         SHIGGINS   515.123.8080         07-JUN-94 AC_MGR          12000                       101           110                                                     
+        206 William         Gietz           WGIETZ     515.123.8181         07-JUN-94 AC_ACCOUNT       8300                       205           110                                                     
+
+20 rows selected.
+
+SQL> REM JAN_JUN_JUL_MIN_SAL     98_94_MAX_SAL    WOM_1_3_AVG_SAL
+SQL> 
+SQL> REM LMV_A_MIN_SAL           LMV_E_MAX_SAL    LMV_O_SUM_SAL
+SQL> 
+SQL> 
+SQL> 
+SQL> 
+SQL> REM JAN_JUN_JUL_MIN_SAL     98_94_MAX_SAL    WOM_1_3_AVG_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN HIRE_DATE LIKE '%J%' THEN SALARY END) JAN_JUN_JUL_MIN_SAL,
+  2         MAX(CASE WHEN SUBSTR(HIRE_DATE,-2) IN ('98','94') THEN SALARY END) "98_94_MAX_SAL",
+  3         AVG(CASE WHEN TO_CHAR(HIRE_DATE,'W') IN ('1','3') THEN SALARY END) WOM_1_3_AVG_SAL
+  4  FROM EMPLOYEES;
+
+JAN_JUN_JUL_MIN_SAL 98_94_MAX_SAL WOM_1_3_AVG_SAL                                                                                                                                                       
+------------------- ------------- ---------------                                                                                                                                                       
+               2500         12000      8907.69231                                                                                                                                                       
+
+SQL> SELECT MIN(CASE WHEN HIRE_DATE LIKE '%J%' THEN SALARY END) JAN_JUN_JUL_MIN_SAL,
+  2  
+SQL> REM LMV_A_MIN_SAL           LMV_E_MAX_SAL    LMV_O_SUM_SAL
+SQL> 
+SQL> SELECT MIN(CASE WHEN SUBSTR(LTRIM(UPPER(FIRST_NAME),'QWRTYPSDFGHJKLZXCVBNM'),1,1) = 'A' THEN SALARY END) LMV_A_MIN_SAL,
+  2         MAX(CASE WHEN SUBSTR(LTRIM(UPPER(FIRST_NAME),'QWRTYPSDFGHJKLZXCVBNM'),1,1) = 'E' THEN SALARY END) LMV_E_MAX_SAL,
+  3         SUM(CASE WHEN SUBSTR(LTRIM(UPPER(FIRST_NAME),'QWRTYPSDFGHJKLZXCVBNM'),1,1) = 'O' THEN SALARY END) LMV_O_SUM_SAL
+  4  FROM EMPLOYEES;
+
+LMV_A_MIN_SAL LMV_E_MAX_SAL LMV_O_SUM_SAL                                                                                                                                                               
+------------- ------------- -------------                                                                                                                                                               
+         2600         24000          8600                                                                                                                                                               
+
+SQL> SELECT DEPARTMENT_ID , SUM(CASE WHEN HIRE_DATE < '1JAN96' THEN SALARY END) SUM_SAL_UPTO_YR_95,
+  2                         SUM(CASE WHEN HIRE_DATE >= '1JAN96' THEN SALARY END) SUM_SAL_YR_96_ONWARDS
+  3  FROM EMPLOYEES
+  4  GROUP BY DEPARTMENT_ID
+  5  ORDER BY 1;
+
+DEPARTMENT_ID SUM_SAL_UPTO_YR_95 SUM_SAL_YR_96_ONWARDS                                                                                                                                                  
+------------- ------------------ ---------------------                                                                                                                                                  
+           10               4400                                                                                                                                                                        
+           20                                    19000                                                                                                                                                  
+           50               3500                 14000                                                                                                                                                  
+           60              15000                  4200                                                                                                                                                  
+           80                                    30100                                                                                                                                                  
+           90              58000                                                                                                                                                                        
+          110              20300                                                                                                                                                                        
+                                                  7000                                                                                                                                                  
+
+8 rows selected.
+
+SQL> /*
+SQL> 
+SQL> ALPHABETS    SUM_SAL
+SQL> ---------    -------
+SQL> A-D          15000
+SQL> E-H
+SQL> I-N
+SQL> O-T
+SQL> U-Z
+SQL> 
+SQL> */
+SQL> 
+SQL> SPOOL OFF
